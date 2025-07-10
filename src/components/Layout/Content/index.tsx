@@ -6,7 +6,7 @@ type ContentProps = {
 
 export function Content({ children }: ContentProps) {
   return (
-    <div className="w-full flex flex-col items-center justify-between h-dvh pt-24">
+    <div className="w-full flex flex-col items-center justify-between h-dvh  pt-24">
       {children}
     </div>
   );

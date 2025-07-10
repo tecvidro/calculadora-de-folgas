@@ -1,5 +1,6 @@
 import { InfosButton } from "@/components/shared/InfosButton";
 import { Logo } from "@/components/shared/Logo";
+import LocaleSwitcher from "../../shared/LocaleSwitcher";
 
 export function Footer() {
   return (
@@ -7,7 +8,7 @@ export function Footer() {
       <div className="flex justify-between items-center w-full max-w-7xl ">
         <Logo size="sm" />
         <div>
-          <h1 className="uppercase">LOCALE</h1>
+          <LocaleSwitcher />
         </div>
         <InfosButton href="#" />
       </div>
