@@ -1,14 +1,13 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Roboto_Condensed } from "next/font/google";
 import "./globals.css";
+import { Header } from "@/components/Layout/Header";
+import { Content } from "@/components/Layout/Content";
+import { Footer } from "@/components/Layout/Footer";
+import { Container } from "@/components/shared/Container";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const robotoCOndensed = Roboto_Condensed({
+  variable: "--roboto-condensed",
   subsets: ["latin"],
 });
 
@@ -24,10 +23,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+      <body className={`${robotoCOndensed.variable} antialiased`}>
+        <Header />
+        <Content>
+          <Container>{children}</Container>
+          <Footer />
+        </Content>
       </body>
     </html>
   );
