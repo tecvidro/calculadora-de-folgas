@@ -12,7 +12,8 @@
       "model": "Versatik Division",
       "title": "Cálculo de holguras para VDPO 2 Puertas",
       "subtitle": "Instalación para vidrios templados",
-      "description": "Modelo sin el uso del perfil lateral de puerta con cerradura empotrada"
+      "description": "Modelo sin el uso del perfil lateral de puerta con cerradura empotrada",
+      "imageUrl": "https://tecvidro.com/tec/wp-content/uploads/2025/07/featured-vdpo2.jpg"
     },
     {
       "name": "VDPO 4 PUERTAS",
@@ -20,7 +21,8 @@
       "model": "Versatik Division",
       "title": "Cálculo de holguras para VDPO 4 Puertas",
       "subtitle": "Instalación para vidrios templados",
-      "description": "Modelo sin el uso del perfil lateral de puerta con cerradura empotrada"
+      "description": "Modelo sin el uso del perfil lateral de puerta con cerradura empotrada",
+      "imageUrl": "https://tecvidro.com/tec/wp-content/uploads/2025/07/featured-vdpo4.jpg"
     }
   ]
 }

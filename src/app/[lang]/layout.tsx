@@ -12,6 +12,7 @@ import "../globals.css";
 const robotoCondensed = Roboto_Condensed({
   variable: "--roboto-condensed",
   subsets: ["latin"],
+  weight: ["400", "800"],
 });
 
 export const metadata: Metadata = {

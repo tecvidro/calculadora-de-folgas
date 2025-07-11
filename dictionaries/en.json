@@ -12,7 +12,9 @@
       "model": "Versatik Division",
       "title": "Gap calculation for VDPO 2 Doors",
       "subtitle": "Installation for tempered glass",
-      "description": "Model without the use of the side door profile with built-in lock"
+      "description": "Model without the use of the side door profile with built-in lock",
+      "imageUrl": "https://tecvidro.com/tec/wp-content/uploads/2025/07/featured-vdpo2.jpg"
+
     },
     {
       "name": "VDPO 4 DOORS",
@@ -20,7 +22,8 @@
       "model": "Versatik Division",
       "title": "Gap calculation for VDPO 4 Doors",
       "subtitle": "Installation for tempered glass",
-      "description": "Model without the use of the side door profile with built-in lock"
+      "description": "Model without the use of the side door profile with built-in lock",
+      "imageUrl": "https://tecvidro.com/tec/wp-content/uploads/2025/07/featured-vdpo4.jpg"
     }
   ]
 }

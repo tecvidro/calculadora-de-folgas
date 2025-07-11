@@ -12,7 +12,8 @@
         "model": "Versatik Division",
         "title": "Cálculo de folgas para VDPO 2 Portas",
         "subtitle": "Instalação para vidros temperados",
-        "description": "Modelo sem o uso do perfil lateral de porta com fechadura embutida"
+        "description": "Modelo sem o uso do perfil lateral de porta com fechadura embutida",
+        "imageUrl": "https://tecvidro.com/tec/wp-content/uploads/2025/07/featured-vdpo2.jpg"
     },
     {
         "name": "VDPO 4 PORTAS",
@@ -20,7 +21,8 @@
         "model": "Versatik Division",
         "title": "Cálculo de folgas para VDPO 4 Portas",
         "subtitle": "Instalação para vidros temperados",
-        "description": "Modelo sem o uso do perfil lateral de porta com fechadura embutida"
+        "description": "Modelo sem o uso do perfil lateral de porta com fechadura embutida",
+        "imageUrl": "https://tecvidro.com/tec/wp-content/uploads/2025/07/featured-vdpo4.jpg"
     }
   ] 
 } 

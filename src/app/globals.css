@@ -23,10 +23,10 @@
 }
 
 body {
-  background: white;
+  background: var(--background);
   color: var(--color-foreground);
   font-family:
-    Roboto Condensed,
+    var(--roboto-condensed),
     Helvetica,
     sans-serif;
 }
