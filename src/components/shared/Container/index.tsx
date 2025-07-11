@@ -1,9 +1,9 @@
-import { ReactNode } from "react";
+import type { ReactNode } from 'react'
 
 type ContainerProps = {
-  children: ReactNode;
-};
+  children: ReactNode
+}
 
 export function Container({ children }: ContainerProps) {
-  return <div className="w-full max-w-7xl flex flex-col px-4">{children}</div>;
+  return <div className="flex w-full max-w-7xl flex-col px-4">{children}</div>
 }

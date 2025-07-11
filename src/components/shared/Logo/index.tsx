@@ -1,32 +1,33 @@
-import Link from "next/link";
-import { cva } from "class-variance-authority";
+import { cva } from 'class-variance-authority'
+import Link from 'next/link'
 
 type LogoProps = {
-  size?: "lg" | "md" | "sm";
-};
+  size?: 'lg' | 'md' | 'sm'
+}
 
-const logoVariants = cva("[&_svg]:size-full", {
+const logoVariants = cva('[&_svg]:size-full', {
   variants: {
     size: {
-      lg: "size-24",
-      md: "size-12",
-      sm: "size-8",
+      lg: 'size-24',
+      md: 'size-12',
+      sm: 'size-8',
     },
   },
-});
+})
 
-export function Logo({ size = "md" }: LogoProps) {
+export function Logo({ size = 'md' }: LogoProps) {
   return (
-    <Link href={"/"}>
+    <Link href={'/'}>
       <div className={logoVariants({ size })}>
         <svg
-          width="38"
+          fill="none"
           height="38"
           viewBox="0 0 38 38"
-          fill="none"
+          width="38"
           xmlns="http://www.w3.org/2000/svg"
         >
-          <circle cx="18.917" cy="18.9166" r="18.917" fill="#004282" />
+          <title>Logotipo Tec</title>
+          <circle cx="18.917" cy="18.9166" fill="#004282" r="18.917" />
           <circle cx="18.917" cy="18.9166" r="18.917" stroke="white" />
           <path
             d="M18.4599 5.09617L6.71703 11.8759C3.91362 13.4943 2.95032 17.0928 4.56955 19.8973L11.3525 31.6454C12.9718 34.4499 16.5698 35.4149 19.3719 33.7966L31.1161 27.0166C33.9195 25.3979 34.8828 21.7992 33.2637 18.9949L26.4807 7.2468C24.8616 4.44229 21.2636 3.47758 18.4599 5.09617Z"
@@ -51,5 +52,5 @@ export function Logo({ size = "md" }: LogoProps) {
         </svg>
       </div>
     </Link>
-  );
+  )
 }

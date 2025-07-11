@@ -1,29 +1,33 @@
-"use client";
-import { usePathname } from "next/navigation";
-import Link from "next/link";
-import { i18n, type Locale } from "../../../i18n-config";
-import { Flag } from "../Flags";
+'use client'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import { i18n, type Locale } from '../../../i18n-config'
+import { Flag } from '../Flags'
 
 export default function LocaleSwitcher() {
-  const pathname = usePathname();
+  const pathname = usePathname()
 
   const getCurrentLocale = (): Locale => {
-    if (!pathname) return i18n.defaultLocale;
-    const segments = pathname.split("/");
-    const potentialLocale = segments[1] as Locale;
+    if (!pathname) {
+      return i18n.defaultLocale
+    }
+    const segments = pathname.split('/')
+    const potentialLocale = segments[1] as Locale
     return i18n.locales.includes(potentialLocale)
       ? potentialLocale
-      : i18n.defaultLocale;
-  };
+      : i18n.defaultLocale
+  }
 
-  const currentLocale = getCurrentLocale();
+  const currentLocale = getCurrentLocale()
 
   const redirectedPathname = (locale: Locale) => {
-    if (!pathname) return "/";
-    const segments = pathname.split("/");
-    segments[1] = locale;
-    return segments.join("/");
-  };
+    if (!pathname) {
+      return '/'
+    }
+    const segments = pathname.split('/')
+    segments[1] = locale
+    return segments.join('/')
+  }
 
   return (
     <div>
@@ -32,20 +36,20 @@ export default function LocaleSwitcher() {
           .filter((locale) => locale !== currentLocale)
           .map((locale) => {
             return (
-              <li key={locale} className="uppercase">
+              <li className="uppercase" key={locale}>
                 <Link
                   className="flex items-center justify-center gap-2"
                   href={redirectedPathname(locale)}
                 >
                   <div className="size-5">
                     <Flag locale={locale} />
-                  </div>{" "}
+                  </div>{' '}
                   <span>{locale}</span>
                 </Link>
               </li>
-            );
+            )
           })}
       </ul>
     </div>
-  );
+  )
 }

@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 
 type ContentProps = {
   children: ReactNode;
@@ -6,7 +6,7 @@ type ContentProps = {
 
 export function Content({ children }: ContentProps) {
   return (
-    <div className="w-full flex flex-col items-center justify-between h-dvh  pt-24">
+    <div className="flex h-dvh w-full flex-col items-center justify-between pt-24">
       {children}
     </div>
   );
