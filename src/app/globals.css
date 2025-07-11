@@ -1,24 +1,32 @@
 @import "tailwindcss";
 
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+/* biome-ignore lint/nursery/noCssUnknownAtRule: Tailwind v4 @theme directive */
 @theme {
-  --color-*: initial;
-  --color-gray-100: #EAEAEA;
-  --color-gray-200: #A5A5A5;
-  --color-gray-300: #2C2C2C;
-  --color-light-blue: #269DC9;
-  --color-green: #00C968;
+  --color-gray-100: "#EAEAEA";
+  --color-gray-200: #a5a5a5;
+  --color-gray-300: #2c2c2c;
+  --color-light-blue: #269dc9;
+  --color-green: #00c968;
   --color-blue: #004282;
   --color-background: var(--color-gray-100);
   --color-header-bg: var(--color-gray-100);
   --color-foreground: var(--color-gray-300);
-
-  --shadow-sm-gray: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  --shadow-sm-gray-up: 0 -4px 6px -1px rgb(0 0 0 / 0.1), 0 -2px 4px -2px rgb(0 0 0 / 0.1);
-
+  --shadow-sm-gray:
+    0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-sm-gray-up:
+    0 -4px 6px -1px rgb(0 0 0 / 0.1), 0 -2px 4px -2px rgb(0 0 0 / 0.1);
 }
 
 body {
   background: white;
   color: var(--color-foreground);
-  font-family: Roboto Condensed, Helvetica, sans-serif;
+  font-family:
+    Roboto Condensed,
+    Helvetica,
+    sans-serif;
 }

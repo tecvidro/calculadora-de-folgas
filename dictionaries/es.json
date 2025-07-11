@@ -1,3 +1,26 @@
 {
-  "title": "Calculadora de autorización técnica"
+  "globals": {
+    "title": "Calculadora de folgas Tec",
+    "description": "Página para calcular as folgas e medidas dos vidros para a instalação do produtos Tec",
+    "homeTitle": "Selecione o produto",
+    "alert": "A calculadora tem como finalidade exclusiva apoiar a interpretação e aplicação das fórmulas apresentadas no manual do produto, sendo de inteira responsabilidade do usuário a precisão dos dados e medidas inseridos nas tabelas."
+  },
+  "products": [
+    {
+      "name": "VDPO 2 PORTAS",
+      "slug": "vdpo-2-portas",
+      "model": "Versatik Division",
+      "title": "Cálculo de folgas para VDPO 2 Portas",
+      "subtitle": "Instalação para vidros temperados",
+      "description": "Modelo sem o uso do perfil lateral de porta com fechadura embutida"
+    },
+    {
+      "name": "VDPO 4 PORTAS",
+      "slug": "vdpo-4-portas",
+      "model": "Versatik Division",
+      "title": "Cálculo de folgas para VDPO 4 Portas",
+      "subtitle": "Instalação para vidros temperados",
+      "description": "Modelo sem o uso do perfil lateral de porta com fechadura embutida"
+    }
+  ]
 }

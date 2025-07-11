@@ -24,6 +24,8 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "sass": "^1.89.2",
+    "sass-loader": "^16.0.5",
     "tailwindcss": "^4",
     "typescript": "^5",
     "ultracite": "5.0.32"

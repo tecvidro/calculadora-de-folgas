@@ -9,7 +9,7 @@ import { Container } from '../../components/shared/Container'
 import { i18n, type Locale } from '../../i18n-config'
 import '../globals.css'
 
-const robotoCOndensed = Roboto_Condensed({
+const robotoCondensed = Roboto_Condensed({
   variable: '--roboto-condensed',
   subsets: ['latin'],
 })
@@ -34,8 +34,8 @@ export default async function Root(props: {
   const { children } = props
   return (
     <html lang={params.lang}>
-      <body className={`${robotoCOndensed.variable} antialiased`}>
-        <Header title={dictionary.title} />
+      <body className={`${robotoCondensed.variable} antialiased`}>
+        <Header title={dictionary.globals.title} />
         <Content>
           <Container>{children}</Container>
           <Footer />
