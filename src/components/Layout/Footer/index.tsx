@@ -1,5 +1,5 @@
-import { InfosButton } from '@/components/shared/InfosButton'
-import { Logo } from '@/components/shared/Logo'
+import { InfosButton } from '../../../components/shared/InfosButton'
+import { Logo } from '../../../components/shared/Logo'
 import LocaleSwitcher from '../../shared/LocaleSwitcher'
 
 export function Footer() {
