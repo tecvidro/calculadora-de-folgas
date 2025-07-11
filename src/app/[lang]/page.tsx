@@ -1,5 +1,6 @@
 import type { Locale } from "@/i18n-config";
-import { getDictionary } from "../../../get-dictionary";
+import { getDictionary } from "@/utils/get-dictionary";
+import Link from "next/link";
 
 export default async function Home(props: {
   params: Promise<{ lang: Locale }>;
@@ -12,7 +13,9 @@ export default async function Home(props: {
       <h1 className="text-center uppercase ">{dictionary.globals.homeTitle}</h1>
       {!!dictionary.products &&
         dictionary.products.map((product) => (
-          <div key={product.slug}>{product.name}</div>
+          <Link key={product.slug} href={`/${params.lang}/${product.slug}`}>
+            {product.name}
+          </Link>
         ))}
     </div>
   );

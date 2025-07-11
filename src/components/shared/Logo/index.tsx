@@ -1,5 +1,8 @@
+'use client'
 import { cva } from 'class-variance-authority'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import { i18n, type Locale } from '../../../i18n-config'
 
 type LogoProps = {
   size?: 'lg' | 'md' | 'sm'
@@ -16,8 +19,23 @@ const logoVariants = cva('[&_svg]:size-full', {
 })
 
 export function Logo({ size = 'md' }: LogoProps) {
+  const pathname = usePathname()
+
+  const getCurrentLocale = (): Locale => {
+    if (!pathname) {
+      return i18n.defaultLocale
+    }
+    const segments = pathname.split('/')
+    const potentialLocale = segments[1] as Locale
+    return i18n.locales.includes(potentialLocale)
+      ? potentialLocale
+      : i18n.defaultLocale
+  }
+
+  const currentLocale = getCurrentLocale()
+
   return (
-    <Link href={'/'}>
+    <Link href={`/${currentLocale}`}>
       <div className={logoVariants({ size })}>
         <svg
           fill="none"

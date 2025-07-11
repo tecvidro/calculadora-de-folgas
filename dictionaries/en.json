@@ -1,26 +1,26 @@
 {
   "globals": {
-    "title": "Calculadora de folgas Tec",
-    "description": "Página para calcular as folgas e medidas dos vidros para a instalação do produtos Tec",
-    "homeTitle": "Selecione o produto",
-    "alert": "A calculadora tem como finalidade exclusiva apoiar a interpretação e aplicação das fórmulas apresentadas no manual do produto, sendo de inteira responsabilidade do usuário a precisão dos dados e medidas inseridos nas tabelas."
+    "title": "Tec Gap Calculator",
+    "description": "Page to calculate glass gaps and measurements for the installation of Tec products",
+    "homeTitle": "Select the product",
+    "alert": "The calculator is exclusively intended to support the interpretation and application of the formulas presented in the product manual, with the user being solely responsible for the accuracy of the data and measurements entered into the tables."
   },
   "products": [
     {
-      "name": "VDPO 2 PORTAS",
+      "name": "VDPO 2 DOORS",
       "slug": "vdpo-2-portas",
       "model": "Versatik Division",
-      "title": "Cálculo de folgas para VDPO 2 Portas",
-      "subtitle": "Instalação para vidros temperados",
-      "description": "Modelo sem o uso do perfil lateral de porta com fechadura embutida"
+      "title": "Gap calculation for VDPO 2 Doors",
+      "subtitle": "Installation for tempered glass",
+      "description": "Model without the use of the side door profile with built-in lock"
     },
     {
-      "name": "VDPO 4 PORTAS",
+      "name": "VDPO 4 DOORS",
       "slug": "vdpo-4-portas",
       "model": "Versatik Division",
-      "title": "Cálculo de folgas para VDPO 4 Portas",
-      "subtitle": "Instalação para vidros temperados",
-      "description": "Modelo sem o uso do perfil lateral de porta com fechadura embutida"
+      "title": "Gap calculation for VDPO 4 Doors",
+      "subtitle": "Installation for tempered glass",
+      "description": "Model without the use of the side door profile with built-in lock"
     }
   ]
 }

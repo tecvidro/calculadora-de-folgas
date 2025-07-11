@@ -1,26 +1,26 @@
 {
   "globals": {
-    "title": "Calculadora de folgas Tec",
-    "description": "Página para calcular as folgas e medidas dos vidros para a instalação do produtos Tec",
-    "homeTitle": "Selecione o produto",
-    "alert": "A calculadora tem como finalidade exclusiva apoiar a interpretação e aplicação das fórmulas apresentadas no manual do produto, sendo de inteira responsabilidade do usuário a precisão dos dados e medidas inseridos nas tabelas."
+    "title": "Calculadora de holguras Tec",
+    "description": "Página para calcular las holguras y medidas de los vidrios para la instalación de productos Tec",
+    "homeTitle": "Seleccione el producto",
+    "alert": "La calculadora tiene como finalidad exclusiva apoyar la interpretación y aplicación de las fórmulas presentadas en el manual del producto, siendo de entera responsabilidad del usuario la precisión de los datos y medidas introducidos en las tablas."
   },
   "products": [
     {
-      "name": "VDPO 2 PORTAS",
+      "name": "VDPO 2 PUERTAS",
       "slug": "vdpo-2-portas",
       "model": "Versatik Division",
-      "title": "Cálculo de folgas para VDPO 2 Portas",
-      "subtitle": "Instalação para vidros temperados",
-      "description": "Modelo sem o uso do perfil lateral de porta com fechadura embutida"
+      "title": "Cálculo de holguras para VDPO 2 Puertas",
+      "subtitle": "Instalación para vidrios templados",
+      "description": "Modelo sin el uso del perfil lateral de puerta con cerradura empotrada"
     },
     {
-      "name": "VDPO 4 PORTAS",
+      "name": "VDPO 4 PUERTAS",
       "slug": "vdpo-4-portas",
       "model": "Versatik Division",
-      "title": "Cálculo de folgas para VDPO 4 Portas",
-      "subtitle": "Instalação para vidros temperados",
-      "description": "Modelo sem o uso do perfil lateral de porta com fechadura embutida"
+      "title": "Cálculo de holguras para VDPO 4 Puertas",
+      "subtitle": "Instalación para vidrios templados",
+      "description": "Modelo sin el uso del perfil lateral de puerta con cerradura empotrada"
     }
   ]
 }
