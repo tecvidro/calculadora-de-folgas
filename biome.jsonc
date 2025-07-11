@@ -6,6 +6,9 @@
       "semicolons": "asNeeded"
     }
   },
+  "files": {
+    "includes": ["!./src/app/globals.css"]
+  },
   "linter": {
     "rules": {
       "correctness": {
@@ -17,3 +20,4 @@
     }
   }
 }
+
