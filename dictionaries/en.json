@@ -3,7 +3,12 @@
     "title": "Tec Gap Calculator",
     "description": "Page to calculate glass gaps and measurements for the installation of Tec products",
     "homeTitle": "Select the product",
-    "alert": "The calculator is exclusively intended to support the interpretation and application of the formulas presented in the product manual, with the user being solely responsible for the accuracy of the data and measurements entered into the tables."
+    "alert": "The calculator is exclusively intended to support the interpretation and application of the formulas presented in the product manual, with the user being solely responsible for the accuracy of the data and measurements entered into the tables.",
+    "callToActions": {
+      "card": "Open calculator",
+      "print": "Print version",
+      "manual": "Download manual"
+    }
   },
   "products": [
     {
@@ -14,7 +19,6 @@
       "subtitle": "Installation for tempered glass",
       "description": "Model without the use of the side door profile with built-in lock",
       "imageUrl": "https://tecvidro.com/tec/wp-content/uploads/2025/07/featured-vdpo2.jpg"
-
     },
     {
       "name": "VDPO 4 DOORS",

@@ -3,7 +3,12 @@
     "title": "Calculadora de holguras Tec",
     "description": "Página para calcular las holguras y medidas de los vidrios para la instalación de productos Tec",
     "homeTitle": "Seleccione el producto",
-    "alert": "La calculadora tiene como finalidad exclusiva apoyar la interpretación y aplicación de las fórmulas presentadas en el manual del producto, siendo de entera responsabilidad del usuario la precisión de los datos y medidas introducidos en las tablas."
+    "alert": "La calculadora tiene como finalidad exclusiva apoyar la interpretación y aplicación de las fórmulas presentadas en el manual del producto, siendo de entera responsabilidad del usuario la precisión de los datos y medidas introducidos en las tablas.",
+    "callToActions": {
+      "card": "Abrir calculadora",
+      "print": "Versión para imprimir",
+      "manual": "Descargar manual"
+    }
   },
   "products": [
     {
