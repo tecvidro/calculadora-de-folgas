@@ -13,6 +13,7 @@
     "@formatjs/intl-localematcher": "^0.6.1",
     "@types/negotiator": "^0.6.4",
     "class-variance-authority": "^0.7.1",
+    "lucide-react": "^0.525.0",
     "negotiator": "^1.0.0",
     "next": "15.3.5",
     "react": "^19.0.0",
