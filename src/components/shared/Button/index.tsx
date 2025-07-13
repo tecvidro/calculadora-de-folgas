@@ -18,7 +18,7 @@ const buttonVariants = cva(
   }
 )
 
-export interface ButtonProps extends VariantProps<typeof buttonVariants> {
+type ButtonProps = VariantProps<typeof buttonVariants> & {
   link: string
   label: string
 }

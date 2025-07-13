@@ -5,7 +5,6 @@
   --foreground: #171717;
 }
 
-/* biome-ignore lint/nursery/noCssUnknownAtRule: Tailwind v4 @theme directive */
 @theme {
   --color-gray-100: #eaeaea;
   --color-gray-200: #a5a5a5;
@@ -13,6 +12,7 @@
   --color-light-blue: #269dc9;
   --color-green: #00c968;
   --color-blue: #004282;
+  --color-red: #c92626;
   --color-background: var(--color-gray-100);
   --color-header-bg: var(--color-gray-100);
   --color-foreground: var(--color-gray-300);
