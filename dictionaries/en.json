@@ -18,7 +18,35 @@
       "title": "Gap calculation for VDPO 2 Doors",
       "subtitle": "Installation for tempered glass",
       "description": "Model without the use of the side door profile with built-in lock",
-      "imageUrl": "https://tecvidro.com/tec/wp-content/uploads/2025/07/featured-vdpo2.jpg"
+      "imageUrl": "https://tecvidro.com/tec/wp-content/uploads/2025/07/featured-vdpo2.jpg",
+      "content": [
+        {
+          "id": 1,
+          "type": "panel",
+          "title": "Panels Configuration",
+          "panelsLabel": "Number of Panels",
+          "panelsDescription": "Select the number of panels.",
+          "panelsCount": 2,
+          "doorsLabel": "Number of Doors",
+          "doorsDescription": "Select the number of doors.",
+          "doorsCount": 2
+        },
+        {
+          "id": 2,
+          "type": "measure",
+          "title": "Measurements"
+        },
+        {
+          "id": 3,
+          "type": "lock",
+          "title": "Lock Type"
+        },
+        {
+          "id": 4,
+          "type": "model",
+          "title": "Glass Model"
+        }
+      ]
     },
     {
       "name": "VDPO 4 DOORS",
@@ -27,7 +55,8 @@
       "title": "Gap calculation for VDPO 4 Doors",
       "subtitle": "Installation for tempered glass",
       "description": "Model without the use of the side door profile with built-in lock",
-      "imageUrl": "https://tecvidro.com/tec/wp-content/uploads/2025/07/featured-vdpo4.jpg"
+      "imageUrl": "https://tecvidro.com/tec/wp-content/uploads/2025/07/featured-vdpo4.jpg",
+      "content": []
     }
   ]
 }

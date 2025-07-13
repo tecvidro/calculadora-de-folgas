@@ -37,3 +37,29 @@ export type CalculatorBuilderProps = {
   content: BlockContentType[];
 };
 
+export type Product = {
+  name: string;
+  slug: string;
+  model: string;
+  title: string;
+  subtitle: string;
+  description: string;
+  imageUrl: string;
+  content: BlockContentType[];
+};
+
+export type Dictionary = {
+  globals: {
+    title: string;
+    description: string;
+    homeTitle: string;
+    alert: string;
+    callToActions: {
+      card: string;
+      print: string;
+      manual: string;
+    };
+  };
+  products: Product[];
+};
+

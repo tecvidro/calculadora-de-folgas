@@ -18,7 +18,35 @@
       "title": "Cálculo de folgas para VDPO 2 Portas",
       "subtitle": "Instalação para vidros temperados",
       "description": "Modelo sem o uso do perfil lateral de porta com fechadura embutida",
-      "imageUrl": "https://tecvidro.com/tec/wp-content/uploads/2025/07/featured-vdpo2.jpg"
+      "imageUrl": "https://tecvidro.com/tec/wp-content/uploads/2025/07/featured-vdpo2.jpg",
+      "content": [
+        {
+          "id": 1,
+          "type": "panel",
+          "title": "Número de vidros",
+          "panelsLabel": "Número de painéis",
+          "panelsDescription": "Digite aqui o número de painéis que serão instalados entre as portas.",
+          "panelsCount": 2,
+          "doorsLabel": "Número de portas",
+          "doorsDescription": "Para este modelo temos portas nas duas laterais! Número não editável.",
+          "doorsCount": 2
+        },
+        {
+          "id": 2,
+          "type": "measure",
+          "title": "Medidas"
+        },
+        {
+          "id": 3,
+          "type": "lock",
+          "title": "Tipo de fechadura"
+        },
+        {
+          "id": 4,
+          "type": "model",
+          "title": "Modelo de vidro"
+        }
+      ]
     },
     {
       "name": "VDPO 4 PORTAS",
@@ -27,7 +55,9 @@
       "title": "Cálculo de folgas para VDPO 4 Portas",
       "subtitle": "Instalação para vidros temperados",
       "description": "Modelo sem o uso do perfil lateral de porta com fechadura embutida",
-      "imageUrl": "https://tecvidro.com/tec/wp-content/uploads/2025/07/featured-vdpo4.jpg"
+      "imageUrl": "https://tecvidro.com/tec/wp-content/uploads/2025/07/featured-vdpo4.jpg",
+      "content": []
     }
   ]
 }
+

@@ -18,7 +18,35 @@
       "title": "Cálculo de holguras para VDPO 2 Puertas",
       "subtitle": "Instalación para vidrios templados",
       "description": "Modelo sin el uso del perfil lateral de puerta con cerradura empotrada",
-      "imageUrl": "https://tecvidro.com/tec/wp-content/uploads/2025/07/featured-vdpo2.jpg"
+      "imageUrl": "https://tecvidro.com/tec/wp-content/uploads/2025/07/featured-vdpo2.jpg",
+      "content": [
+        {
+          "id": 1,
+          "type": "panel",
+          "title": "Configuración de paneles",
+          "panelsLabel": "Número de paneles",
+          "panelsDescription": "Seleccione el número de paneles.",
+          "panelsCount": 2,
+          "doorsLabel": "Número de puertas",
+          "doorsDescription": "Seleccione el número de puertas.",
+          "doorsCount": 2
+        },
+        {
+          "id": 2,
+          "type": "measure",
+          "title": "Medidas"
+        },
+        {
+          "id": 3,
+          "type": "lock",
+          "title": "Tipo de cerradura"
+        },
+        {
+          "id": 4,
+          "type": "model",
+          "title": "Modelo de vidrio"
+        }
+      ]
     },
     {
       "name": "VDPO 4 PUERTAS",
@@ -27,7 +55,8 @@
       "title": "Cálculo de holguras para VDPO 4 Puertas",
       "subtitle": "Instalación para vidrios templados",
       "description": "Modelo sin el uso del perfil lateral de puerta con cerradura empotrada",
-      "imageUrl": "https://tecvidro.com/tec/wp-content/uploads/2025/07/featured-vdpo4.jpg"
+      "imageUrl": "https://tecvidro.com/tec/wp-content/uploads/2025/07/featured-vdpo4.jpg",
+      "content": []
     }
   ]
 }
