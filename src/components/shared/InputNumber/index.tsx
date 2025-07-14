@@ -8,6 +8,7 @@ type InputNumberProps = {
   description?: string
   defaultValue: number
   disabled?: boolean
+  onChange?: (value: number) => void
 }
 
 export const InputNumber = ({
@@ -16,23 +17,34 @@ export const InputNumber = ({
   description,
   name,
   disabled = false,
+  onChange,
 }: InputNumberProps) => {
   const [value, setValue] = useState(defaultValue)
 
   const handleIncrement = () => {
-    setValue((prev) => prev + 1)
+    setValue((prev) => {
+      const newValue = prev + 1
+      onChange?.(newValue)
+      return newValue
+    })
   }
 
   const handleDecrement = () => {
-    setValue((prev) => (prev > 1 ? prev - 1 : 1))
+    setValue((prev) => {
+      const newValue = prev > 1 ? prev - 1 : 1
+      onChange?.(newValue)
+      return newValue
+    })
   }
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = Number.parseInt(event.target.value, 10)
     if (!Number.isNaN(newValue) && newValue >= 1) {
       setValue(newValue)
+      onChange?.(newValue)
     } else if (event.target.value === '') {
       setValue(1)
+      onChange?.(1)
     }
   }
 

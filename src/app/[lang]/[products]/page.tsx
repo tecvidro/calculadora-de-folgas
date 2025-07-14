@@ -1,6 +1,4 @@
-import { CalculatorBuilder } from '@/components/Blocks/CalculatorBuilder'
-import { Results } from '@/components/Layout/Results'
-import { Alert } from '@/components/shared/Alert'
+import { CalculatorForm } from '@/components/CalculatorForm'
 import type { Locale } from '@/i18n-config'
 import { getDictionary } from '@/utils/get-dictionary'
 
@@ -21,9 +19,7 @@ export default async function ProductCalculator(props: {
     <div className=" flex flex-col items-center gap-4">
       <h1 className="w-full text-center uppercase">{product.name}</h1>
       <p className="w-full text-center">{product.description}</p>
-      <Alert text={dictionary.globals.alert} />
-      <CalculatorBuilder content={product.content} />
-      <Results product={product.name} />
+      <CalculatorForm product={product} alertText={dictionary.globals.alert} />
     </div>
   )
 }

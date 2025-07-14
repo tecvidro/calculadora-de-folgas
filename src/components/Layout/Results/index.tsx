@@ -3,14 +3,21 @@ import { Title } from "@/components/shared/BoxTitle";
 
 type ResultsProps = {
   product: string;
+  panelCount: number;
+  doorsCount: number;
+  gapWidth: number;
+  gapHeight: number;
+  lockDiscount: number;
 };
 
-export const Results = ({ product }: ResultsProps) => {
-  const panelCount = 2;
-  const doorsCount = 2;
-  const gapWidth = 4000;
-  const gapHeight = 2000;
-  const lockDiscount = 50;
+export const Results = ({
+  product,
+  panelCount,
+  doorsCount,
+  gapWidth,
+  gapHeight,
+  lockDiscount,
+}: ResultsProps) => {
 
   return (
     <div>
@@ -20,12 +27,12 @@ export const Results = ({ product }: ResultsProps) => {
           <div>
             <h3>Informações e medidas</h3>
             <p>Número de vidros:</p>
-            <p>Painéis: {panelCount} </p>
-            <p>Portas: {doorsCount} </p>
+            <p>Painéis: {panelCount}</p>
+            <p>Portas: {doorsCount}</p>
             <p>Medidas do vão:</p>
-            <p>Largura: {gapWidth} mm </p>
-            <p>Altura: {gapHeight} mm </p>
-            <p>Descontos de fechadura: {lockDiscount}</p>
+            <p>Largura: {gapWidth} mm</p>
+            <p>Altura: {gapHeight} mm</p>
+            <p>Descontos de fechadura: {lockDiscount} mm</p>
           </div>
         </Box>
       </div>

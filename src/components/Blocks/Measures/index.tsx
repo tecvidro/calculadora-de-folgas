@@ -7,13 +7,25 @@ export default function Measures({
   title,
   widthLabel,
   heightLabel,
+  setGapWidth,
+  setGapHeight,
 }: MeasuresProps) {
   return (
     <Box className="flex flex-col gap-4">
       <Title title={title} />
       <div className="flex justify-between gap-4">
-        <InputNumber defaultValue={4000} label={widthLabel} name="panels" />
-        <InputNumber defaultValue={2400} label={heightLabel} name="doors" />
+        <InputNumber
+          defaultValue={4000}
+          label={widthLabel}
+          name="panels"
+          onChange={setGapWidth}
+        />
+        <InputNumber
+          defaultValue={2400}
+          label={heightLabel}
+          name="doors"
+          onChange={setGapHeight}
+        />
       </div>
     </Box>
   )

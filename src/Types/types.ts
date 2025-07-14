@@ -13,6 +13,8 @@ export type PanelsProps = Base<'panel'> & {
   doorsLabel: string
   doorsDescription: string
   doorsCount: number
+  setPanelCount: (count: number) => void
+  setDoorsCount: (count: number) => void
 }
 
 export type LockProps = Base<'lock'> & {
@@ -24,6 +26,7 @@ export type LockProps = Base<'lock'> & {
   }[]
   label: string
   defaultValue: number
+  setLockDiscount: (discount: number) => void
 }
 
 export type ModelProps = Base<'model'> & {
@@ -34,6 +37,8 @@ export type MeasuresProps = Base<'measure'> & {
   title: string
   widthLabel: string
   heightLabel: string
+  setGapWidth: (width: number) => void
+  setGapHeight: (height: number) => void
 }
 
 export type BlockContentType =
@@ -44,6 +49,11 @@ export type BlockContentType =
 
 export type CalculatorBuilderProps = {
   content: BlockContentType[]
+  setPanelCount: (count: number) => void
+  setDoorsCount: (count: number) => void
+  setGapWidth: (width: number) => void
+  setGapHeight: (height: number) => void
+  setLockDiscount: (discount: number) => void
 }
 
 export type Product = {

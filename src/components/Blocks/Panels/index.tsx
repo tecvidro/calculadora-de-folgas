@@ -11,6 +11,8 @@ export default function Panels({
   doorsCount,
   doorsDescription,
   doorsLabel,
+  setPanelCount,
+  setDoorsCount,
 }: PanelsProps) {
   return (
     <Box className="flex flex-col gap-4">
@@ -21,6 +23,7 @@ export default function Panels({
           description={panelsDescription}
           label={panelsLabel}
           name="panels"
+          onChange={setPanelCount}
         />
         <InputNumber
           defaultValue={doorsCount}
@@ -28,6 +31,7 @@ export default function Panels({
           disabled
           label={doorsLabel}
           name="doors"
+          onChange={setDoorsCount}
         />
       </form>
     </Box>

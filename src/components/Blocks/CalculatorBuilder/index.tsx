@@ -4,7 +4,14 @@ import Measures from '../Measures'
 import Model from '../Model'
 import Panels from '../Panels'
 
-export const CalculatorBuilder = ({ content }: CalculatorBuilderProps) => {
+export const CalculatorBuilder = ({
+  content,
+  setPanelCount,
+  setDoorsCount,
+  setGapWidth,
+  setGapHeight,
+  setLockDiscount,
+}: CalculatorBuilderProps) => {
   if (!Array.isArray(content)) {
     return null
   }
@@ -13,11 +20,31 @@ export const CalculatorBuilder = ({ content }: CalculatorBuilderProps) => {
       {content.map((block) => {
         switch (block.type) {
           case 'panel':
-            return <Panels key={block.id} {...block} />
+            return (
+              <Panels
+                key={block.id}
+                {...block}
+                setPanelCount={setPanelCount}
+                setDoorsCount={setDoorsCount}
+              />
+            )
           case 'measure':
-            return <Measures key={block.id} {...block} />
+            return (
+              <Measures
+                key={block.id}
+                {...block}
+                setGapWidth={setGapWidth}
+                setGapHeight={setGapHeight}
+              />
+            )
           case 'lock':
-            return <Lock key={block.id} {...block} />
+            return (
+              <Lock
+                key={block.id}
+                {...block}
+                setLockDiscount={setLockDiscount}
+              />
+            )
           case 'model':
             return <Model key={block.id} {...block} />
           default:
