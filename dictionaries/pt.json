@@ -34,17 +34,27 @@
         {
           "id": 2,
           "type": "measure",
-          "title": "Medidas"
+          "title": "Medidas do vão",
+          "widthLabel": "Largura",
+          "heightLabel": "Altura"
         },
         {
           "id": 3,
           "type": "lock",
-          "title": "Tipo de fechadura"
-        },
-        {
-          "id": 4,
-          "type": "model",
-          "title": "Modelo de vidro"
+          "title": "Desconto de fechadura",
+          "description": "Aqui você coloca a medida a mais, por porta, para ajuste da fechadura.",
+          "text": [
+            {
+              "index": 1,
+              "text": "Recomendamos 100mm para folga de fechaduras."
+            },
+            {
+              "index": 2,
+              "text": "Se você quiser utilizar um puxador ou outro tipo de acessório, você pode usar folgas maiores (ex: 230mm, 250mm...) por porta!"
+            }
+          ],
+          "label": "Porta",
+          "defaultValue": 50
         }
       ]
     },
@@ -60,4 +70,3 @@
     }
   ]
 }
-

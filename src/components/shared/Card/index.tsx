@@ -34,7 +34,7 @@ export function Card({
         <span className="flex w-fit rounded-sm bg-blue px-2 py-1 text-sm text-white">
           {model}
         </span>
-        <span className="text-2xl text-bold">{name}</span>
+        <span className="text-2xl font-bold">{name}</span>
         <span className="text-lg/5">{subtitle}</span>
       </Link>
       <Button label={ctaLabel} link={link} />
