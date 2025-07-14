@@ -1,4 +1,5 @@
 import { CalculatorBuilder } from '@/components/Blocks/CalculatorBuilder'
+import { Results } from '@/components/Layout/Results'
 import { Alert } from '@/components/shared/Alert'
 import type { Locale } from '@/i18n-config'
 import { getDictionary } from '@/utils/get-dictionary'
@@ -22,6 +23,7 @@ export default async function ProductCalculator(props: {
       <p className="w-full text-center">{product.description}</p>
       <Alert text={dictionary.globals.alert} />
       <CalculatorBuilder content={product.content} />
+      <Results product={product.name} />
     </div>
   )
 }
