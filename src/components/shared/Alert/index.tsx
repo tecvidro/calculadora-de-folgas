@@ -6,7 +6,7 @@ type AlertProps = {
 
 export const Alert = ({ text }: AlertProps) => {
   return (
-    <Box variant="red" className="w-full max-w-4xl">
+    <Box className="w-full max-w-4xl" variant="red">
       {text}
     </Box>
   )

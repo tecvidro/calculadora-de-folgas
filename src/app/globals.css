@@ -5,6 +5,7 @@
   --foreground: #171717;
 }
 
+/* biome-ignore lint/nursery/noUnknownAtRule: used for theming */
 @theme {
   --color-gray-100: #eaeaea;
   --color-gray-200: #a5a5a5;
@@ -27,9 +28,4 @@ body {
   color: var(--color-foreground);
   font-family: var(--roboto-condensed), Helvetica, sans-serif;
   font-weight: 400;
-}
-
-bold,
-strong {
-  font-weight: 800;
 }
