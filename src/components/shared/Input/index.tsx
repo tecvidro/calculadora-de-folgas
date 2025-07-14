@@ -1,10 +1,10 @@
 type InputProps = {
-  name: string;
-  label: string;
-  description?: string;
-  defaultValue: string | number;
-  disabled?: boolean;
-};
+  name: string
+  label: string
+  description?: string
+  defaultValue: string | number
+  disabled?: boolean
+}
 
 export const Input = ({
   label,
@@ -20,12 +20,12 @@ export const Input = ({
       </label>
       {!!description && <div>{description}</div>}
       <input
-        className="rounded border p-2 disabled:bg-gray-100"
+        className="rounded border p-2 text-center disabled:bg-gray-100"
         defaultValue={defaultValue}
         disabled={disabled}
         id={name}
         type="number"
       />
     </fieldset>
-  );
-};
+  )
+}

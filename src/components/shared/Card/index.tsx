@@ -1,15 +1,15 @@
-import Image from "next/image";
-import Link from "next/link";
-import Button from "../Button";
+import Image from 'next/image'
+import Link from 'next/link'
+import Button from '../Button'
 
 type CardProps = {
-  name: string;
-  model: string;
-  subtitle: string;
-  ctaLabel: string;
-  link: string;
-  imageUrl: string;
-};
+  name: string
+  model: string
+  subtitle: string
+  ctaLabel: string
+  link: string
+  imageUrl: string
+}
 
 export function Card({
   name,
@@ -39,5 +39,5 @@ export function Card({
       </Link>
       <Button label={ctaLabel} link={link} />
     </div>
-  );
+  )
 }

@@ -29,6 +29,7 @@ body {
   font-weight: 400;
 }
 
-bold, strong {
-    font-weight: 800;
+bold,
+strong {
+  font-weight: 800;
 }

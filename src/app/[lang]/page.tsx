@@ -1,13 +1,13 @@
-import { Card } from "@/components/shared/Card";
-import type { Locale } from "@/i18n-config";
-import { getDictionary } from "@/utils/get-dictionary";
+import { Card } from '@/components/shared/Card'
+import type { Locale } from '@/i18n-config'
+import { getDictionary } from '@/utils/get-dictionary'
 
 export default async function Home(props: {
-  params: Promise<{ lang: Locale }>;
+  params: Promise<{ lang: Locale }>
 }) {
-  const params = await props.params;
+  const params = await props.params
 
-  const dictionary = await getDictionary(params.lang);
+  const dictionary = await getDictionary(params.lang)
   return (
     <div className="flex flex-col gap-4">
       <h1 className="text-center uppercase ">{dictionary.globals.homeTitle}</h1>
@@ -23,5 +23,5 @@ export default async function Home(props: {
           ))}
       </div>
     </div>
-  );
+  )
 }

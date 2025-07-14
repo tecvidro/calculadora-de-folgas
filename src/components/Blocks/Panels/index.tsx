@@ -1,7 +1,7 @@
-import { Box } from "@/components/shared/Box";
-import { Title } from "@/components/shared/BoxTitle";
-import { Input } from "@/components/shared/Input";
-import type { PanelsProps } from "@/Types/types";
+import { Box } from '@/components/shared/Box'
+import { Title } from '@/components/shared/BoxTitle'
+import { InputNumber } from '@/components/shared/InputNumber'
+import type { PanelsProps } from '@/Types/types'
 
 export default function Panels({
   title,
@@ -16,13 +16,13 @@ export default function Panels({
     <Box className="flex flex-col gap-4">
       <Title title={title} />
       <form>
-        <Input
+        <InputNumber
           defaultValue={panelsCount}
           description={panelsDescription}
           label={panelsLabel}
           name="panels"
         />
-        <Input
+        <InputNumber
           defaultValue={doorsCount}
           description={doorsDescription}
           disabled
@@ -31,5 +31,5 @@ export default function Panels({
         />
       </form>
     </Box>
-  );
+  )
 }

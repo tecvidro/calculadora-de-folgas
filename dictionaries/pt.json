@@ -35,8 +35,8 @@
           "id": 2,
           "type": "measure",
           "title": "Medidas do vão",
-          "widthLabel": "Largura",
-          "heightLabel": "Altura"
+          "widthLabel": "Largura (mm)",
+          "heightLabel": "Altura (mm)"
         },
         {
           "id": 3,
