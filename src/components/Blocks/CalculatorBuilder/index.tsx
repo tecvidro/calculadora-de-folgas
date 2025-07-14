@@ -10,7 +10,7 @@ export const CalculatorBuilder = ({
   setDoorsCount,
   setGapWidth,
   setGapHeight,
-  setLockDiscount,
+  setLockDiscounts,
 }: CalculatorBuilderProps) => {
   if (!Array.isArray(content)) {
     return null;
@@ -42,7 +42,7 @@ export const CalculatorBuilder = ({
               <Lock
                 key={block.id}
                 {...block}
-                setLockDiscount={setLockDiscount}
+                setLockDiscounts={setLockDiscounts}
               />
             );
           case "model":

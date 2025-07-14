@@ -8,7 +8,7 @@ type ResultsProps = {
   doorsCount: number
   gapWidth: number
   gapHeight: number
-  lockDiscount: number[]
+  lockDiscounts: number[]
 }
 
 export const Results = ({
@@ -17,7 +17,7 @@ export const Results = ({
   doorsCount,
   gapWidth,
   gapHeight,
-  lockDiscount,
+  lockDiscounts,
 }: ResultsProps) => {
   return (
     <div>
@@ -33,7 +33,7 @@ export const Results = ({
             <p>Largura: {gapWidth} mm</p>
             <p>Altura: {gapHeight} mm</p>
             <p>Descontos de fechadura:</p>
-            {lockDiscount.map((discount, index) => (
+            {lockDiscounts.map((discount, index) => (
               <p key={uuidv4()}>
                 Porta {index + 1}: {discount} mm
               </p>

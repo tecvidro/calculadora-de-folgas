@@ -27,7 +27,7 @@ export type LockProps = Base<'lock'> & {
   label: string
   defaultValues: number[]
   doorCount: number
-  setLockDiscount: (discount: number[]) => void
+  setLockDiscounts: (discount: number[]) => void
 }
 
 export type ModelProps = Base<'model'> & {
@@ -56,7 +56,7 @@ export type CalculatorBuilderProps = {
   setDoorsCount: (count: number) => void
   setGapWidth: (width: number) => void
   setGapHeight: (height: number) => void
-  setLockDiscount: (discount: number[]) => void
+  setLockDiscounts: (discount: number[]) => void
 }
 
 export type Product = {
