@@ -13,6 +13,13 @@ export default function Measures({
 }: MeasuresProps) {
   const { setGapWidth, setGapHeight } = useCalculator()
 
+  const handleGapWidthChange = (value: number) => {
+    setGapWidth(value)
+  }
+  const handleGapHeightChange = (value: number) => {
+    setGapHeight(value)
+  }
+
   return (
     <Box className="flex flex-col gap-4">
       <Title title={title} />
@@ -21,13 +28,13 @@ export default function Measures({
           defaultValue={defaultWidth}
           label={widthLabel}
           name="panels"
-          onChange={setGapWidth}
+          onChange={(value) => handleGapWidthChange(value)}
         />
         <InputNumber
           defaultValue={defaultHeight}
           label={heightLabel}
           name="doors"
-          onChange={setGapHeight}
+          onChange={(value) => handleGapHeightChange(value)}
         />
       </div>
     </Box>
