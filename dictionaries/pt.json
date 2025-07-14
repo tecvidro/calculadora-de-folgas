@@ -56,7 +56,8 @@
             }
           ],
           "label": "Porta",
-          "defaultValue": 50
+          "defaultValues": [50, 50],
+          "doorCount": 0
         }
       ]
     },

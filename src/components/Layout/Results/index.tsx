@@ -1,14 +1,15 @@
-import { Box } from "@/components/shared/Box";
-import { Title } from "@/components/shared/BoxTitle";
+import { Box } from '@/components/shared/Box'
+import { Title } from '@/components/shared/BoxTitle'
 
+import { v4 as uuidv4 } from 'uuid'
 type ResultsProps = {
-  product: string;
-  panelCount: number;
-  doorsCount: number;
-  gapWidth: number;
-  gapHeight: number;
-  lockDiscount: number;
-};
+  product: string
+  panelCount: number
+  doorsCount: number
+  gapWidth: number
+  gapHeight: number
+  lockDiscount: number[]
+}
 
 export const Results = ({
   product,
@@ -18,7 +19,6 @@ export const Results = ({
   gapHeight,
   lockDiscount,
 }: ResultsProps) => {
-
   return (
     <div>
       <Title title={`Resultado de folgas para ${product}`} />
@@ -32,10 +32,15 @@ export const Results = ({
             <p>Medidas do vão:</p>
             <p>Largura: {gapWidth} mm</p>
             <p>Altura: {gapHeight} mm</p>
-            <p>Descontos de fechadura: {lockDiscount} mm</p>
+            <p>Descontos de fechadura:</p>
+            {lockDiscount.map((discount, index) => (
+              <p key={uuidv4()}>
+                Porta {index + 1}: {discount} mm
+              </p>
+            ))}
           </div>
         </Box>
       </div>
     </div>
-  );
-};
+  )
+}
