@@ -26,7 +26,6 @@ export type LockProps = Base<'lock'> & {
   }[]
   label: string
   defaultValues: number[]
-  doorCount: number
   setLockDiscounts: (discount: number[]) => void
 }
 
