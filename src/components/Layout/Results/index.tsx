@@ -1,21 +1,21 @@
-import { v4 as uuidv4 } from 'uuid'
-import { Box } from '@/components/shared/Box'
-import { Title } from '@/components/shared/BoxTitle'
-import { useCalculator } from '@/context/calculator-context'
+import { v4 as uuidv4 } from "uuid";
+import { Box } from "@/components/shared/Box";
+import { Title } from "@/components/shared/BoxTitle";
+import { useCalculator } from "@/context/calculator-context";
 
 type ResultsProps = {
-  product: string
-}
+  product: string;
+};
 
 export const Results = ({ product }: ResultsProps) => {
   const { panelCount, doorsCount, gapWidth, gapHeight, lockDiscounts } =
-    useCalculator()
+    useCalculator();
 
   return (
-    <div>
+    <div className="w-full">
       <Title title={`Resultado de folgas para ${product}`} />
-      <div className="grid grid-cols-2">
-        <Box variant="gray">
+      <div className="grid w-full grid-cols-2 gap-4">
+        <Box className="w-full" variant="gray">
           <div>
             <h3>Informações e medidas</h3>
             <p>Número de vidros:</p>
@@ -32,7 +32,12 @@ export const Results = ({ product }: ResultsProps) => {
             ))}
           </div>
         </Box>
+        <Box variant="blue">
+          <div>
+            <h3>Dimensões dos vidros</h3>
+          </div>
+        </Box>
       </div>
     </div>
-  )
-}
+  );
+};
