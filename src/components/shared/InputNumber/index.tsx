@@ -1,49 +1,38 @@
 'use client'
 import { Minus, Plus } from 'lucide-react'
-import { useState } from 'react'
 
 type InputNumberProps = {
   name: string
   label: string
   description?: string
-  defaultValue: number
+  value: number
   disabled?: boolean
   onChange?: (value: number) => void
 }
 
 export const InputNumber = ({
   label,
-  defaultValue,
+  value,
   description,
   name,
   disabled = false,
   onChange,
 }: InputNumberProps) => {
-  const [value, setValue] = useState(defaultValue)
-
   const handleIncrement = () => {
-    setValue((prev) => {
-      const newValue = prev + 1
-      onChange?.(newValue)
-      return newValue
-    })
+    const newValue = value + 1
+    onChange?.(newValue)
   }
 
   const handleDecrement = () => {
-    setValue((prev) => {
-      const newValue = prev > 1 ? prev - 1 : 1
-      onChange?.(newValue)
-      return newValue
-    })
+    const newValue = value > 1 ? value - 1 : 1
+    onChange?.(newValue)
   }
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = Number.parseInt(event.target.value, 10)
     if (!Number.isNaN(newValue) && newValue >= 1) {
-      setValue(newValue)
       onChange?.(newValue)
     } else if (event.target.value === '') {
-      setValue(1)
       onChange?.(1)
     }
   }

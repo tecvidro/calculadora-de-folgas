@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Box } from '@/components/shared/Box'
 import { Title } from '@/components/shared/BoxTitle'
 import { InputNumber } from '@/components/shared/InputNumber'
@@ -12,11 +13,15 @@ export default function Measures({
   defaultHeight,
 }: MeasuresProps) {
   const { setGapWidth, setGapHeight } = useCalculator()
+  const [gapWidth, setLocalGapWidth] = useState(defaultWidth)
+  const [gapHeight, setLocalGapHeight] = useState(defaultHeight)
 
   const handleGapWidthChange = (value: number) => {
+    setLocalGapWidth(value)
     setGapWidth(value)
   }
   const handleGapHeightChange = (value: number) => {
+    setLocalGapHeight(value)
     setGapHeight(value)
   }
 
@@ -25,16 +30,16 @@ export default function Measures({
       <Title title={title} />
       <div className="flex justify-between gap-4">
         <InputNumber
-          defaultValue={defaultWidth}
           label={widthLabel}
           name="panels"
           onChange={(value) => handleGapWidthChange(value)}
+          value={gapWidth}
         />
         <InputNumber
-          defaultValue={defaultHeight}
           label={heightLabel}
           name="doors"
           onChange={(value) => handleGapHeightChange(value)}
+          value={gapHeight}
         />
       </div>
     </Box>
