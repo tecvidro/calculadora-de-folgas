@@ -1,22 +1,34 @@
-'use client'
+"use client";
 
-import { useState } from 'react'
-import { CalculatorBuilder } from '@/components/Blocks/CalculatorBuilder'
-import { Results } from '@/components/Layout/Results'
-import { Alert } from '@/components/shared/Alert'
-import type { Product } from '@/Types/types'
+import { useState } from "react";
+import { CalculatorBuilder } from "@/components/Blocks/CalculatorBuilder";
+import { Results } from "@/components/Layout/Results";
+import { Alert } from "@/components/shared/Alert";
+import type { Product } from "@/Types/types";
 
 type CalculatorFormProps = {
-  product: Product
-  alertText: string
-}
+  product: Product;
+  alertText: string;
+};
 
 export const CalculatorForm = ({ product, alertText }: CalculatorFormProps) => {
-  const [panelCount, setPanelCount] = useState(0)
-  const [doorsCount, setDoorsCount] = useState(0)
-  const [gapWidth, setGapWidth] = useState(0)
-  const [gapHeight, setGapHeight] = useState(0)
-  const [lockDiscount, setLockDiscount] = useState(0)
+  const initialPanelsCount = product.content.filter(
+    (item) => item.type === "panel",
+  )[0].panelsCount;
+  const initialDoorsCount = product.content.filter(
+    (item) => item.type === "panel",
+  )[0].doorsCount;
+  const initialWidth = product.content.filter(
+    (item) => item.type === "measure",
+  )[0].defaultWidth;
+  const initialHeight = product.content.filter(
+    (item) => item.type === "measure",
+  )[0].defaultHeight;
+  const [panelCount, setPanelCount] = useState(initialPanelsCount);
+  const [doorsCount, setDoorsCount] = useState(initialDoorsCount);
+  const [gapWidth, setGapWidth] = useState(initialWidth);
+  const [gapHeight, setGapHeight] = useState(initialHeight);
+  const [lockDiscount, setLockDiscount] = useState(0);
 
   return (
     <div className=" flex flex-col items-center gap-4">
@@ -40,5 +52,5 @@ export const CalculatorForm = ({ product, alertText }: CalculatorFormProps) => {
         product={product.name}
       />
     </div>
-  )
-}
+  );
+};
