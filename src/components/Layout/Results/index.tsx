@@ -1,24 +1,16 @@
+import { v4 as uuidv4 } from 'uuid'
 import { Box } from '@/components/shared/Box'
 import { Title } from '@/components/shared/BoxTitle'
+import { useCalculator } from '@/context/calculator-context'
 
-import { v4 as uuidv4 } from 'uuid'
 type ResultsProps = {
   product: string
-  panelCount: number
-  doorsCount: number
-  gapWidth: number
-  gapHeight: number
-  lockDiscounts: number[]
 }
 
-export const Results = ({
-  product,
-  panelCount,
-  doorsCount,
-  gapWidth,
-  gapHeight,
-  lockDiscounts,
-}: ResultsProps) => {
+export const Results = ({ product }: ResultsProps) => {
+  const { panelCount, doorsCount, gapWidth, gapHeight, lockDiscounts } =
+    useCalculator()
+
   return (
     <div>
       <Title title={`Resultado de folgas para ${product}`} />

@@ -1,6 +1,7 @@
 import { Box } from '@/components/shared/Box'
 import { Title } from '@/components/shared/BoxTitle'
 import { InputNumber } from '@/components/shared/InputNumber'
+import { useCalculator } from '@/context/calculator-context'
 import type { PanelsProps } from '@/Types/types'
 
 export default function Panels({
@@ -11,9 +12,9 @@ export default function Panels({
   doorsCount,
   doorsDescription,
   doorsLabel,
-  setPanelCount,
-  setDoorsCount,
 }: PanelsProps) {
+  const { setPanelCount, setDoorsCount } = useCalculator()
+
   return (
     <Box className="flex flex-col gap-4">
       <Title title={title} />

@@ -1,6 +1,7 @@
 import { Box } from '@/components/shared/Box'
 import { Title } from '@/components/shared/BoxTitle'
 import { InputNumber } from '@/components/shared/InputNumber'
+import { useCalculator } from '@/context/calculator-context'
 import type { MeasuresProps } from '@/Types/types'
 
 export default function Measures({
@@ -9,9 +10,9 @@ export default function Measures({
   heightLabel,
   defaultWidth,
   defaultHeight,
-  setGapWidth,
-  setGapHeight,
 }: MeasuresProps) {
+  const { setGapWidth, setGapHeight } = useCalculator()
+
   return (
     <Box className="flex flex-col gap-4">
       <Title title={title} />
