@@ -46,6 +46,7 @@ export default async function ProductCalculator(props: {
         <CalculatorForm
           alertText={dictionary.globals.alert}
           product={product}
+          dictionary={dictionary}
         />
       </CalculatorProvider>
     </div>

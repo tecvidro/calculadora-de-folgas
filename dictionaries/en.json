@@ -1,13 +1,26 @@
 {
   "globals": {
-    "title": "Tec Gap Calculator",
-    "description": "Page to calculate glass gaps and measurements for the installation of Tec products",
+    "title": "Tec Clearance Calculator",
+    "description": "Page to calculate the clearances and dimensions of the glass for Tec product installation",
     "homeTitle": "Select the product",
-    "alert": "The calculator is exclusively intended to support the interpretation and application of the formulas presented in the product manual, with the user being solely responsible for the accuracy of the data and measurements entered into the tables.",
+    "alert": "The calculator is intended solely to support the interpretation and application of the formulas presented in the product manual, with the user being fully responsible for the accuracy of the data and measurements entered in the tables.",
     "callToActions": {
       "card": "Open calculator",
-      "print": "Print version",
-      "manual": "Download manual"
+      "print": "Printable version",
+      "manual": "download manual"
+    },
+    "resultsLabels": {
+      "title": "Clearance result for",
+      "infoAndMeasures": "Information and measurements",
+      "numberOfGlasses": "Number of glasses:",
+      "panels": "Panels",
+      "doors": "Doors",
+      "gapMeasures": "Opening measurements:",
+      "width": "Width",
+      "height": "Height",
+      "lockDiscounts": "Lock deductions:",
+      "door": "Door",
+      "glassDimensions": "Glass dimensions"
     }
   },
   "products": [
@@ -15,36 +28,49 @@
       "name": "VDPO 2 DOORS",
       "slug": "vdpo-2-portas",
       "model": "Versatik Division",
-      "title": "Gap calculation for VDPO 2 Doors",
+      "title": "Clearance calculation for VDPO 2 Doors",
       "subtitle": "Installation for tempered glass",
-      "description": "Model without the use of the side door profile with built-in lock",
+      "description": "Model without the use of side door profile with built-in lock",
       "imageUrl": "https://tecvidro.com/tec/wp-content/uploads/2025/07/featured-vdpo2.jpg",
       "content": [
         {
           "id": 1,
           "type": "panel",
-          "title": "Panels Configuration",
-          "panelsLabel": "Number of Panels",
-          "panelsDescription": "Select the number of panels.",
+          "title": "Number of glasses",
+          "panelsLabel": "Number of panels",
+          "panelsDescription": "Enter here the number of panels to be installed between the doors.",
           "panelsCount": 2,
-          "doorsLabel": "Number of Doors",
-          "doorsDescription": "Select the number of doors.",
+          "doorsLabel": "Number of doors",
+          "doorsDescription": "For this model we have doors on both sides! Non-editable number.",
           "doorsCount": 2
         },
         {
           "id": 2,
           "type": "measure",
-          "title": "Measurements"
+          "title": "Opening measurements",
+          "widthLabel": "Width (mm)",
+          "heightLabel": "Height (mm)",
+          "defaultWidth": 4000,
+          "defaultHeight": 2400
         },
         {
           "id": 3,
           "type": "lock",
-          "title": "Lock Type"
-        },
-        {
-          "id": 4,
-          "type": "model",
-          "title": "Glass Model"
+          "title": "Lock deduction",
+          "description": "Here you enter the additional measurement, per door, for lock adjustment.",
+          "text": [
+            {
+              "index": 1,
+              "text": "We recommend 100mm for lock clearance."
+            },
+            {
+              "index": 2,
+              "text": "If you want to use a handle or other type of accessory, you can use larger clearances (e.g., 230mm, 250mm...) per door!"
+            }
+          ],
+          "label": "Door",
+          "defaultValues": [50, 50],
+          "disabled": false
         }
       ]
     },
@@ -52,11 +78,51 @@
       "name": "VDPO 4 DOORS",
       "slug": "vdpo-4-portas",
       "model": "Versatik Division",
-      "title": "Gap calculation for VDPO 4 Doors",
+      "title": "Clearance calculation for VDPO 4 Doors",
       "subtitle": "Installation for tempered glass",
-      "description": "Model without the use of the side door profile with built-in lock",
+      "description": "Model without the use of side door profile with built-in lock",
       "imageUrl": "https://tecvidro.com/tec/wp-content/uploads/2025/07/featured-vdpo4.jpg",
-      "content": []
+      "content": [
+        {
+          "id": 1,
+          "type": "panel",
+          "title": "Number of glasses",
+          "panelsLabel": "Number of panels",
+          "panelsDescription": "Enter here the number of panels to be installed between the doors.",
+          "panelsCount": 2,
+          "doorsLabel": "Number of doors",
+          "doorsDescription": "For this model we have doors on both sides and two more in the center! Non-editable number.",
+          "doorsCount": 4
+        },
+        {
+          "id": 2,
+          "type": "measure",
+          "title": "Opening measurements",
+          "widthLabel": "Width (mm)",
+          "heightLabel": "Height (mm)",
+          "defaultWidth": 6000,
+          "defaultHeight": 2400
+        },
+        {
+          "id": 3,
+          "type": "lock",
+          "title": "Lock deduction",
+          "description": "Here you enter the additional measurement, per door, for lock adjustment.",
+          "text": [
+            {
+              "index": 1,
+              "text": "We recommend 100mm for lock clearance."
+            },
+            {
+              "index": 2,
+              "text": "If you want to use a handle or other type of accessory, you can use larger clearances (e.g., 230mm, 250mm...) per door!"
+            }
+          ],
+          "label": "Door",
+          "defaultValues": [50, 50, 50, 50],
+          "disabled": false
+        }
+      ]
     }
   ]
 }

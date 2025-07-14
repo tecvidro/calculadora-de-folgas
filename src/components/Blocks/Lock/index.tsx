@@ -11,6 +11,7 @@ export default function Lock({
   text,
   defaultValues,
   label,
+  disabled = false,
 }: LockProps) {
   const { lockDiscounts, setLockDiscounts } = useCalculator()
 
@@ -29,6 +30,7 @@ export default function Lock({
       <div className="flex justify-between gap-4">
         {defaultValues.map((_, i) => (
           <InputNumber
+            disabled={disabled}
             key={uuidv4()}
             label={`${label} ${i + 1}`}
             name={`${label}_${i + 1}`}
