@@ -1,6 +1,12 @@
 'use client'
 
-import { createContext, type ReactNode, useContext, useState } from 'react'
+import {
+  createContext,
+  type ReactNode,
+  useContext,
+  useState,
+  useEffect,
+} from 'react'
 
 interface CalculatorContextType {
   panelCount: number
@@ -52,10 +58,18 @@ export const CalculatorProvider = ({
   const [useDefaultLockDiscounts, setUseDefaultLockDiscounts] =
     useState<boolean>(initialUseDefaultLockDiscounts)
   const [lockDiscounts, setLockDiscounts] = useState<number[]>(
-    initialUseDefaultLockDiscounts && initialLockDiscounts.option
+    initialUseDefaultLockDiscounts
       ? initialLockDiscounts.default
       : initialLockDiscounts.option || initialLockDiscounts.default
   )
+
+  useEffect(() => {
+    if (useDefaultLockDiscounts) {
+      setLockDiscounts(initialLockDiscounts.default)
+    } else {
+      setLockDiscounts(initialLockDiscounts.option || initialLockDiscounts.default)
+    }
+  }, [useDefaultLockDiscounts, initialLockDiscounts])
 
   return (
     <CalculatorContext.Provider

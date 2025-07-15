@@ -161,6 +161,7 @@
           "id": 3,
           "type": "model",
           "title": "Modelo de puxador para as portas",
+          "label": "Selecione uma opção",
           "description": "",
           "options": [
             { "label": "Puxador", "value": "default" },
@@ -185,6 +186,199 @@
           },
           "disabled": true
         }
+      ]
+    },
+    {
+      "name": "VDPL + VDSU",
+      "slug": "vdpl-vdsu",
+      "model": "Versatik Division",
+      "title": "Cálculo de folgas para VDPL + VDSU",
+      "subtitle": "Instalação para vidros temperados",
+      "description": "Modelo com o uso de 4 fechaduras",
+      "imageUrl": "https://tecvidro.com/tec/wp-content/uploads/2025/07/featured-vdpo4.jpg",
+      "content": [
+        {
+          "id": 1,
+          "type": "panel",
+          "title": "Número de vidros",
+          "panelsLabel": "Número de painéis",
+          "panelsDescription": "Digite aqui o número de painéis que serão instalados entre as portas.",
+          "panelsCount": 2,
+          "doorsLabel": "Número de portas",
+          "doorsDescription": "Para este modelo temos portas nas duas laterais e mais duas nas centrais! Número não editável.",
+          "doorsCount": 4
+        },
+        {
+          "id": 2,
+          "type": "measure",
+          "title": "Medidas do vão",
+          "widthLabel": "Largura (mm)",
+          "heightLabel": "Altura (mm)",
+          "defaultWidth": 6000,
+          "defaultHeight": 2500
+        },
+        {
+          "id": 3,
+          "type": "lock",
+          "title": "Desconto de fechadura",
+          "description": "Esta é a medida a mais para as portas com perfil lateral de fechadura embutida. Não editável.",
+          "text": [],
+          "label": "Porta",
+          "defaultValues": {
+            "default": [50, 50, 50, 50]
+          },
+          "disabled": true
+        }
+      ]
+    },
+    {
+      "name": "Alvenaria",
+      "slug": "alvenaria",
+      "model": "Versatik Division",
+      "title": "Cálculo de folga para alvenaria",
+      "subtitle": "Instalação atrás de alvenaria.",
+      "description": "Modelo em instalação atrás de alvenaria",
+      "imageUrl": "https://tecvidro.com/tec/wp-content/uploads/2025/07/featured-vdpo4.jpg",
+      "content": [
+                {
+          "id": 1,
+          "type": "model",
+          "title": "Modelo de porta",
+          "label": "Selecione uma opção",
+          "description": "",
+          "options": [
+            { "label": "VDPO", "value": "default" },
+            { "label": "VDPL", "value": "option" }
+          ]
+        },
+        {
+          "id": 2,
+          "type": "panel",
+          "title": "Número de vidros",
+          "panelsLabel": "Número de painéis",
+          "panelsDescription": "Digite aqui o número de painéis que serão instalados entre as portas.",
+          "panelsCount": 4,
+          "doorsLabel": "Número de portas",
+          "doorsDescription": "Para este modelo, o cálculo é com 1 porta. Não editável.",
+          "doorsCount": 1
+        },
+        {
+          "id": 3,
+          "type": "measure",
+          "title": "Medidas do vão",
+          "description": "ATENÇÃO! Aqui você digita apenas a largura de abertura do vão. Desconsiderar a medida da parede.",
+          "widthLabel": "Largura (mm)",
+          "heightLabel": "Altura (mm)",
+          "defaultWidth": 3000,
+          "defaultHeight": 2500
+        },
+        {
+          "id": 4,
+          "type": "lock",
+          "title": "Desconto de fechadura",
+          "description": "Esta é a medida à mais para a porta... Não editável!",
+          "text": [{"index": 1, "text": "ATENÇÃO: A largura livre de parede deve ser maior que a largura da maior folha do sistema!"}],
+          "label": "Porta",
+          "defaultValues": {
+            "default": [50],
+            "option": [100]
+
+          },
+          "disabled": true
+        }
+      ]
+    },
+    {
+      "name": "VDPL + VDC",
+      "slug": "vdpl-vdc",
+      "model": "Versatik Division",
+      "title": "Cálculo de folgas para VDPL + VDC",
+      "subtitle": "Vidro laminado para instalação em cantos",
+      "description": "Modelo com folhas transversais (canto)",
+      "imageUrl": "https://tecvidro.com/tec/wp-content/uploads/2025/07/featured-vdpo4.jpg",
+      "content": [
+                {
+          "id": 1,
+          "type": "model",
+          "title": "Modelo de porta",
+          "label": "Aqui você escolhe o tipo de montagem do seu projeto.",
+          "description": "",
+          "options": [
+            { "label": "VDPL e VDC", "value": "default" },
+            { "label": "VDPL e VDPL", "value": "option" }
+          ]
+        },
+        {
+          "id": 2,
+          "type": "panel",
+          "title": "Número de vidros - Lado A",
+          "panelsLabel": "Número de painéis",
+          "panelsDescription": "Digite aqui o número de painéis que serão instalados entre as portas.",
+          "panelsCount": 2,
+          "doorsLabel": "Número de portas",
+          "doorsDescription": "Para este modelo temos portas nas duas laterais! Número não editável.",
+          "doorsCount": 2
+        },
+        {
+          "id": 3,
+          "type": "measure",
+          "title": "Medidas do vão - Lado A",
+          "description": "",
+          "widthLabel": "Largura (mm)",
+          "heightLabel": "Altura (mm)",
+          "defaultWidth": 4000,
+          "defaultHeight": 2500
+        },
+        {
+          "id": 4,
+          "type": "lock",
+          "title": "Desconto de fechadura - Lado A",
+          "description": "Esta é a medida a mais para as portas com perfil lateral de fechadura embutida. Não editável.",
+          "text": [],
+          "label": "Porta",
+          "defaultValues": {
+            "default": [50, 50],
+            "option": [100, 100]
+
+          },
+          "disabled": true
+        },
+                {
+          "id": 5,
+          "type": "panel",
+          "title": "Número de vidros - Lado B",
+          "panelsLabel": "Número de painéis",
+          "panelsDescription": "Digite aqui o número de painéis que serão instalados entre as portas.",
+          "panelsCount": 2,
+          "doorsLabel": "Número de portas",
+          "doorsDescription": "Para este modelo temos portas nas duas laterais! Número não editável.",
+          "doorsCount": 2
+        },
+        {
+          "id": 6,
+          "type": "measure",
+          "title": "Medidas do vão - Lado B",
+          "description": "",
+          "widthLabel": "Largura (mm)",
+          "heightLabel": "Altura (mm)",
+          "defaultWidth": 4000,
+          "defaultHeight": 2500
+        },
+        {
+          "id": 7,
+          "type": "lock",
+          "title": "Desconto de fechadura - Lado B",
+          "description": "Esta é a medida a mais para as portas com perfil lateral de fechadura embutida. Não editável.",
+          "text": [],
+          "label": "Porta",
+          "defaultValues": {
+            "default": [50, 50],
+            "option": [100, 100]
+
+          },
+          "disabled": true
+        }
+
       ]
     }
   ]

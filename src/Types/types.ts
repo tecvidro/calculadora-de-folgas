@@ -33,11 +33,13 @@ export type LockProps = Base<'lock'> & {
 export type ModelProps = Base<'model'> & {
   title: string
   description: string
+  label: string
   options: { label: string; value: string }[]
 }
 
 export type MeasuresProps = Base<'measure'> & {
   title: string
+  description?: string
   widthLabel: string
   heightLabel: string
   defaultWidth: number
