@@ -23,6 +23,31 @@
       "glassDimensions": "Dimensões dos vidros"
     }
   },
+  "infosPage": {
+    "title": "Como utilizar a calculadora de folgas da Tec",
+    "steps": [
+      {
+        "id": "iaosjewh",
+        "text": "Preencha os campos com os números de painéis e portas."
+      },
+      {
+        "id": "iskeyhfd",
+        "text": "Informe a medida do vão."
+      },
+      {
+        "id": "ghjkasd",
+        "text": "Informe a medida dos descontos das fechaduras para cada uma das portas."
+      },
+      {
+        "id": "jkasiuyd",
+        "text": "As medidas finais dos vidros serão informadas na caixa azul."
+      },
+      {
+        "id": "asdciuyh",
+        "text": "Para compartilhar, clique no botão 'Versão para impressão'."
+      }
+    ]
+  },
   "products": [
     {
       "name": "VDPO 2 PORTAS",
@@ -240,7 +265,7 @@
       "description": "Modelo em instalação atrás de alvenaria",
       "imageUrl": "https://tecvidro.com/tec/wp-content/uploads/2025/07/featured-vdpo4.jpg",
       "content": [
-                {
+        {
           "id": "md2_alv",
           "type": "model",
           "title": "Modelo de porta",
@@ -277,12 +302,16 @@
           "type": "lock",
           "title": "Desconto de fechadura",
           "description": "Esta é a medida à mais para a porta... Não editável!",
-          "text": [{"index": 1, "text": "ATENÇÃO: A largura livre de parede deve ser maior que a largura da maior folha do sistema!"}],
+          "text": [
+            {
+              "index": 1,
+              "text": "ATENÇÃO: A largura livre de parede deve ser maior que a largura da maior folha do sistema!"
+            }
+          ],
           "label": "Porta",
           "defaultValues": {
             "default": [50],
             "option": [100]
-
           },
           "disabled": true
         }
@@ -297,7 +326,7 @@
       "description": "Modelo com folhas transversais (canto)",
       "imageUrl": "https://tecvidro.com/tec/wp-content/uploads/2025/07/featured-vdpo4.jpg",
       "content": [
-                {
+        {
           "id": "md3_vdc",
           "type": "model",
           "title": "Modelo de porta",
@@ -339,11 +368,10 @@
           "defaultValues": {
             "default": [50, 50],
             "option": [100, 100]
-
           },
           "disabled": true
         },
-                {
+        {
           "id": "p6b_vdc",
           "type": "panel",
           "title": "Número de vidros - Lado B",
@@ -374,11 +402,9 @@
           "defaultValues": {
             "default": [50, 50],
             "option": [100, 100]
-
           },
           "disabled": true
         }
-
       ]
     }
   ]

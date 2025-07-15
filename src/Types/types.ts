@@ -94,5 +94,9 @@ export type Dictionary = {
     }
     resultsLabels: ResultsLabels
   }
+  infosPage: {
+    title: string
+    steps: { id: string; text: string }[]
+  }
   products: Product[]
 }

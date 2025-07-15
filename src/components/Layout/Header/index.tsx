@@ -1,9 +1,9 @@
-import { InfosButton } from '../../../components/shared/InfosButton'
-import { Logo } from '../../../components/shared/Logo'
+import { InfosButton } from "../../../components/shared/InfosButton";
+import { Logo } from "../../../components/shared/Logo";
 
 type HeaderProps = {
-  title: string
-}
+  title: string;
+};
 
 export function Header({ title }: HeaderProps) {
   return (
@@ -13,8 +13,8 @@ export function Header({ title }: HeaderProps) {
         <div>
           <h1 className="uppercase">{title}</h1>
         </div>
-        <InfosButton href="#" />
+        <InfosButton href={"/infos"} />
       </div>
     </header>
-  )
+  );
 }

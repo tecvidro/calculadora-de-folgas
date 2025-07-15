@@ -23,6 +23,31 @@
       "glassDimensions": "Glass dimensions"
     }
   },
+  "infosPage": {
+    "title": "How to use Tec's gap calculator",
+    "steps": [
+      {
+        "id": "iaosjewh",
+        "text": "Fill in the fields with the number of panels and doors."
+      },
+      {
+        "id": "iskeyhfd",
+        "text": "Enter the opening measurement."
+      },
+      {
+        "id": "ghjkasd",
+        "text": "Enter the lock deduction measurements for each of the doors."
+      },
+      {
+        "id": "jkasiuyd",
+        "text": "The final glass measurements will be displayed in the blue box."
+      },
+      {
+        "id": "asdciuyh",
+        "text": "To share, click on the 'Print version' button."
+      }
+    ]
+  },
   "products": [
     {
       "name": "VDPO 2 DOORS",
@@ -277,7 +302,12 @@
           "type": "lock",
           "title": "Lock discount",
           "description": "This is the additional measurement for the door... Non-editable!",
-          "text": [{"index": 1, "text": "ATTENTION: The free wall width must be greater than the width of the largest leaf of the system!"}],
+          "text": [
+            {
+              "index": 1,
+              "text": "ATTENTION: The free wall width must be greater than the width of the largest leaf of the system!"
+            }
+          ],
           "label": "Door",
           "defaultValues": {
             "default": [50],

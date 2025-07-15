@@ -23,6 +23,31 @@
       "glassDimensions": "Dimensiones de los vidrios"
     }
   },
+  "infosPage": {
+    "title": "Cómo utilizar la calculadora de holguras de Tec",
+    "steps": [
+      {
+        "id": "iaosjewh",
+        "text": "Complete los campos con el número de paneles y puertas."
+      },
+      {
+        "id": "iskeyhfd",
+        "text": "Ingrese la medida del vano."
+      },
+      {
+        "id": "ghjkasd",
+        "text": "Ingrese las medidas de los descuentos de las cerraduras para cada puerta."
+      },
+      {
+        "id": "jkasiuyd",
+        "text": "Las medidas finales de los vidros se mostrarán en el cuadro azul."
+      },
+      {
+        "id": "asdciuyh",
+        "text": "Para compartir, haga clic en el botón 'Versión para imprimir'."
+      }
+    ]
+  },
   "products": [
     {
       "name": "VDPO 2 PUERTAS",
@@ -384,4 +409,3 @@
     }
   ]
 }
-
