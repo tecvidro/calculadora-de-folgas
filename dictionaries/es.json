@@ -1,9 +1,9 @@
 {
   "globals": {
     "title": "Calculadora de holguras Tec",
-    "description": "Página para calcular las holguras y medidas de los vidrios para la instalación de productos Tec",
+    "description": "Página para calcular las holguras y medidas de los vidrios para la instalación de los productos Tec",
     "homeTitle": "Seleccione el producto",
-    "alert": "La calculadora tiene como finalidad exclusiva apoyar la interpretación y aplicación de las fórmulas presentadas en el manual del producto, siendo de total responsabilidad del usuario la precisión de los datos y medidas ingresadas en las tablas.",
+    "alert": "La calculadora tiene como finalidad exclusiva apoyar la interpretación y aplicación de las fórmulas presentadas en el manual del producto, siendo de entera responsabilidad del usuario la precisión de los datos y medidas insertados en las tablas.",
     "callToActions": {
       "card": "Abrir calculadora",
       "print": "Versión para imprimir",
@@ -18,7 +18,7 @@
       "gapMeasures": "Medidas del vano:",
       "width": "Ancho",
       "height": "Alto",
-      "lockDiscounts": "Descuentos por cerradura:",
+      "lockDiscounts": "Descuentos de cerradura:",
       "door": "Puerta",
       "glassDimensions": "Dimensiones de los vidrios"
     }
@@ -26,7 +26,7 @@
   "products": [
     {
       "name": "VDPO 2 PUERTAS",
-      "slug": "vdpo-2-portas",
+      "slug": "vdpo-2-puertas",
       "model": "Versatik Division",
       "title": "Cálculo de holguras para VDPO 2 Puertas",
       "subtitle": "Instalación para vidrios templados",
@@ -34,18 +34,18 @@
       "imageUrl": "https://tecvidro.com/tec/wp-content/uploads/2025/07/featured-vdpo2.jpg",
       "content": [
         {
-          "id": 1,
+          "id": "p1_2vdpo",
           "type": "panel",
           "title": "Número de vidrios",
           "panelsLabel": "Número de paneles",
-          "panelsDescription": "Ingrese aquí el número de paneles que se instalarán entre las puertas.",
+          "panelsDescription": "Digite aquí el número de paneles que serán instalados entre las puertas.",
           "panelsCount": 4,
           "doorsLabel": "Número de puertas",
-          "doorsDescription": "¡Para este modelo tenemos puertas en ambos laterales! Número no editable.",
+          "doorsDescription": "Para este modelo tenemos puertas en las dos laterales! Número no editable.",
           "doorsCount": 2
         },
         {
-          "id": 2,
+          "id": "m1_2vdpo",
           "type": "measure",
           "title": "Medidas del vano",
           "widthLabel": "Ancho (mm)",
@@ -54,10 +54,10 @@
           "defaultHeight": 2400
         },
         {
-          "id": 3,
+          "id": "l1_2vdpo",
           "type": "lock",
-          "title": "Descuento por cerradura",
-          "description": "Aquí puede ingresar la medida adicional, por puerta, para ajuste de cerradura.",
+          "title": "Descuento de cerradura",
+          "description": "Aquí usted coloca la medida a más, por puerta, para ajuste de la cerradura.",
           "text": [
             {
               "index": 1,
@@ -65,7 +65,7 @@
             },
             {
               "index": 2,
-              "text": "Si desea utilizar un tirador u otro tipo de accesorio, puede usar holguras mayores (ej: 230mm, 250mm...) por puerta."
+              "text": "Si usted quiere utilizar un tirador u otro tipo de accesorio, usted puede usar holguras mayores (ej: 230mm, 250mm...) por puerta!"
             }
           ],
           "label": "Puerta",
@@ -78,7 +78,7 @@
     },
     {
       "name": "VDPO 4 PUERTAS",
-      "slug": "vdpo-4-portas",
+      "slug": "vdpo-4-puertas",
       "model": "Versatik Division",
       "title": "Cálculo de holguras para VDPO 4 Puertas",
       "subtitle": "Instalación para vidrios templados",
@@ -86,18 +86,18 @@
       "imageUrl": "https://tecvidro.com/tec/wp-content/uploads/2025/07/featured-vdpo4.jpg",
       "content": [
         {
-          "id": 1,
+          "id": "p2_4vdpo",
           "type": "panel",
           "title": "Número de vidrios",
           "panelsLabel": "Número de paneles",
-          "panelsDescription": "Ingrese aquí el número de paneles que se instalarán entre las puertas.",
+          "panelsDescription": "Digite aquí el número de paneles que serán instalados entre las puertas.",
           "panelsCount": 2,
           "doorsLabel": "Número de puertas",
-          "doorsDescription": "¡Para este modelo tenemos puertas en ambos laterales y dos más en el centro! Número no editable.",
+          "doorsDescription": "Para este modelo tenemos puertas en las dos laterales y más duas en las centrales! Número no editable.",
           "doorsCount": 4
         },
         {
-          "id": 2,
+          "id": "m2_4vdpo",
           "type": "measure",
           "title": "Medidas del vano",
           "widthLabel": "Ancho (mm)",
@@ -106,10 +106,10 @@
           "defaultHeight": 2500
         },
         {
-          "id": 3,
+          "id": "l2_4vdpo",
           "type": "lock",
-          "title": "Descuento por cerradura",
-          "description": "Aquí puede ingresar la medida adicional, por puerta, para ajuste de cerradura.",
+          "title": "Descuento de cerradura",
+          "description": "Aquí usted coloca la medida a más, por puerta, para ajuste de la cerradura.",
           "text": [
             {
               "index": 1,
@@ -117,7 +117,7 @@
             },
             {
               "index": 2,
-              "text": "Si desea utilizar un tirador u otro tipo de accesorio, puede usar holguras mayores (ej: 230mm, 250mm...) por puerta."
+              "text": "Si usted quiere utilizar un tirador u otro tipo de accesorio, usted puede usar holguras mayores (ej: 230mm, 250mm...) por puerta!"
             }
           ],
           "label": "Puerta",
@@ -126,6 +126,259 @@
           },
           "disabled": false
         }
+      ]
+    },
+    {
+      "name": "VDPL 2 PUERTAS",
+      "slug": "vdpl-2-puertas",
+      "model": "Versatik Division",
+      "title": "Cálculo de holguras para VDPL 2 Puertas",
+      "subtitle": "Instalación para vidrios laminados",
+      "description": "Modelo sin el uso del perfil lateral de puerta con cerradura embutida",
+      "imageUrl": "https://tecvidro.com/tec/wp-content/uploads/2025/07/featured-vdpo4.jpg",
+      "content": [
+        {
+          "id": "p3_2vdpl",
+          "type": "panel",
+          "title": "Número de vidrios",
+          "panelsLabel": "Número de paneles",
+          "panelsDescription": "Digite aquí el número de paneles que serán instalados entre las puertas.",
+          "panelsCount": 2,
+          "doorsLabel": "Número de puertas",
+          "doorsDescription": "Para este modelo tenemos puertas en las dos laterales y más duas en las centrales! Número no editable.",
+          "doorsCount": 2
+        },
+        {
+          "id": "m3_2vdpl",
+          "type": "measure",
+          "title": "Medidas del vano",
+          "widthLabel": "Ancho (mm)",
+          "heightLabel": "Alto (mm)",
+          "defaultWidth": 3000,
+          "defaultHeight": 2500
+        },
+        {
+          "id": "md1_2vpl",
+          "type": "model",
+          "title": "Modelo de tirador para las puertas",
+          "label": "Seleccione una opción",
+          "description": "",
+          "options": [
+            { "label": "Tirador", "value": "default" },
+            { "label": "De embutir en el perfil", "value": "option" }
+          ]
+        },
+        {
+          "id": "l3_2vdpl",
+          "type": "lock",
+          "title": "Descuento de cerradura",
+          "description": "Las medidas son preenchidas automaticamente de acuerdo con la opción de tirador.",
+          "text": [
+            {
+              "index": 1,
+              "text": "Para modelos con uso de tirador en barra fijado en los vidrios templados, recomendamos el uso del solape con 100mm."
+            }
+          ],
+          "label": "Puerta",
+          "defaultValues": {
+            "default": [50, 50],
+            "option": [100, 100]
+          },
+          "disabled": true
+        }
+      ]
+    },
+    {
+      "name": "VDPL + VDSU",
+      "slug": "vdpl-vdsu",
+      "model": "Versatik Division",
+      "title": "Cálculo de holguras para VDPL + VDSU",
+      "subtitle": "Instalación para vidrios templados",
+      "description": "Modelo con el uso de 4 cerraduras",
+      "imageUrl": "https://tecvidro.com/tec/wp-content/uploads/2025/07/featured-vdpo4.jpg",
+      "content": [
+        {
+          "id": "p4_vdsu",
+          "type": "panel",
+          "title": "Número de vidrios",
+          "panelsLabel": "Número de paneles",
+          "panelsDescription": "Digite aquí el número de paneles que serán instalados entre las puertas.",
+          "panelsCount": 2,
+          "doorsLabel": "Número de puertas",
+          "doorsDescription": "Para este modelo tenemos puertas en las dos laterales y más duas en las centrales! Número no editable.",
+          "doorsCount": 4
+        },
+        {
+          "id": "m4_vdsu",
+          "type": "measure",
+          "title": "Medidas del vano",
+          "widthLabel": "Ancho (mm)",
+          "heightLabel": "Alto (mm)",
+          "defaultWidth": 6000,
+          "defaultHeight": 2500
+        },
+        {
+          "id": "l4_vdsu",
+          "type": "lock",
+          "title": "Descuento de cerradura",
+          "description": "Esta es la medida a más para las puertas con perfil lateral de cerradura embutida. No editable.",
+          "text": [],
+          "label": "Puerta",
+          "defaultValues": {
+            "default": [50, 50, 50, 50]
+          },
+          "disabled": true
+        }
+      ]
+    },
+    {
+      "name": "Albañilería",
+      "slug": "albanileria",
+      "model": "Versatik Division",
+      "title": "Cálculo de holgura para albañilería",
+      "subtitle": "Instalación detrás de albañilería.",
+      "description": "Modelo en instalación detrás de albañilería",
+      "imageUrl": "https://tecvidro.com/tec/wp-content/uploads/2025/07/featured-vdpo4.jpg",
+      "content": [
+                {
+          "id": "md2_alv",
+          "type": "model",
+          "title": "Modelo de puerta",
+          "label": "Seleccione una opción",
+          "description": "",
+          "options": [
+            { "label": "VDPO", "value": "default" },
+            { "label": "VDPL", "value": "option" }
+          ]
+        },
+        {
+          "id": "p5_alv",
+          "type": "panel",
+          "title": "Número de vidrios",
+          "panelsLabel": "Número de paneles",
+          "panelsDescription": "Digite aquí el número de paneles que serán instalados entre las puertas.",
+          "panelsCount": 4,
+          "doorsLabel": "Número de puertas",
+          "doorsDescription": "Para este modelo, el cálculo es con 1 puerta. No editable.",
+          "doorsCount": 1
+        },
+        {
+          "id": "m5_alv",
+          "type": "measure",
+          "title": "Medidas del vano",
+          "description": "ATENCIÓN! Aquí usted digita apenas el ancho de apertura del vano. Desconsiderar la medida de la pared.",
+          "widthLabel": "Ancho (mm)",
+          "heightLabel": "Alto (mm)",
+          "defaultWidth": 3000,
+          "defaultHeight": 2500
+        },
+        {
+          "id": "l5_alv",
+          "type": "lock",
+          "title": "Descuento de cerradura",
+          "description": "Esta es la medida a más para la puerta... No editable!",
+          "text": [{"index": 1, "text": "ATENCIÓN: El ancho libre de pared debe ser mayor que el ancho de la mayor hoja del sistema!"}],
+          "label": "Puerta",
+          "defaultValues": {
+            "default": [50],
+            "option": [100]
+
+          },
+          "disabled": true
+        }
+      ]
+    },
+    {
+      "name": "VDPL + VDC",
+      "slug": "vdpl-vdc",
+      "model": "Versatik Division",
+      "title": "Cálculo de holguras para VDPL + VDC",
+      "subtitle": "Vidrio laminado para instalación en esquinas",
+      "description": "Modelo con hojas transversales (esquina)",
+      "imageUrl": "https://tecvidro.com/tec/wp-content/uploads/2025/07/featured-vdpo4.jpg",
+      "content": [
+                {
+          "id": "md3_vdc",
+          "type": "model",
+          "title": "Modelo de puerta",
+          "label": "Aquí usted escoge el tipo de montaje de su proyecto.",
+          "description": "",
+          "options": [
+            { "label": "VDPL y VDC", "value": "default" },
+            { "label": "VDPL y VDPL", "value": "option" }
+          ]
+        },
+        {
+          "id": "p6a_vdc",
+          "type": "panel",
+          "title": "Número de vidrios - Lado A",
+          "panelsLabel": "Número de paneles",
+          "panelsDescription": "Digite aquí el número de paneles que serán instalados entre las puertas.",
+          "panelsCount": 2,
+          "doorsLabel": "Número de puertas",
+          "doorsDescription": "Para este modelo tenemos puertas en las dos laterales! Número não editável.",
+          "doorsCount": 2
+        },
+        {
+          "id": "m6a_vdc",
+          "type": "measure",
+          "title": "Medidas del vano - Lado A",
+          "description": "",
+          "widthLabel": "Ancho (mm)",
+          "heightLabel": "Alto (mm)",
+          "defaultWidth": 4000,
+          "defaultHeight": 2500
+        },
+        {
+          "id": "l6a_vdc",
+          "type": "lock",
+          "title": "Descuento de cerradura - Lado A",
+          "description": "Esta es la medida a más para las puertas con perfil lateral de cerradura embutida. No editable.",
+          "text": [],
+          "label": "Puerta",
+          "defaultValues": {
+            "default": [50, 50],
+            "option": [100, 100]
+
+          },
+          "disabled": true
+        },
+                {
+          "id": "p6b_vdc",
+          "type": "panel",
+          "title": "Número de vidrios - Lado B",
+          "panelsLabel": "Número de paneles",
+          "panelsDescription": "Digite aquí el número de paneles que serán instalados entre las puertas.",
+          "panelsCount": 2,
+          "doorsLabel": "Número de puertas",
+          "doorsDescription": "Para este modelo tenemos puertas en las dos laterales! Número não editável.",
+          "doorsCount": 2
+        },
+        {
+          "id": "m6b_vdc",
+          "type": "measure",
+          "title": "Medidas del vano - Lado B",
+          "description": "",
+          "widthLabel": "Ancho (mm)",
+          "heightLabel": "Alto (mm)",
+          "defaultWidth": 4000,
+          "defaultHeight": 2500
+        },
+        {
+          "id": "l6b_vdc",
+          "type": "lock",
+          "title": "Descuento de cerradura - Lado B",
+          "description": "Esta es la medida a más para las puertas con perfil lateral de cerradura embutida. No editable.",
+          "text": [],
+          "label": "Puerta",
+          "defaultValues": {
+            "default": [50, 50],
+            "option": [100, 100]
+
+          },
+          "disabled": true
+        }
+
       ]
     }
   ]

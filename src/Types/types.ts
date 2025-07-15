@@ -1,7 +1,7 @@
 export type BlockTypes = 'panel' | 'measure' | 'lock' | 'model'
 
 export interface Base<T extends BlockTypes> {
-  id: number
+  id: string
   type: T
 }
 

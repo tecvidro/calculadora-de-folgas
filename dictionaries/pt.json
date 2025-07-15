@@ -34,7 +34,7 @@
       "imageUrl": "https://tecvidro.com/tec/wp-content/uploads/2025/07/featured-vdpo2.jpg",
       "content": [
         {
-          "id": 1,
+          "id": "p1_2vdpo",
           "type": "panel",
           "title": "Número de vidros",
           "panelsLabel": "Número de painéis",
@@ -45,7 +45,7 @@
           "doorsCount": 2
         },
         {
-          "id": 2,
+          "id": "m1_2vdpo",
           "type": "measure",
           "title": "Medidas do vão",
           "widthLabel": "Largura (mm)",
@@ -54,7 +54,7 @@
           "defaultHeight": 2400
         },
         {
-          "id": 3,
+          "id": "l1_2vdpo",
           "type": "lock",
           "title": "Desconto de fechadura",
           "description": "Aqui você coloca a medida a mais, por porta, para ajuste da fechadura.",
@@ -86,7 +86,7 @@
       "imageUrl": "https://tecvidro.com/tec/wp-content/uploads/2025/07/featured-vdpo4.jpg",
       "content": [
         {
-          "id": 1,
+          "id": "p2_4vdpo",
           "type": "panel",
           "title": "Número de vidros",
           "panelsLabel": "Número de painéis",
@@ -97,7 +97,7 @@
           "doorsCount": 4
         },
         {
-          "id": 2,
+          "id": "m2_4vdpo",
           "type": "measure",
           "title": "Medidas do vão",
           "widthLabel": "Largura (mm)",
@@ -106,7 +106,7 @@
           "defaultHeight": 2500
         },
         {
-          "id": 3,
+          "id": "l2_4vdpo",
           "type": "lock",
           "title": "Desconto de fechadura",
           "description": "Aqui você coloca a medida a mais, por porta, para ajuste da fechadura.",
@@ -138,7 +138,7 @@
       "imageUrl": "https://tecvidro.com/tec/wp-content/uploads/2025/07/featured-vdpo4.jpg",
       "content": [
         {
-          "id": 1,
+          "id": "p3_2vdpl",
           "type": "panel",
           "title": "Número de vidros",
           "panelsLabel": "Número de painéis",
@@ -149,7 +149,7 @@
           "doorsCount": 2
         },
         {
-          "id": 2,
+          "id": "m3_2vdpl",
           "type": "measure",
           "title": "Medidas do vão",
           "widthLabel": "Largura (mm)",
@@ -158,7 +158,7 @@
           "defaultHeight": 2500
         },
         {
-          "id": 3,
+          "id": "md1_2vpl",
           "type": "model",
           "title": "Modelo de puxador para as portas",
           "label": "Selecione uma opção",
@@ -169,7 +169,7 @@
           ]
         },
         {
-          "id": 4,
+          "id": "l3_2vdpl",
           "type": "lock",
           "title": "Desconto de fechadura",
           "description": "As medidas são preenchidas automaticamente de acordo com a opção de puxador.",
@@ -198,7 +198,7 @@
       "imageUrl": "https://tecvidro.com/tec/wp-content/uploads/2025/07/featured-vdpo4.jpg",
       "content": [
         {
-          "id": 1,
+          "id": "p4_vdsu",
           "type": "panel",
           "title": "Número de vidros",
           "panelsLabel": "Número de painéis",
@@ -209,7 +209,7 @@
           "doorsCount": 4
         },
         {
-          "id": 2,
+          "id": "m4_vdsu",
           "type": "measure",
           "title": "Medidas do vão",
           "widthLabel": "Largura (mm)",
@@ -218,7 +218,7 @@
           "defaultHeight": 2500
         },
         {
-          "id": 3,
+          "id": "l4_vdsu",
           "type": "lock",
           "title": "Desconto de fechadura",
           "description": "Esta é a medida a mais para as portas com perfil lateral de fechadura embutida. Não editável.",
@@ -241,7 +241,7 @@
       "imageUrl": "https://tecvidro.com/tec/wp-content/uploads/2025/07/featured-vdpo4.jpg",
       "content": [
                 {
-          "id": 1,
+          "id": "md2_alv",
           "type": "model",
           "title": "Modelo de porta",
           "label": "Selecione uma opção",
@@ -252,7 +252,7 @@
           ]
         },
         {
-          "id": 2,
+          "id": "p5_alv",
           "type": "panel",
           "title": "Número de vidros",
           "panelsLabel": "Número de painéis",
@@ -263,7 +263,7 @@
           "doorsCount": 1
         },
         {
-          "id": 3,
+          "id": "m5_alv",
           "type": "measure",
           "title": "Medidas do vão",
           "description": "ATENÇÃO! Aqui você digita apenas a largura de abertura do vão. Desconsiderar a medida da parede.",
@@ -273,7 +273,7 @@
           "defaultHeight": 2500
         },
         {
-          "id": 4,
+          "id": "l5_alv",
           "type": "lock",
           "title": "Desconto de fechadura",
           "description": "Esta é a medida à mais para a porta... Não editável!",
@@ -298,7 +298,7 @@
       "imageUrl": "https://tecvidro.com/tec/wp-content/uploads/2025/07/featured-vdpo4.jpg",
       "content": [
                 {
-          "id": 1,
+          "id": "md3_vdc",
           "type": "model",
           "title": "Modelo de porta",
           "label": "Aqui você escolhe o tipo de montagem do seu projeto.",
@@ -309,7 +309,7 @@
           ]
         },
         {
-          "id": 2,
+          "id": "p6a_vdc",
           "type": "panel",
           "title": "Número de vidros - Lado A",
           "panelsLabel": "Número de painéis",
@@ -320,7 +320,7 @@
           "doorsCount": 2
         },
         {
-          "id": 3,
+          "id": "m6a_vdc",
           "type": "measure",
           "title": "Medidas do vão - Lado A",
           "description": "",
@@ -330,7 +330,7 @@
           "defaultHeight": 2500
         },
         {
-          "id": 4,
+          "id": "l6a_vdc",
           "type": "lock",
           "title": "Desconto de fechadura - Lado A",
           "description": "Esta é a medida a mais para as portas com perfil lateral de fechadura embutida. Não editável.",
@@ -344,7 +344,7 @@
           "disabled": true
         },
                 {
-          "id": 5,
+          "id": "p6b_vdc",
           "type": "panel",
           "title": "Número de vidros - Lado B",
           "panelsLabel": "Número de painéis",
@@ -355,7 +355,7 @@
           "doorsCount": 2
         },
         {
-          "id": 6,
+          "id": "m6b_vdc",
           "type": "measure",
           "title": "Medidas do vão - Lado B",
           "description": "",
@@ -365,7 +365,7 @@
           "defaultHeight": 2500
         },
         {
-          "id": 7,
+          "id": "l6b_vdc",
           "type": "lock",
           "title": "Desconto de fechadura - Lado B",
           "description": "Esta é a medida a mais para as portas com perfil lateral de fechadura embutida. Não editável.",
