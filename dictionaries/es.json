@@ -69,7 +69,10 @@
             }
           ],
           "label": "Puerta",
-          "defaultValues": [50, 50],
+          "defaultValues": {
+            "default": [50, 50],
+            "options": [150, 150]
+          },
           "disabled": false
         }
       ]
@@ -119,7 +122,9 @@
             }
           ],
           "label": "Puerta",
-          "defaultValues": [50, 50, 50, 50],
+          "defaultValues": {
+            "default": [50, 50, 50, 50]
+          },
           "disabled": false
         }
       ]
