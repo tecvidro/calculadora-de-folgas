@@ -23,7 +23,10 @@ export type LockProps = Base<"lock"> & {
     text: string;
   }[];
   label: string;
-  defaultValues: number[];
+  defaultValues: {
+    default: number[];
+    option: number[];
+  };
   disabled?: boolean;
 };
 

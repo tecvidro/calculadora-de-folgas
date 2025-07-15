@@ -13,7 +13,8 @@ export default function Lock({
   label,
   disabled = false,
 }: LockProps) {
-  const { lockDiscounts, setLockDiscounts } = useCalculator()
+  const { lockDiscounts, setLockDiscounts, useDefaultLockDiscounts } =
+    useCalculator()
 
   const handleLockChange = (index: number, value: number) => {
     setLockDiscounts((prevValues: number[]) => {
@@ -28,7 +29,10 @@ export default function Lock({
       <Title title={title} />
       <p>{description}</p>
       <div className="flex justify-between gap-4">
-        {defaultValues.map((_, i) => (
+        {(useDefaultLockDiscounts || !defaultValues.option
+          ? defaultValues.default
+          : defaultValues.option
+        ).map((_, i) => (
           <InputNumber
             disabled={disabled}
             key={uuidv4()}

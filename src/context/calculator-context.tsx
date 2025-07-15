@@ -15,6 +15,8 @@ interface CalculatorContextType {
   setLockDiscounts: (
     discounts: number[] | ((prev: number[]) => number[])
   ) => void
+  useDefaultLockDiscounts: boolean
+  setUseDefaultLockDiscounts: (useDefault: boolean) => void
 }
 
 const CalculatorContext = createContext<CalculatorContextType | undefined>(
@@ -27,7 +29,11 @@ interface CalculatorProviderProps {
   initialDoorsCount: number
   initialGapWidth: number
   initialGapHeight: number
-  initialLockDiscounts: number[]
+  initialLockDiscounts: {
+    default: number[]
+    option?: number[]
+  }
+  useDefaultLockDiscounts?: boolean
 }
 
 export const CalculatorProvider = ({
@@ -37,13 +43,19 @@ export const CalculatorProvider = ({
   initialGapWidth,
   initialGapHeight,
   initialLockDiscounts,
+  useDefaultLockDiscounts: initialUseDefaultLockDiscounts = true,
 }: CalculatorProviderProps) => {
   const [panelCount, setPanelCount] = useState<number>(initialPanelCount)
   const [doorsCount, setDoorsCount] = useState<number>(initialDoorsCount)
   const [gapWidth, setGapWidth] = useState<number>(initialGapWidth)
   const [gapHeight, setGapHeight] = useState<number>(initialGapHeight)
-  const [lockDiscounts, setLockDiscounts] =
-    useState<number[]>(initialLockDiscounts)
+  const [useDefaultLockDiscounts, setUseDefaultLockDiscounts] =
+    useState<boolean>(initialUseDefaultLockDiscounts)
+  const [lockDiscounts, setLockDiscounts] = useState<number[]>(
+    initialUseDefaultLockDiscounts && initialLockDiscounts.option
+      ? initialLockDiscounts.default
+      : initialLockDiscounts.option || initialLockDiscounts.default
+  )
 
   return (
     <CalculatorContext.Provider
@@ -58,6 +70,8 @@ export const CalculatorProvider = ({
         setGapHeight,
         lockDiscounts,
         setLockDiscounts,
+        useDefaultLockDiscounts,
+        setUseDefaultLockDiscounts,
       }}
     >
       {children}
