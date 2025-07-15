@@ -39,7 +39,7 @@
           "title": "Number of glasses",
           "panelsLabel": "Number of panels",
           "panelsDescription": "Enter here the number of panels to be installed between the doors.",
-          "panelsCount": 2,
+          "panelsCount": 4,
           "doorsLabel": "Number of doors",
           "doorsDescription": "For this model we have doors on both sides! Non-editable number.",
           "doorsCount": 2
@@ -70,8 +70,7 @@
           ],
           "label": "Door",
           "defaultValues": {
-            "default": [50, 50],
-            "options": [150, 150]
+            "default": [50, 50]
           },
           "disabled": false
         }
@@ -104,7 +103,7 @@
           "widthLabel": "Width (mm)",
           "heightLabel": "Height (mm)",
           "defaultWidth": 6000,
-          "defaultHeight": 2400
+          "defaultHeight": 2500
         },
         {
           "id": 3,

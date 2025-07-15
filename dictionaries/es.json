@@ -39,7 +39,7 @@
           "title": "Número de vidrios",
           "panelsLabel": "Número de paneles",
           "panelsDescription": "Ingrese aquí el número de paneles que se instalarán entre las puertas.",
-          "panelsCount": 2,
+          "panelsCount": 4,
           "doorsLabel": "Número de puertas",
           "doorsDescription": "¡Para este modelo tenemos puertas en ambos laterales! Número no editable.",
           "doorsCount": 2
@@ -70,8 +70,7 @@
           ],
           "label": "Puerta",
           "defaultValues": {
-            "default": [50, 50],
-            "options": [150, 150]
+            "default": [50, 50]
           },
           "disabled": false
         }
@@ -104,7 +103,7 @@
           "widthLabel": "Ancho (mm)",
           "heightLabel": "Alto (mm)",
           "defaultWidth": 6000,
-          "defaultHeight": 2400
+          "defaultHeight": 2500
         },
         {
           "id": 3,

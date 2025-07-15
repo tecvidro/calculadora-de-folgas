@@ -1,9 +1,9 @@
-import { useState } from 'react'
-import { Box } from '@/components/shared/Box'
-import { Title } from '@/components/shared/BoxTitle'
-import { InputNumber } from '@/components/shared/InputNumber'
-import { useCalculator } from '@/context/calculator-context'
-import type { PanelsProps } from '@/Types/types'
+import { useState } from "react";
+import { Box } from "@/components/shared/Box";
+import { Title } from "@/components/shared/BoxTitle";
+import { InputNumber } from "@/components/shared/InputNumber";
+import { useCalculator } from "@/context/calculator-context";
+import type { PanelsProps } from "@/Types/types";
 
 export default function Panels({
   title,
@@ -14,19 +14,19 @@ export default function Panels({
   doorsDescription,
   doorsLabel,
 }: PanelsProps) {
-  const { setPanelCount, setDoorsCount } = useCalculator()
-  const [panelsCount, setLocalPanelsCount] = useState(initialPanelsCount)
-  const [doorsCount, setLocalDoorsCount] = useState(initialDoorsCount)
+  const { setPanelCount, setDoorsCount } = useCalculator();
+  const [panelsCount, setLocalPanelsCount] = useState(initialPanelsCount);
+  const [doorsCount, setLocalDoorsCount] = useState(initialDoorsCount);
 
   const handlePanelCountChange = (value: number) => {
-    setLocalPanelsCount(value)
-    setPanelCount(value)
-  }
+    setLocalPanelsCount(value);
+    setPanelCount(value);
+  };
 
   const handleDoorsCountChange = (value: number) => {
-    setLocalDoorsCount(value)
-    setDoorsCount(value)
-  }
+    setLocalDoorsCount(value);
+    setDoorsCount(value);
+  };
 
   return (
     <Box className="flex flex-col gap-4">
@@ -49,5 +49,5 @@ export default function Panels({
         />
       </form>
     </Box>
-  )
+  );
 }
