@@ -1,16 +1,16 @@
 {
   "globals": {
-    "title": "Tec Gaps Calculator",
-    "description": "Page to calculate gaps and glass measurements for the installation of Tec products",
+    "title": "Tec Gap Calculator",
+    "description": "Page to calculate gaps and measurements for glass installation of Tec products",
     "homeTitle": "Select the product",
-    "alert": "The calculator's exclusive purpose is to support the interpretation and application of the formulas presented in the product manual. The accuracy of the data and measurements entered in the tables is the user's entire responsibility.",
+    "alert": "The calculator is intended exclusively to support the interpretation and application of the formulas presented in the product manual, and the accuracy of the data and measurements entered in the tables is the sole responsibility of the user.",
     "callToActions": {
       "card": "Open calculator",
       "print": "Printable version",
       "manual": "download manual"
     },
     "resultsLabels": {
-      "title": "Gap results for",
+      "title": "Gap result for",
       "infoAndMeasures": "Information and measurements",
       "numberOfGlasses": "Number of glasses:",
       "panels": "Panels",
@@ -26,11 +26,11 @@
   "products": [
     {
       "name": "VDPO 2 DOORS",
-      "slug": "vdpo-2-doors",
+      "slug": "vdpo-2-portas",
       "model": "Versatik Division",
       "title": "Gap calculation for VDPO 2 Doors",
       "subtitle": "Installation for tempered glass",
-      "description": "Model without the use of the side door profile with a built-in lock",
+      "description": "Model without the use of side door profile with built-in lock",
       "imageUrl": "https://tecvidro.com/tec/wp-content/uploads/2025/07/featured-vdpo2.jpg",
       "content": [
         {
@@ -38,10 +38,10 @@
           "type": "panel",
           "title": "Number of glasses",
           "panelsLabel": "Number of panels",
-          "panelsDescription": "Enter the number of panels to be installed between the doors here.",
+          "panelsDescription": "Enter here the number of panels that will be installed between the doors.",
           "panelsCount": 4,
           "doorsLabel": "Number of doors",
-          "doorsDescription": "For this model, we have doors on both sides! Number not editable.",
+          "doorsDescription": "For this model, we have doors on both sides! Non-editable number.",
           "doorsCount": 2
         },
         {
@@ -57,7 +57,7 @@
           "id": "l1_2vdpo",
           "type": "lock",
           "title": "Lock discount",
-          "description": "Here you add the extra measurement, per door, for the lock adjustment.",
+          "description": "Here you enter the additional measurement, per door, for lock adjustment.",
           "text": [
             {
               "index": 1,
@@ -65,7 +65,7 @@
             },
             {
               "index": 2,
-              "text": "If you want to use a handle or other type of accessory, you can use larger gaps (e.g., 230mm, 250mm...) per door!"
+              "text": "If you want to use a handle or another type of accessory, you can use larger clearances (e.g., 230mm, 250mm...) per door!"
             }
           ],
           "label": "Door",
@@ -78,11 +78,11 @@
     },
     {
       "name": "VDPO 4 DOORS",
-      "slug": "vdpo-4-doors",
+      "slug": "vdpo-4-portas",
       "model": "Versatik Division",
       "title": "Gap calculation for VDPO 4 Doors",
       "subtitle": "Installation for tempered glass",
-      "description": "Model without the use of the side door profile with a built-in lock",
+      "description": "Model without the use of side door profile with built-in lock",
       "imageUrl": "https://tecvidro.com/tec/wp-content/uploads/2025/07/featured-vdpo4.jpg",
       "content": [
         {
@@ -90,10 +90,10 @@
           "type": "panel",
           "title": "Number of glasses",
           "panelsLabel": "Number of panels",
-          "panelsDescription": "Enter the number of panels to be installed between the doors here.",
+          "panelsDescription": "Enter here the number of panels that will be installed between the doors.",
           "panelsCount": 2,
           "doorsLabel": "Number of doors",
-          "doorsDescription": "For this model, we have doors on both sides and two more in the center! Number not editable.",
+          "doorsDescription": "For this model, we have doors on both sides and two more in the center! Non-editable number.",
           "doorsCount": 4
         },
         {
@@ -109,7 +109,7 @@
           "id": "l2_4vdpo",
           "type": "lock",
           "title": "Lock discount",
-          "description": "Here you add the extra measurement, per door, for the lock adjustment.",
+          "description": "Here you enter the additional measurement, per door, for lock adjustment.",
           "text": [
             {
               "index": 1,
@@ -117,7 +117,7 @@
             },
             {
               "index": 2,
-              "text": "If you want to use a handle or other type of accessory, you can use larger gaps (e.g., 230mm, 250mm...) per door!"
+              "text": "If you want to use a handle or another type of accessory, you can use larger clearances (e.g., 230mm, 250mm...) per door!"
             }
           ],
           "label": "Door",
@@ -130,11 +130,11 @@
     },
     {
       "name": "VDPL 2 DOORS",
-      "slug": "vdpl-2-doors",
+      "slug": "vdpl-2-portas",
       "model": "Versatik Division",
       "title": "Gap calculation for VDPL 2 Doors",
       "subtitle": "Installation for laminated glass",
-      "description": "Model without the use of the side door profile with a built-in lock",
+      "description": "Model without the use of side door profile with built-in lock",
       "imageUrl": "https://tecvidro.com/tec/wp-content/uploads/2025/07/featured-vdpo4.jpg",
       "content": [
         {
@@ -142,10 +142,10 @@
           "type": "panel",
           "title": "Number of glasses",
           "panelsLabel": "Number of panels",
-          "panelsDescription": "Enter the number of panels to be installed between the doors here.",
+          "panelsDescription": "Enter here the number of panels that will be installed between the doors.",
           "panelsCount": 2,
           "doorsLabel": "Number of doors",
-          "doorsDescription": "For this model, we have doors on both sides and two more in the center! Number not editable.",
+          "doorsDescription": "For this model, we have doors on both sides and two more in the center! Non-editable number.",
           "doorsCount": 2
         },
         {
@@ -160,23 +160,23 @@
         {
           "id": "md1_2vpl",
           "type": "model",
-          "title": "Door handle model",
+          "title": "Handle model for the doors",
           "label": "Select an option",
           "description": "",
           "options": [
             { "label": "Handle", "value": "default" },
-            { "label": "Built-in profile", "value": "option" }
+            { "label": "Embedded in the profile", "value": "option" }
           ]
         },
         {
           "id": "l3_2vdpl",
           "type": "lock",
           "title": "Lock discount",
-          "description": "The measurements are filled automatically according to the handle option.",
+          "description": "The measurements are automatically filled according to the handle option.",
           "text": [
             {
               "index": 1,
-              "text": "For models with a bar handle fixed on tempered glass, we recommend using a 100mm overlap."
+              "text": "For models with the use of a bar handle fixed on tempered glass, we recommend using an overlap of 100mm."
             }
           ],
           "label": "Door",
@@ -202,10 +202,10 @@
           "type": "panel",
           "title": "Number of glasses",
           "panelsLabel": "Number of panels",
-          "panelsDescription": "Enter the number of panels to be installed between the doors here.",
+          "panelsDescription": "Enter here the number of panels that will be installed between the doors.",
           "panelsCount": 2,
           "doorsLabel": "Number of doors",
-          "doorsDescription": "For this model, we have doors on both sides and two more in the center! Number not editable.",
+          "doorsDescription": "For this model, we have doors on both sides and two more in the center! Non-editable number.",
           "doorsCount": 4
         },
         {
@@ -221,7 +221,7 @@
           "id": "l4_vdsu",
           "type": "lock",
           "title": "Lock discount",
-          "description": "This is the extra measurement for doors with a side profile for a built-in lock. Not editable.",
+          "description": "This is the additional measurement for doors with side profile with built-in lock. Non-editable.",
           "text": [],
           "label": "Door",
           "defaultValues": {
@@ -233,14 +233,14 @@
     },
     {
       "name": "Masonry",
-      "slug": "masonry",
+      "slug": "alvenaria",
       "model": "Versatik Division",
       "title": "Gap calculation for masonry",
       "subtitle": "Installation behind masonry.",
       "description": "Model for installation behind masonry",
       "imageUrl": "https://tecvidro.com/tec/wp-content/uploads/2025/07/featured-vdpo4.jpg",
       "content": [
-                {
+        {
           "id": "md2_alv",
           "type": "model",
           "title": "Door model",
@@ -256,17 +256,17 @@
           "type": "panel",
           "title": "Number of glasses",
           "panelsLabel": "Number of panels",
-          "panelsDescription": "Enter the number of panels to be installed between the doors here.",
+          "panelsDescription": "Enter here the number of panels that will be installed between the doors.",
           "panelsCount": 4,
           "doorsLabel": "Number of doors",
-          "doorsDescription": "For this model, the calculation is with 1 door. Not editable.",
+          "doorsDescription": "For this model, the calculation is with 1 door. Non-editable.",
           "doorsCount": 1
         },
         {
           "id": "m5_alv",
           "type": "measure",
           "title": "Gap measurements",
-          "description": "ATTENTION! Here you only enter the opening width of the gap. Disregard the wall measurement.",
+          "description": "ATTENTION! Here you only enter the width of the gap opening. Do not consider the wall measurement.",
           "widthLabel": "Width (mm)",
           "heightLabel": "Height (mm)",
           "defaultWidth": 3000,
@@ -276,13 +276,12 @@
           "id": "l5_alv",
           "type": "lock",
           "title": "Lock discount",
-          "description": "This is the extra measurement for the door... Not editable!",
-          "text": [{"index": 1, "text": "ATTENTION: The free wall width must be greater than the width of the largest system sheet!"}],
+          "description": "This is the additional measurement for the door... Non-editable!",
+          "text": [{"index": 1, "text": "ATTENTION: The free wall width must be greater than the width of the largest leaf of the system!"}],
           "label": "Door",
           "defaultValues": {
             "default": [50],
             "option": [100]
-
           },
           "disabled": true
         }
@@ -294,14 +293,14 @@
       "model": "Versatik Division",
       "title": "Gap calculation for VDPL + VDC",
       "subtitle": "Laminated glass for corner installation",
-      "description": "Model with transverse sheets (corner)",
+      "description": "Model with transverse leaves (corner)",
       "imageUrl": "https://tecvidro.com/tec/wp-content/uploads/2025/07/featured-vdpo4.jpg",
       "content": [
-                {
+        {
           "id": "md3_vdc",
           "type": "model",
           "title": "Door model",
-          "label": "Here you choose the assembly type for your project.",
+          "label": "Here you choose the type of assembly for your project.",
           "description": "",
           "options": [
             { "label": "VDPL and VDC", "value": "default" },
@@ -313,10 +312,10 @@
           "type": "panel",
           "title": "Number of glasses - Side A",
           "panelsLabel": "Number of panels",
-          "panelsDescription": "Enter the number of panels to be installed between the doors here.",
+          "panelsDescription": "Enter here the number of panels that will be installed between the doors.",
           "panelsCount": 2,
           "doorsLabel": "Number of doors",
-          "doorsDescription": "For this model, we have doors on both sides! Number not editable.",
+          "doorsDescription": "For this model, we have doors on both sides! Non-editable number.",
           "doorsCount": 2
         },
         {
@@ -333,25 +332,24 @@
           "id": "l6a_vdc",
           "type": "lock",
           "title": "Lock discount - Side A",
-          "description": "This is the extra measurement for doors with a side profile for a built-in lock. Not editable.",
+          "description": "This is the additional measurement for doors with side profile with built-in lock. Non-editable.",
           "text": [],
           "label": "Door",
           "defaultValues": {
             "default": [50, 50],
             "option": [100, 100]
-
           },
           "disabled": true
         },
-                {
+        {
           "id": "p6b_vdc",
           "type": "panel",
           "title": "Number of glasses - Side B",
           "panelsLabel": "Number of panels",
-          "panelsDescription": "Enter the number of panels to be installed between the doors here.",
+          "panelsDescription": "Enter here the number of panels that will be installed between the doors.",
           "panelsCount": 2,
           "doorsLabel": "Number of doors",
-          "doorsDescription": "For this model, we have doors on both sides! Number not editable.",
+          "doorsDescription": "For this model, we have doors on both sides! Non-editable number.",
           "doorsCount": 2
         },
         {
@@ -368,17 +366,15 @@
           "id": "l6b_vdc",
           "type": "lock",
           "title": "Lock discount - Side B",
-          "description": "This is the extra measurement for doors with a side profile for a built-in lock. Not editable.",
+          "description": "This is the additional measurement for doors with side profile with built-in lock. Non-editable.",
           "text": [],
           "label": "Door",
           "defaultValues": {
             "default": [50, 50],
             "option": [100, 100]
-
           },
           "disabled": true
         }
-
       ]
     }
   ]

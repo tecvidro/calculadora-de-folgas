@@ -26,7 +26,7 @@
   "products": [
     {
       "name": "VDPO 2 PUERTAS",
-      "slug": "vdpo-2-puertas",
+      "slug": "vdpo-2-portas",
       "model": "Versatik Division",
       "title": "Cálculo de holguras para VDPO 2 Puertas",
       "subtitle": "Instalación para vidrios templados",
@@ -78,7 +78,7 @@
     },
     {
       "name": "VDPO 4 PUERTAS",
-      "slug": "vdpo-4-puertas",
+      "slug": "vdpo-4-portas",
       "model": "Versatik Division",
       "title": "Cálculo de holguras para VDPO 4 Puertas",
       "subtitle": "Instalación para vidrios templados",
@@ -130,7 +130,7 @@
     },
     {
       "name": "VDPL 2 PUERTAS",
-      "slug": "vdpl-2-puertas",
+      "slug": "vdpl-2-portas",
       "model": "Versatik Division",
       "title": "Cálculo de holguras para VDPL 2 Puertas",
       "subtitle": "Instalación para vidrios laminados",
@@ -233,14 +233,14 @@
     },
     {
       "name": "Albañilería",
-      "slug": "albanileria",
+      "slug": "alvenaria",
       "model": "Versatik Division",
       "title": "Cálculo de holgura para albañilería",
       "subtitle": "Instalación detrás de albañilería.",
       "description": "Modelo en instalación detrás de albañilería",
       "imageUrl": "https://tecvidro.com/tec/wp-content/uploads/2025/07/featured-vdpo4.jpg",
       "content": [
-                {
+        {
           "id": "md2_alv",
           "type": "model",
           "title": "Modelo de puerta",
@@ -277,12 +277,16 @@
           "type": "lock",
           "title": "Descuento de cerradura",
           "description": "Esta es la medida a más para la puerta... No editable!",
-          "text": [{"index": 1, "text": "ATENCIÓN: El ancho libre de pared debe ser mayor que el ancho de la mayor hoja del sistema!"}],
+          "text": [
+            {
+              "index": 1,
+              "text": "ATENCIÓN: El ancho libre de pared debe ser mayor que el ancho de la mayor hoja del sistema!"
+            }
+          ],
           "label": "Puerta",
           "defaultValues": {
             "default": [50],
             "option": [100]
-
           },
           "disabled": true
         }
@@ -297,7 +301,7 @@
       "description": "Modelo con hojas transversales (esquina)",
       "imageUrl": "https://tecvidro.com/tec/wp-content/uploads/2025/07/featured-vdpo4.jpg",
       "content": [
-                {
+        {
           "id": "md3_vdc",
           "type": "model",
           "title": "Modelo de puerta",
@@ -339,11 +343,10 @@
           "defaultValues": {
             "default": [50, 50],
             "option": [100, 100]
-
           },
           "disabled": true
         },
-                {
+        {
           "id": "p6b_vdc",
           "type": "panel",
           "title": "Número de vidrios - Lado B",
@@ -374,12 +377,11 @@
           "defaultValues": {
             "default": [50, 50],
             "option": [100, 100]
-
           },
           "disabled": true
         }
-
       ]
     }
   ]
 }
+
