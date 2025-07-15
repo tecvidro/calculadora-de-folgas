@@ -26,21 +26,24 @@ export function generateStaticParams() {
 
 export default async function Root(props: {
   children: React.ReactNode
+  modal: React.ReactNode
   params: Promise<{ lang: Locale }>
 }) {
   const params = await props.params
 
   const dictionary = await getDictionary(params.lang)
 
-  const { children } = props
+  const { children, modal } = props
   return (
     <html lang={params.lang}>
       <body className={`${robotoCondensed.variable} antialiased`}>
-        <Header title={dictionary.globals.title} />
+        {modal}
+        <Header lang={params.lang} title={dictionary.globals.title} />
         <Content>
           <Container>{children}</Container>
-          <Footer />
+          <Footer lang={params.lang} />
         </Content>
+        <div id="modal-root" />
       </body>
     </html>
   )

@@ -1,14 +1,16 @@
+'use client'
 import Link from 'next/link'
+import type { Locale } from '@/i18n-config'
 
 type InfosButtonProps = {
-  href: string
+  lang: Locale
 }
 
-export function InfosButton({ href }: InfosButtonProps) {
+export function InfosButton({ lang }: InfosButtonProps) {
   return (
     <Link
-      className="text-current transition hover:text-green active:text-blue"
-      href={href}
+      className="text-current transition hover:scale-120 hover:text-green active:text-blue"
+      href={`/${lang}/infos`}
     >
       <svg
         fill="none"
