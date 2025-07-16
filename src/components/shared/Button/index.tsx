@@ -3,7 +3,7 @@ import { ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 
 const buttonVariants = cva(
-  'flex items-center justify-between rounded-md px-4 py-2 transition-colors duration-300',
+  'flex w-full items-center justify-between rounded-md px-4 py-2 transition-colors duration-300',
   {
     variants: {
       intent: {

@@ -26,9 +26,9 @@ export default function Lock({
 
   return (
     <Box className="flex flex-col gap-4">
-      <Title title={title} />
+      <Title>{title}</Title>
       {!!description && <p>{description}</p>}
-      <div className="flex justify-between gap-4">
+      <div className="flex flex-col justify-between gap-4 lg:flex-row">
         {(useDefaultLockDiscounts || !defaultValues.option
           ? defaultValues.default
           : defaultValues.option

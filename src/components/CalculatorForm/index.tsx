@@ -19,8 +19,14 @@ export const CalculatorForm = ({
   return (
     <div className=" flex flex-col items-center gap-4">
       <Alert text={alertText} />
-      <CalculatorBuilder content={product.content} />
-      <Results product={product.name} resultsLabels={dictionary.globals.resultsLabels} />
+      <section className="flex flex-col gap-4 md:grid md:grid-cols-2">
+        <CalculatorBuilder content={product.content} />
+        <Results
+          callToactions={dictionary.globals.callToActions}
+          product={product.name}
+          resultsLabels={dictionary.globals.resultsLabels}
+        />
+      </section>
     </div>
   )
 }

@@ -7,7 +7,7 @@
     "callToActions": {
       "card": "Open calculator",
       "print": "Printable version",
-      "manual": "download manual"
+      "manual": "Download manual"
     },
     "resultsLabels": {
       "title": "Gap result for",

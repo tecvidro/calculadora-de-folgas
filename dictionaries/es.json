@@ -7,7 +7,7 @@
     "callToActions": {
       "card": "Abrir calculadora",
       "print": "Versión para imprimir",
-      "manual": "descargar manual"
+      "manual": "Descargar manual"
     },
     "resultsLabels": {
       "title": "Resultado de holguras para",

@@ -81,17 +81,19 @@ export type ResultsLabels = {
   glassDimensions: string
 }
 
+export type CallToActions = {
+  card: string
+  print: string
+  manual: string
+}
+
 export type Dictionary = {
   globals: {
     title: string
     description: string
     homeTitle: string
     alert: string
-    callToActions: {
-      card: string
-      print: string
-      manual: string
-    }
+    callToActions: CallToActions
     resultsLabels: ResultsLabels
   }
   infosPage: {

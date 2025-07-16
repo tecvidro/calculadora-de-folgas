@@ -1,4 +1,5 @@
 import { CalculatorForm } from "@/components/CalculatorForm";
+import { Title } from "@/components/shared/BoxTitle";
 import { CalculatorProvider } from "@/context/calculator-context";
 import type { Locale } from "@/i18n-config";
 import { getDictionary } from "@/utils/get-dictionary";
@@ -34,7 +35,7 @@ export default async function ProductCalculator(props: {
 
   return (
     <div className=" flex flex-col items-center gap-4">
-      <h1 className="w-full text-center uppercase">{product.name}</h1>
+      <Title variant="sectionTitle">{product.name}</Title>
       <p className="w-full text-center">{product.description}</p>
       <CalculatorProvider
         initialDoorsCount={initialDoorsCount}
