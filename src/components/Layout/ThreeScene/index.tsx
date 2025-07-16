@@ -1,102 +1,156 @@
-import type React from "react";
-import { useEffect, useRef } from "react";
-import * as THREE from "three";
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
-import { RoomEnvironment } from "three/examples/jsm/environments/RoomEnvironment.js";
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
+import type React from 'react'
+import { useEffect, useRef } from 'react'
+import {
+  Box3,
+  Color,
+  PerspectiveCamera,
+  PMREMGenerator,
+  Scene,
+  Vector3,
+  WebGLRenderer,
+} from 'three'
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
+import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js'
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
+import {
+  CSS2DObject,
+  CSS2DRenderer,
+} from 'three/examples/jsm/renderers/CSS2DRenderer.js'
 
 const ThreeScene: React.FC = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    const currentContainer = containerRef.current;
-    if (typeof window === "undefined" || !currentContainer) {
-      return;
+    const currentContainer = containerRef.current
+    if (typeof window === 'undefined' || !currentContainer) {
+      return
     }
 
     // Renderer
-    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    const renderer = new WebGLRenderer({ antialias: true })
     renderer.setSize(
       currentContainer.clientWidth,
-      currentContainer.clientHeight,
-    );
-    currentContainer.appendChild(renderer.domElement);
+      currentContainer.clientHeight
+    )
+    currentContainer.appendChild(renderer.domElement)
 
-    const environment = new RoomEnvironment();
-    const pmremGenerator = new THREE.PMREMGenerator(renderer);
+    // CSS2DRenderer for labels
+    const labelRenderer = new CSS2DRenderer()
+    labelRenderer.setSize(
+      currentContainer.clientWidth,
+      currentContainer.clientHeight
+    )
+    labelRenderer.domElement.style.position = 'absolute'
+    labelRenderer.domElement.style.top = '0px'
+    labelRenderer.domElement.style.pointerEvents = 'none' // Allow interaction with the canvas below
+    currentContainer.appendChild(labelRenderer.domElement)
+
+    const environment = new RoomEnvironment()
+    const pmremGenerator = new PMREMGenerator(renderer)
 
     // Scene
-    const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0xdd_dd_dd);
-    scene.environment = pmremGenerator.fromScene(environment).texture;
+    const scene = new Scene()
+    scene.background = new Color(0xdd_dd_dd)
+    scene.environment = pmremGenerator.fromScene(environment).texture
 
     // Camera
-    const camera = new THREE.PerspectiveCamera(
+    const camera = new PerspectiveCamera(
       45,
       currentContainer.clientWidth / currentContainer.clientHeight,
       0.1,
-      1000,
-    );
-    camera.position.z = 5;
+      1000
+    )
+    camera.position.z = 5
 
     // Controls
-    const controls = new OrbitControls(camera, renderer.domElement);
-    controls.enableDamping = true;
+    const controls = new OrbitControls(camera, renderer.domElement)
+    controls.enableDamping = true
 
     // Model Loader
-    const loader = new GLTFLoader();
+    const loader = new GLTFLoader()
     loader.load(
-      "/models/vdpo-2-portas.glb",
+      '/models/vdpo-2-portas.glb',
       (gltf) => {
-        const box = new THREE.Box3().setFromObject(gltf.scene);
-        const center = box.getCenter(new THREE.Vector3());
-        gltf.scene.position.sub(center);
-        scene.add(gltf.scene);
-      },
-      undefined,
-    );
+        const box = new Box3().setFromObject(gltf.scene)
+        const center = box.getCenter(new Vector3())
+        gltf.scene.position.sub(center)
+        scene.add(gltf.scene)
 
-    let animationFrameId: number;
+        // Add labels to model objects
+        gltf.scene.traverse((object) => {
+          if (
+            (object.type === 'Object3D' &&
+              object.name &&
+              object.name.startsWith('Porta')) ||
+            object.name.startsWith('Painel')
+          ) {
+            const labelDiv = document.createElement('div')
+
+            labelDiv.className = 'label'
+            labelDiv.textContent = object.name.replaceAll('_', ' ')
+            labelDiv.style.backgroundColor = 'rgba(255,255,255,0.5)'
+            labelDiv.style.padding = '5px'
+            labelDiv.style.borderRadius = '3px'
+            labelDiv.style.fontSize = '16px'
+            labelDiv.style.color = 'black'
+            labelDiv.style.whiteSpace = 'nowrap'
+
+            const label = new CSS2DObject(labelDiv)
+            // Get the world position of the object and set the label's position
+            const worldPosition = new Vector3()
+            object.getWorldPosition(worldPosition)
+            label.position.copy(worldPosition)
+            scene.add(label)
+          }
+        })
+      },
+      undefined
+    )
+
+    let animationFrameId: number
     // Render loop
     const animate = () => {
-      animationFrameId = requestAnimationFrame(animate);
-      controls.update();
-      renderer.render(scene, camera);
-    };
-    animate();
+      animationFrameId = requestAnimationFrame(animate)
+      controls.update()
+      renderer.render(scene, camera)
+      labelRenderer.render(scene, camera) // Render labels
+    }
+    animate()
 
     const handleResize = () => {
       if (currentContainer) {
-        const width = currentContainer.clientWidth;
-        const height = currentContainer.clientHeight;
+        const width = currentContainer.clientWidth
+        const height = currentContainer.clientHeight
 
-        camera.aspect = width / height;
-        camera.updateProjectionMatrix();
+        camera.aspect = width / height
+        camera.updateProjectionMatrix()
 
-        renderer.setSize(width, height);
+        renderer.setSize(width, height)
+        labelRenderer.setSize(width, height) // Resize label renderer
       }
-    };
+    }
 
-    window.addEventListener("resize", handleResize);
+    window.addEventListener('resize', handleResize)
 
     // Clean up the event listener when the component is unmounted
     return () => {
-      cancelAnimationFrame(animationFrameId);
-      window.removeEventListener("resize", handleResize);
-      controls.dispose();
-      renderer.dispose();
+      cancelAnimationFrame(animationFrameId)
+      window.removeEventListener('resize', handleResize)
+      controls.dispose()
+      renderer.dispose()
       if (currentContainer) {
-        currentContainer.removeChild(renderer.domElement);
+        currentContainer.removeChild(renderer.domElement)
+        currentContainer.removeChild(labelRenderer.domElement) // Clean up label renderer
       }
-    };
-  }, []);
+    }
+  }, [])
 
   return (
     <div
-      className="aspect-square h-full w-full overflow-hidden rounded"
+      className="relative aspect-square h-full w-full overflow-hidden rounded"
       ref={containerRef}
     />
-  );
-};
+  )
+}
 
-export default ThreeScene;
+export default ThreeScene
