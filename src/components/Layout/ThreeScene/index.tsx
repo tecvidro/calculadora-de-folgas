@@ -3,6 +3,7 @@ import { useEffect, useRef } from 'react'
 import {
   Box3,
   Color,
+  Object3D,
   PerspectiveCamera,
   PMREMGenerator,
   Scene,
@@ -65,6 +66,13 @@ const ThreeScene: React.FC = () => {
     // Controls
     const controls = new OrbitControls(camera, renderer.domElement)
     controls.enableDamping = true
+    controls.autoRotate = true // Enable auto-rotation
+    controls.autoRotateSpeed = -2.0 // Set rotation speed
+
+    // Stop auto-rotation after a few seconds
+    setTimeout(() => {
+      controls.autoRotate = false
+    }, 3000) // 5 seconds
 
     // Model Loader
     const loader = new GLTFLoader()
@@ -75,6 +83,29 @@ const ThreeScene: React.FC = () => {
         const center = box.getCenter(new Vector3())
         gltf.scene.position.sub(center)
         scene.add(gltf.scene)
+
+        // Function to fit camera to scene
+        const fitCameraToScene = (
+          cam: PerspectiveCamera,
+          ctrls: OrbitControls,
+          obj: Object3D
+        ) => {
+          const box2 = new Box3().setFromObject(obj)
+          const center2 = box2.getCenter(new Vector3())
+          const size = box2.getSize(new Vector3())
+
+          const maxDim = Math.max(size.x, size.y, size.z)
+          const fov = cam.fov * (Math.PI / 180)
+          let cameraZ = Math.abs(maxDim / 2 / Math.tan(fov / 2))
+
+          cameraZ *= 1.2 // Add some padding
+
+          cam.position.set(center2.x, center2.y, center2.z + cameraZ)
+          ctrls.target.copy(center2)
+          ctrls.update()
+        }
+
+        fitCameraToScene(camera, controls, gltf.scene)
 
         // Add labels to model objects
         gltf.scene.traverse((object) => {
