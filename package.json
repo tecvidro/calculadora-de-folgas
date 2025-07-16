@@ -20,6 +20,7 @@
     "next": "15.3.5",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "three": "^0.178.0",
     "uuid": "^11.1.0"
   },
   "devDependencies": {
@@ -28,6 +29,7 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/three": "^0.178.1",
     "tailwindcss": "^4",
     "typescript": "^5",
     "ultracite": "5.0.32"

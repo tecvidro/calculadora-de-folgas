@@ -47,6 +47,6 @@ export function middleware(request: NextRequest) {
 export const config = {
   matcher: [
     '/', // match root path
-    '/((?!api|_next/static|_next/image|favicon.ico).*)',
+    '/((?!api|_next/static|_next/image|models|favicon.ico).*)',
   ],
 }

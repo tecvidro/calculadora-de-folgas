@@ -11,6 +11,14 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  async rewrites() {
+    return [
+      {
+        source: '/models/:path*',
+        destination: '/models/:path*',
+      },
+    ]
+  },
   /* config options here */
 }
 

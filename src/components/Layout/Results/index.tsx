@@ -1,15 +1,16 @@
-import { v4 as uuidv4 } from "uuid";
-import { Box } from "@/components/shared/Box";
-import { Title } from "@/components/shared/BoxTitle";
-import Button from "@/components/shared/Button";
-import { useCalculator } from "@/context/calculator-context";
-import type { CallToActions, ResultsLabels } from "@/Types/types";
+import { v4 as uuidv4 } from 'uuid'
+import { Box } from '@/components/shared/Box'
+import { Title } from '@/components/shared/BoxTitle'
+import Button from '@/components/shared/Button'
+import { useCalculator } from '@/context/calculator-context'
+import type { CallToActions, ResultsLabels } from '@/Types/types'
+import ThreeScene from '../ThreeScene'
 
 type ResultsProps = {
-  product: string;
-  resultsLabels: ResultsLabels;
-  callToactions: CallToActions;
-};
+  product: string
+  resultsLabels: ResultsLabels
+  callToactions: CallToActions
+}
 
 export const Results = ({
   product,
@@ -17,7 +18,7 @@ export const Results = ({
   callToactions,
 }: ResultsProps) => {
   const { panelCount, doorsCount, gapWidth, gapHeight, lockDiscounts } =
-    useCalculator();
+    useCalculator()
 
   return (
     <div className="flex w-full flex-col gap-4">
@@ -56,10 +57,11 @@ export const Results = ({
           </div>
         </Box>
       </div>
+      <ThreeScene />
       <div className="flex flex-col gap-4 md:flex-row">
         <Button label={callToactions.print} link="#" />
         <Button intent="secondary" label={callToactions.manual} link="#" />
       </div>
     </div>
-  );
-};
+  )
+}
