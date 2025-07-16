@@ -1,9 +1,9 @@
-import { useState } from "react";
-import { Box } from "@/components/shared/Box";
-import { Title } from "@/components/shared/BoxTitle";
-import { InputNumber } from "@/components/shared/InputNumber";
-import { useCalculator } from "@/context/calculator-context";
-import type { MeasuresProps } from "@/Types/types";
+import { useState } from 'react'
+import { Box } from '@/components/shared/Box'
+import { Title } from '@/components/shared/BoxTitle'
+import { InputNumber } from '@/components/shared/InputNumber'
+import { useCalculator } from '@/context/calculator-context'
+import type { MeasuresProps } from '@/Types/types'
 
 export default function Measures({
   title,
@@ -13,22 +13,22 @@ export default function Measures({
   defaultWidth,
   defaultHeight,
 }: MeasuresProps) {
-  const { setGapWidth, setGapHeight } = useCalculator();
-  const [gapWidth, setLocalGapWidth] = useState(defaultWidth);
-  const [gapHeight, setLocalGapHeight] = useState(defaultHeight);
+  const { setGapWidth, setGapHeight } = useCalculator()
+  const [gapWidth, setLocalGapWidth] = useState(defaultWidth)
+  const [gapHeight, setLocalGapHeight] = useState(defaultHeight)
 
   const handleGapWidthChange = (value: number) => {
-    setLocalGapWidth(value);
-    setGapWidth(value);
-  };
+    setLocalGapWidth(value)
+    setGapWidth(value)
+  }
   const handleGapHeightChange = (value: number) => {
-    setLocalGapHeight(value);
-    setGapHeight(value);
-  };
+    setLocalGapHeight(value)
+    setGapHeight(value)
+  }
 
   return (
     <Box className="flex flex-col gap-4">
-      <Title title={title} />
+      <Title>{title}</Title>
       {!!description && <p>{description}</p>}
       <div className="flex justify-between gap-4">
         <InputNumber
@@ -45,5 +45,5 @@ export default function Measures({
         />
       </div>
     </Box>
-  );
+  )
 }

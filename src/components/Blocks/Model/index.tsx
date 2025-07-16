@@ -20,7 +20,7 @@ export default function Model({
 
   return (
     <Box variant="dashed">
-      <Title title={title} />
+      <Title>{title}</Title>
       {!!description && <p>{description}</p>}
       <InputOptions
         label={label}
