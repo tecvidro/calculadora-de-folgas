@@ -78,6 +78,7 @@ export type ResultsLabels = {
   height: string
   lockDiscounts: string
   door: string
+  panel: string
   glassDimensions: string
 }
 
