@@ -64,6 +64,7 @@ export type Product = {
   subtitle: string
   description: string
   imageUrl: string
+  manualUrl: string
   content: BlockContentType[]
 }
 

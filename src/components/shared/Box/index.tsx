@@ -4,7 +4,7 @@ import type { ReactNode } from 'react'
 const boxVariants = cva('rounded-md p-4', {
   variants: {
     variant: {
-      dashed: 'border-2 border-gray-400 border-dashed bg-white',
+      dashed: 'border-1 border-gray-400 border-dashed bg-white',
       gray: 'bg-gray-100',
       red: 'bg-red text-white',
       blue: 'bg-blue text-white',

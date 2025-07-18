@@ -9,7 +9,7 @@ type FooterProps = {
 
 export function Footer({ lang }: FooterProps) {
   return (
-    <footer className="flex w-full items-center justify-center bg-header-bg p-4 text-gray-300 shadow-sm-gray-up">
+    <footer className="flex w-full items-center justify-center bg-header-bg p-4 text-gray-300 shadow-sm-gray-up print:hidden">
       <div className="flex w-full max-w-7xl items-center justify-between">
         <Logo size="sm" />
         <div>

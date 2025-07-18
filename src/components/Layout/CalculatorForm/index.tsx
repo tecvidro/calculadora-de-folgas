@@ -1,17 +1,17 @@
-'use client'
+"use client";
 
-import { CalculatorBuilder } from '@/components/Blocks/CalculatorBuilder'
-import { Results } from '@/components/Layout/Results'
-import { Title } from '@/components/shared/BoxTitle'
-import Button from '@/components/shared/Button'
-import type { Dictionary, Product } from '@/Types/types'
-import ThreeScene from '../ThreeScene'
+import { CalculatorBuilder } from "@/components/Blocks/CalculatorBuilder";
+import { Results } from "@/components/Layout/Results";
+import { Title } from "@/components/shared/BoxTitle";
+import Button from "@/components/shared/Button";
+import type { Dictionary, Product } from "@/Types/types";
+import ThreeScene from "../ThreeScene";
 
 type CalculatorFormProps = {
-  product: Product
-  alertText: string
-  dictionary: Dictionary
-}
+  product: Product;
+  alertText: string;
+  dictionary: Dictionary;
+};
 
 export const CalculatorForm = ({
   product,
@@ -24,13 +24,14 @@ export const CalculatorForm = ({
           <CalculatorBuilder content={product.content} />
           <div className="flex flex-col gap-4 md:flex-row">
             <Button
-              href="print"
+              href={`${product.slug}/print`}
               label={dictionary.globals.callToActions.print}
             />
             <Button
-              href="#"
+              href={product.manualUrl}
               intent="secondary"
               label={dictionary.globals.callToActions.manual}
+              target="_blank"
             />
           </div>
         </div>
@@ -46,5 +47,5 @@ export const CalculatorForm = ({
         </div>
       </section>
     </div>
-  )
-}
+  );
+};

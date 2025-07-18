@@ -37,7 +37,7 @@ export function Card({
         <span className="font-bold text-2xl">{name}</span>
         <span className="text-lg/5">{subtitle}</span>
       </Link>
-      <Button label={ctaLabel} href={link} />
+      <Button href={link} label={ctaLabel} />
     </div>
   )
 }

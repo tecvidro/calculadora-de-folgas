@@ -20,11 +20,24 @@ const buttonVariants = cva(
 
 type ButtonProps = VariantProps<typeof buttonVariants> & {
   label: string;
+  onClick?: () => void;
+  target?: "_blank" | "_self";
 } & LinkProps;
 
-const Button = ({ label, intent, ...props }: ButtonProps) => {
+const Button = ({
+  label,
+  intent,
+  onClick,
+  target = "_self",
+  ...props
+}: ButtonProps) => {
   return (
-    <Link className={buttonVariants({ intent })} {...props}>
+    <Link
+      className={buttonVariants({ intent })}
+      target={target}
+      onClick={onClick}
+      {...props}
+    >
       <span>{label}</span>
       <ArrowRight size={18} />
     </Link>

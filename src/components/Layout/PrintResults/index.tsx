@@ -14,36 +14,43 @@ export const PrintResults = ({ resultsLabels }: ResultsProps) => {
     useCalculator();
 
   return (
-    <div className="flex w-full flex-col gap-4">
-      <div className="flex w-ful flex-col gap-4 md:grid md:grid-cols-2">
-        <Box className="w-full" variant="gray">
-          <div>
-            <h3>{resultsLabels.infoAndMeasures}</h3>
-            <p>{resultsLabels.numberOfGlasses}</p>
-            <p>
-              {resultsLabels.panels}: {panelCount}
-            </p>
-            <p>
-              {resultsLabels.doors}: {doorsCount}
-            </p>
-            <p>{resultsLabels.gapMeasures}</p>
-            <p>
-              {resultsLabels.width}: {gapWidth} mm
-            </p>
-            <p>
-              {resultsLabels.height}: {gapHeight} mm
-            </p>
-            <p>{resultsLabels.lockDiscounts}</p>
-            {lockDiscounts.map((discount, index) => (
-              <p key={uuidv4()}>
-                {resultsLabels.door} {index + 1}: {discount} mm
+    <div className="flex w-full flex-col items-center gap-4">
+      <div className="grid w-full max-w-7xl grid-cols-2 items-start gap-4">
+        <Box variant="dashed">
+          <div className="w-full max-w-5xl">
+            <div className="border-b-1 border-dashed py-4">
+              <h3 className="font-bold">{resultsLabels.infoAndMeasures}</h3>
+              <p>{resultsLabels.numberOfGlasses}</p>
+              <p>
+                {resultsLabels.panels}: {panelCount}
               </p>
-            ))}
+              <p>
+                {resultsLabels.doors}: {doorsCount}
+              </p>
+            </div>
+            <div className="border-b-1 border-dashed py-4">
+              <h3 className=" font-bold">{resultsLabels.gapMeasures}</h3>
+              <p>
+                {resultsLabels.width}: {gapWidth} mm
+              </p>
+              <p>
+                {resultsLabels.height}: {gapHeight} mm
+              </p>
+            </div>
+            <div className="py-4">
+              <h3 className="font-bold">{resultsLabels.lockDiscounts}</h3>
+              {lockDiscounts.map((discount, index) => (
+                <p key={uuidv4()}>
+                  {resultsLabels.door} {index + 1}: {discount} mm
+                </p>
+              ))}
+            </div>
           </div>
         </Box>
-        <Box variant="blue">
+
+        <Box variant="dashed">
           <div>
-            <h3>{resultsLabels.glassDimensions}</h3>
+            <h3 className="font-bold">{resultsLabels.glassDimensions}</h3>
           </div>
         </Box>
       </div>

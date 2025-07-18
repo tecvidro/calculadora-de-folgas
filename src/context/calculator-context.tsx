@@ -67,7 +67,9 @@ export const CalculatorProvider = ({
     if (useDefaultLockDiscounts) {
       setLockDiscounts(initialLockDiscounts.default)
     } else {
-      setLockDiscounts(initialLockDiscounts.option || initialLockDiscounts.default)
+      setLockDiscounts(
+        initialLockDiscounts.option || initialLockDiscounts.default
+      )
     }
   }, [useDefaultLockDiscounts, initialLockDiscounts])
 
