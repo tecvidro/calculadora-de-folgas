@@ -27,10 +27,10 @@ export default function Measures({
   }
 
   return (
-    <Box className="flex flex-col gap-4">
+    <Box className="@container flex flex-col gap-4">
       <Title>{title}</Title>
       {!!description && <p>{description}</p>}
-      <div className="flex justify-between gap-4">
+      <div className="container flex @lg:flex-row flex-col justify-between gap-4">
         <InputNumber
           label={widthLabel}
           name="panels"

@@ -7,9 +7,15 @@ const titleVariants = cva('text-xl', {
       title: 'font-bold',
       sectionTitle: 'w-full text-center font-normal uppercase',
     },
+    align: {
+      left: 'text-left',
+      right: 'text-right',
+      center: 'text-center',
+    },
   },
   defaultVariants: {
     variant: 'title',
+    align: 'left',
   },
 })
 
@@ -22,11 +28,12 @@ export interface TitleProps
 export const Title = ({
   children,
   variant = 'title',
+  align,
   className,
   ...props
 }: TitleProps) => {
   return (
-    <h2 className={titleVariants({ variant, className })} {...props}>
+    <h2 className={titleVariants({ variant, align, className })} {...props}>
       {children}
     </h2>
   )

@@ -192,7 +192,7 @@ const ThreeScene = ({ filename, labels }: ThreeSceneProps) => {
 
   return (
     <div
-      className="relative aspect-square w-full overflow-hidden rounded"
+      className="relative h-full max-h-screen min-h-[500px] w-full overflow-hidden rounded"
       ref={containerRef}
     />
   )

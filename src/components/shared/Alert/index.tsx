@@ -1,13 +1,13 @@
-import { Box } from '../Box'
+import { Box } from "../Box";
 
 type AlertProps = {
-  text: string
-}
+  text: string;
+};
 
 export const Alert = ({ text }: AlertProps) => {
   return (
-    <Box className="w-full max-w-4xl" variant="red">
+    <Box className="w-full max-w-7xl" variant="red">
       {text}
     </Box>
-  )
-}
+  );
+};
