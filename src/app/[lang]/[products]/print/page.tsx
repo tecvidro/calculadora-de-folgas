@@ -1,10 +1,9 @@
-import { CalculatorForm } from "@/components/Layout/CalculatorForm";
-import { Alert } from "@/components/shared/Alert";
 import { Title } from "@/components/shared/BoxTitle";
 import type { Locale } from "@/i18n-config";
 import { getDictionary } from "@/utils/get-dictionary";
+import { PrintResults } from "@/components/Layout/PrintResults";
 
-export default async function ProductCalculator(props: {
+export default async function PrintPage(props: {
   params: Promise<{ lang: Locale; products: string }>;
 }) {
   const params = await props.params;
@@ -18,17 +17,11 @@ export default async function ProductCalculator(props: {
   }
 
   return (
-    <div className=" flex flex-col items-center gap-4 pb-4">
+    <div className="flex flex-col items-center gap-4 pb-4">
       <Title align="center" variant="sectionTitle">
         {product.name}
       </Title>
-      <p className="w-full text-center">{product.description}</p>
-      <Alert text={dictionary.globals.alert} />
-      <CalculatorForm
-        alertText={dictionary.globals.alert}
-        dictionary={dictionary}
-        product={product}
-      />
+      <PrintResults resultsLabels={dictionary.globals.resultsLabels} />
     </div>
   );
 }

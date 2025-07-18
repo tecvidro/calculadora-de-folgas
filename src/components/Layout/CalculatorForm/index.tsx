@@ -23,7 +23,7 @@ export const CalculatorForm = ({
         <div className="flex flex-col gap-4">
           <CalculatorBuilder content={product.content} />
           <div className="flex flex-col gap-4 md:flex-row">
-            <Button label={dictionary.globals.callToActions.print} link="#" />
+            <Button label={dictionary.globals.callToActions.print} link="print" target="_blank" />
             <Button
               intent="secondary"
               label={dictionary.globals.callToActions.manual}
