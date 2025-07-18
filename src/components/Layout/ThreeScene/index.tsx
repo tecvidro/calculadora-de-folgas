@@ -74,13 +74,10 @@ const ThreeScene = ({ filename, labels }: ThreeSceneProps) => {
     // Controls
     const controls = new OrbitControls(camera, renderer.domElement)
     controls.enableDamping = true
-    controls.autoRotate = true // Enable auto-rotation
+    controls.autoRotate = false // Enable auto-rotation
+    controls.minPolarAngle = 0
+    controls.maxPolarAngle = Math.PI / 2
     controls.autoRotateSpeed = -2.0 // Set rotation speed
-
-    // Stop auto-rotation after a few seconds
-    setTimeout(() => {
-      controls.autoRotate = false
-    }, 3000) // 5 seconds
 
     // Model Loader
     const loader = new GLTFLoader()
@@ -192,7 +189,7 @@ const ThreeScene = ({ filename, labels }: ThreeSceneProps) => {
 
   return (
     <div
-      className="relative h-full max-h-screen min-h-[500px] w-full overflow-hidden rounded"
+      className="relative h-full max-h-[700px] min-h-[500px] w-full overflow-hidden rounded"
       ref={containerRef}
     />
   )
