@@ -34,8 +34,8 @@ const Button = ({
   return (
     <Link
       className={buttonVariants({ intent })}
-      target={target}
       onClick={onClick}
+      target={target}
       {...props}
     >
       <span>{label}</span>

@@ -55,7 +55,7 @@ export function Modal({ children }: { children: React.ReactNode }) {
         initial={{ opacity: 0, y: 100 }}
         ref={wrapper}
       >
-        <Box className="relative shadow-lg" variant="white">
+        <Box className="relative w-full max-w-4xl shadow-lg" variant="white">
           <button
             aria-label="close modal"
             className="absolute top-4 right-4 cursor-pointer text-gray-200 transition hover:scale-110 hover:text-red active:scale-90 active:text-green "

@@ -9,7 +9,7 @@ type InfosButtonProps = {
 export function InfosButton({ lang }: InfosButtonProps) {
   return (
     <Link
-      className="text-current transition hover:scale-120 hover:text-green active:text-blue"
+      className="text-current transition hover:scale-120 hover:text-green active:text-blue print:hidden"
       href={`/${lang}/infos`}
     >
       <svg
