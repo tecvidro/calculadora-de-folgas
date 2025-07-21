@@ -1,52 +1,53 @@
-import { useState } from 'react'
-import { Box } from '@/components/shared/Box'
-import { Title } from '@/components/shared/BoxTitle'
-import { InputNumber } from '@/components/shared/InputNumber'
-import { useCalculator } from '@/context/calculator-context'
-import type { PanelsProps } from '@/Types/types'
+import { useState } from "react";
+import { Box } from "@/components/shared/Box";
+import { InputNumber } from "@/components/shared/InputNumber";
+import { useCalculator } from "@/context/calculator-context";
+import type { PanelsProps } from "@/Types/types";
 
 export default function Panels({
-  title,
   panelsCount: initialPanelsCount,
   panelsDescription,
   panelsLabel,
   doorsCount: initialDoorsCount,
   doorsDescription,
   doorsLabel,
-  side = 'A',
+  side = "A",
 }: PanelsProps) {
   const { setPanelCount, setDoorsCount, setPanelCountB, setDoorsCountB } =
-    useCalculator()
-  const [panelsCount, setLocalPanelsCount] = useState(initialPanelsCount)
-  const [doorsCount, setLocalDoorsCount] = useState(initialDoorsCount)
+    useCalculator();
+  const [panelsCount, setLocalPanelsCount] = useState(initialPanelsCount);
+  const [doorsCount, setLocalDoorsCount] = useState(initialDoorsCount);
 
   const handlePanelCountChange = (value: number) => {
-    setLocalPanelsCount(value)
+    setLocalPanelsCount(value);
     switch (side) {
-      case 'A':
-        setPanelCount(value)
-        break
-      case 'B':
-        setPanelCountB(value)
-        break
+      case "A":
+        setPanelCount(value);
+        break;
+      case "B":
+        setPanelCountB(value);
+        break;
+      default:
+        return null;
     }
-  }
+  };
 
   const handleDoorsCountChange = (value: number) => {
-    setLocalDoorsCount(value)
+    setLocalDoorsCount(value);
     switch (side) {
-      case 'A':
-        setDoorsCount(value)
-        break
-      case 'B':
-        setDoorsCountB(value)
-        break
+      case "A":
+        setDoorsCount(value);
+        break;
+      case "B":
+        setDoorsCountB(value);
+        break;
+      default:
+        return null;
     }
-  }
+  };
 
   return (
     <Box className="flex flex-col gap-4">
-      <Title>{title}</Title>
       <form>
         <InputNumber
           description={panelsDescription}
@@ -65,5 +66,5 @@ export default function Panels({
         />
       </form>
     </Box>
-  )
+  );
 }
