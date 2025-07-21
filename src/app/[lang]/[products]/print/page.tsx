@@ -22,8 +22,14 @@ export default async function PrintPage(props: {
       <Title align="center" title={`${product.name}`} variant="sectionTitle">
         {dictionary.globals.resultsLabels.title} {product.name}
       </Title>
-      <PrintResults resultsLabels={dictionary.globals.resultsLabels} />
       <Box className="w-full max-w-7xl">{dictionary.globals.alert}</Box>
+
+      <div className="flex w-full flex-col gap-2">
+        <PrintResults
+          productType={product.slug}
+          resultsLabels={dictionary.globals.resultsLabels}
+        />
+      </div>
     </div>
   );
 }

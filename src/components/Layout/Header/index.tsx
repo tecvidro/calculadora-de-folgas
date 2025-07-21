@@ -9,7 +9,7 @@ type HeaderProps = {
 
 export function Header({ title, lang }: HeaderProps) {
   return (
-    <header className="fixed z-50 flex w-full items-center justify-center bg-header-bg p-4 text-gray-300 shadow-sm-gray print:border-b-1 print:shadow-none">
+    <header className="fixed z-50 flex w-full items-center justify-center bg-header-bg p-4 text-gray-300 shadow-sm-gray print:relative print:border-b-1 print:shadow-none">
       <div className="flex w-full max-w-7xl items-center justify-between ">
         <Logo />
         <div>
