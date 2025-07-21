@@ -53,7 +53,7 @@ export default function Panels({
           description={panelsDescription}
           label={panelsLabel}
           name="panels"
-          onChange={handlePanelCountChange}
+          onValueChange={handlePanelCountChange}
           value={panelsCount}
         />
         <InputNumber
@@ -61,7 +61,7 @@ export default function Panels({
           disabled
           label={doorsLabel}
           name="doors"
-          onChange={handleDoorsCountChange}
+          onValueChange={handleDoorsCountChange}
           value={doorsCount}
         />
       </form>

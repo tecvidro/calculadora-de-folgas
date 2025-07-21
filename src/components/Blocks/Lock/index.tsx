@@ -56,7 +56,7 @@ export default function Lock({
             key={uuidv4()}
             label={`${label} ${i + 1}`}
             name={`${label}_${i + 1}`}
-            onChange={(value) => handleLockChange(i, value)}
+            onValueChange={(value) => handleLockChange(i, value)}
             value={side === 'A' ? lockDiscounts[i] : lockDiscountsB[i]}
           />
         ))}

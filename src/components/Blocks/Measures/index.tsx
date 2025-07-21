@@ -1,9 +1,9 @@
-import { useState } from 'react'
-import { Box } from '@/components/shared/Box'
-import { Title } from '@/components/shared/BoxTitle'
-import { InputNumber } from '@/components/shared/InputNumber'
-import { useCalculator } from '@/context/calculator-context'
-import type { MeasuresProps } from '@/Types/types'
+import { useState } from "react";
+import { Box } from "@/components/shared/Box";
+import { Title } from "@/components/shared/BoxTitle";
+import { InputNumber } from "@/components/shared/InputNumber";
+import { useCalculator } from "@/context/calculator-context";
+import type { MeasuresProps } from "@/Types/types";
 
 export default function Measures({
   title,
@@ -12,35 +12,39 @@ export default function Measures({
   heightLabel,
   defaultWidth,
   defaultHeight,
-  side = 'A',
+  side = "A",
 }: MeasuresProps) {
   const { setGapWidth, setGapHeight, setGapWidthB, setGapHeightB } =
-    useCalculator()
-  const [gapWidth, setLocalGapWidth] = useState(defaultWidth)
-  const [gapHeight, setLocalGapHeight] = useState(defaultHeight)
+    useCalculator();
+  const [gapWidth, setLocalGapWidth] = useState(defaultWidth);
+  const [gapHeight, setLocalGapHeight] = useState(defaultHeight);
 
   const handleGapWidthChange = (value: number) => {
-    setLocalGapWidth(value)
+    setLocalGapWidth(value);
     switch (side) {
-      case 'A':
-        setGapWidth(value)
-        break
-      case 'B':
-        setGapWidthB(value)
-        break
+      case "A":
+        setGapWidth(value);
+        break;
+      case "B":
+        setGapWidthB(value);
+        break;
+      default:
+        return null;
     }
-  }
+  };
   const handleGapHeightChange = (value: number) => {
-    setLocalGapHeight(value)
+    setLocalGapHeight(value);
     switch (side) {
-      case 'A':
-        setGapHeight(value)
-        break
-      case 'B':
-        setGapHeightB(value)
-        break
+      case "A":
+        setGapHeight(value);
+        break;
+      case "B":
+        setGapHeightB(value);
+        break;
+      default:
+        return null;
     }
-  }
+  };
 
   return (
     <Box className="@container flex flex-col gap-4">
@@ -50,16 +54,16 @@ export default function Measures({
         <InputNumber
           label={widthLabel}
           name="panels"
-          onChange={(value) => handleGapWidthChange(value)}
+          onValueChange={(value) => handleGapWidthChange(value)}
           value={gapWidth}
         />
         <InputNumber
           label={heightLabel}
           name="doors"
-          onChange={(value) => handleGapHeightChange(value)}
+          onValueChange={(value) => handleGapHeightChange(value)}
           value={gapHeight}
         />
       </div>
     </Box>
-  )
+  );
 }

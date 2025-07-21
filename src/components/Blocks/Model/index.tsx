@@ -1,8 +1,8 @@
-import { Box } from "@/components/shared/Box";
-import { Title } from "@/components/shared/BoxTitle";
-import { InputOptions } from "@/components/shared/InputOptions";
-import { useCalculator } from "@/context/calculator-context";
-import type { ModelProps } from "@/Types/types";
+import { Box } from '@/components/shared/Box'
+import { Title } from '@/components/shared/BoxTitle'
+import { InputOptions } from '@/components/shared/InputOptions'
+import { useCalculator } from '@/context/calculator-context'
+import type { ModelProps } from '@/Types/types'
 
 export default function Model({
   title,
@@ -11,12 +11,12 @@ export default function Model({
   label,
 }: ModelProps) {
   const { useDefaultLockDiscounts, setUseDefaultLockDiscounts } =
-    useCalculator();
+    useCalculator()
 
   const booleanOptions = [
     { label: options[0].label, value: true },
     { label: options[1].label, value: false },
-  ];
+  ]
 
   return (
     <Box variant="dashed">
@@ -25,10 +25,10 @@ export default function Model({
       <InputOptions
         label={label}
         name="model"
-        onChange={setUseDefaultLockDiscounts}
+        onValueChange={setUseDefaultLockDiscounts}
         options={booleanOptions}
         value={useDefaultLockDiscounts}
       />
     </Box>
-  );
+  )
 }
