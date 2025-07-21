@@ -13,19 +13,35 @@ export default function Panels({
   doorsCount: initialDoorsCount,
   doorsDescription,
   doorsLabel,
+  side = 'A',
 }: PanelsProps) {
-  const { setPanelCount, setDoorsCount } = useCalculator()
+  const { setPanelCount, setDoorsCount, setPanelCountB, setDoorsCountB } =
+    useCalculator()
   const [panelsCount, setLocalPanelsCount] = useState(initialPanelsCount)
   const [doorsCount, setLocalDoorsCount] = useState(initialDoorsCount)
 
   const handlePanelCountChange = (value: number) => {
     setLocalPanelsCount(value)
-    setPanelCount(value)
+    switch (side) {
+      case 'A':
+        setPanelCount(value)
+        break
+      case 'B':
+        setPanelCountB(value)
+        break
+    }
   }
 
   const handleDoorsCountChange = (value: number) => {
     setLocalDoorsCount(value)
-    setDoorsCount(value)
+    switch (side) {
+      case 'A':
+        setDoorsCount(value)
+        break
+      case 'B':
+        setDoorsCountB(value)
+        break
+    }
   }
 
   return (

@@ -12,18 +12,34 @@ export default function Measures({
   heightLabel,
   defaultWidth,
   defaultHeight,
+  side = 'A',
 }: MeasuresProps) {
-  const { setGapWidth, setGapHeight } = useCalculator()
+  const { setGapWidth, setGapHeight, setGapWidthB, setGapHeightB } =
+    useCalculator()
   const [gapWidth, setLocalGapWidth] = useState(defaultWidth)
   const [gapHeight, setLocalGapHeight] = useState(defaultHeight)
 
   const handleGapWidthChange = (value: number) => {
     setLocalGapWidth(value)
-    setGapWidth(value)
+    switch (side) {
+      case 'A':
+        setGapWidth(value)
+        break
+      case 'B':
+        setGapWidthB(value)
+        break
+    }
   }
   const handleGapHeightChange = (value: number) => {
     setLocalGapHeight(value)
-    setGapHeight(value)
+    switch (side) {
+      case 'A':
+        setGapHeight(value)
+        break
+      case 'B':
+        setGapHeightB(value)
+        break
+    }
   }
 
   return (

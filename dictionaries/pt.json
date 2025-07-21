@@ -377,40 +377,6 @@
             "option": [100, 100]
           },
           "disabled": true
-        },
-        {
-          "id": "p6b_vdc",
-          "type": "panel",
-          "title": "Número de vidros - Lado B",
-          "panelsLabel": "Número de painéis",
-          "panelsDescription": "Digite aqui o número de painéis que serão instalados entre as portas.",
-          "panelsCount": 2,
-          "doorsLabel": "Número de portas",
-          "doorsDescription": "Para este modelo temos portas nas duas laterais! Número não editável.",
-          "doorsCount": 2
-        },
-        {
-          "id": "m6b_vdc",
-          "type": "measure",
-          "title": "Medidas do vão - Lado B",
-          "description": "",
-          "widthLabel": "Largura (mm)",
-          "heightLabel": "Altura (mm)",
-          "defaultWidth": 4000,
-          "defaultHeight": 2500
-        },
-        {
-          "id": "l6b_vdc",
-          "type": "lock",
-          "title": "Desconto de fechadura - Lado B",
-          "description": "Esta é a medida a mais para as portas com perfil lateral de fechadura embutida. Não editável.",
-          "text": [],
-          "label": "Porta",
-          "defaultValues": {
-            "default": [50, 50],
-            "option": [100, 100]
-          },
-          "disabled": true
         }
       ]
     }

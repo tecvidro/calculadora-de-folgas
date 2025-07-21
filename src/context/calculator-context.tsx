@@ -1,6 +1,5 @@
 "use client";
 
-import { calculator } from "@/utils/calculator";
 import {
   createContext,
   type ReactNode,
@@ -24,6 +23,21 @@ interface CalculatorContextType {
   ) => void;
   useDefaultLockDiscounts: boolean;
   setUseDefaultLockDiscounts: (useDefault: boolean) => void;
+
+  panelCountB: number;
+  setPanelCountB: (count: number) => void;
+  doorsCountB: number;
+  setDoorsCountB: (count: number) => void;
+  gapWidthB: number;
+  setGapWidthB: (width: number) => void;
+  gapHeightB: number;
+  setGapHeightB: (height: number) => void;
+  lockDiscountsB: number[];
+  setLockDiscountsB: (
+    discounts: number[] | ((prev: number[]) => number[]),
+  ) => void;
+  useDefaultLockDiscountsB: boolean;
+  setUseDefaultLockDiscountsB: (useDefault: boolean) => void;
 }
 
 const CalculatorContext = createContext<CalculatorContextType | undefined>(
@@ -64,6 +78,18 @@ export const CalculatorProvider = ({
       : initialLockDiscounts.option || initialLockDiscounts.default,
   );
 
+  const [panelCountB, setPanelCountB] = useState<number>(initialPanelCount);
+  const [doorsCountB, setDoorsCountB] = useState<number>(initialDoorsCount);
+  const [gapWidthB, setGapWidthB] = useState<number>(initialGapWidth);
+  const [gapHeightB, setGapHeightB] = useState<number>(initialGapHeight);
+  const [useDefaultLockDiscountsB, setUseDefaultLockDiscountsB] =
+    useState<boolean>(initialUseDefaultLockDiscounts);
+  const [lockDiscountsB, setLockDiscountsB] = useState<number[]>(
+    initialUseDefaultLockDiscounts
+      ? initialLockDiscounts.default
+      : initialLockDiscounts.option || initialLockDiscounts.default,
+  );
+
   useEffect(() => {
     if (useDefaultLockDiscounts) {
       setLockDiscounts(initialLockDiscounts.default);
@@ -73,6 +99,16 @@ export const CalculatorProvider = ({
       );
     }
   }, [useDefaultLockDiscounts, initialLockDiscounts]);
+
+  useEffect(() => {
+    if (useDefaultLockDiscountsB) {
+      setLockDiscountsB(initialLockDiscounts.default);
+    } else {
+      setLockDiscountsB(
+        initialLockDiscounts.option || initialLockDiscounts.default,
+      );
+    }
+  }, [useDefaultLockDiscountsB, initialLockDiscounts]);
 
   return (
     <CalculatorContext.Provider
@@ -89,6 +125,18 @@ export const CalculatorProvider = ({
         setLockDiscounts,
         useDefaultLockDiscounts,
         setUseDefaultLockDiscounts,
+        panelCountB,
+        setPanelCountB,
+        doorsCountB,
+        setDoorsCountB,
+        gapWidthB,
+        setGapWidthB,
+        gapHeightB,
+        setGapHeightB,
+        lockDiscountsB,
+        setLockDiscountsB,
+        useDefaultLockDiscountsB,
+        setUseDefaultLockDiscountsB,
       }}
     >
       {children}

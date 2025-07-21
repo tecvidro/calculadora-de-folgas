@@ -12,16 +12,34 @@ export default function Lock({
   defaultValues,
   label,
   disabled = false,
+  side = 'A',
 }: LockProps) {
-  const { lockDiscounts, setLockDiscounts, useDefaultLockDiscounts } =
-    useCalculator()
+  const {
+    lockDiscounts,
+    setLockDiscounts,
+    useDefaultLockDiscounts,
+    lockDiscountsB,
+    setLockDiscountsB,
+    useDefaultLockDiscountsB,
+  } = useCalculator()
 
   const handleLockChange = (index: number, value: number) => {
-    setLockDiscounts((prevValues: number[]) => {
-      const newValues = [...prevValues]
-      newValues[index] = value
-      return newValues
-    })
+    switch (side) {
+      case 'A':
+        setLockDiscounts((prevValues: number[]) => {
+          const newValues = [...prevValues]
+          newValues[index] = value
+          return newValues
+        })
+        break
+      case 'B':
+        setLockDiscountsB((prevValues: number[]) => {
+          const newValues = [...prevValues]
+          newValues[index] = value
+          return newValues
+        })
+        break
+    }
   }
 
   return (
@@ -39,7 +57,7 @@ export default function Lock({
             label={`${label} ${i + 1}`}
             name={`${label}_${i + 1}`}
             onChange={(value) => handleLockChange(i, value)}
-            value={lockDiscounts[i]}
+            value={side === 'A' ? lockDiscounts[i] : lockDiscountsB[i]}
           />
         ))}
       </div>

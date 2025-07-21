@@ -13,6 +13,7 @@ export type PanelsProps = Base<'panel'> & {
   doorsLabel: string
   doorsDescription: string
   doorsCount: number
+  side?: 'A' | 'B'
 }
 
 export type LockProps = Base<'lock'> & {
@@ -28,6 +29,7 @@ export type LockProps = Base<'lock'> & {
     option: number[]
   }
   disabled?: boolean
+  side?: 'A' | 'B'
 }
 
 export type ModelProps = Base<'model'> & {
@@ -44,6 +46,7 @@ export type MeasuresProps = Base<'measure'> & {
   heightLabel: string
   defaultWidth: number
   defaultHeight: number
+  side?: 'A' | 'B'
 }
 
 export type BlockContentType =
@@ -54,6 +57,7 @@ export type BlockContentType =
 
 export type CalculatorBuilderProps = {
   content: BlockContentType[]
+  productType: string
 }
 
 export type Product = {

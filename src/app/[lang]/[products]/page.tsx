@@ -28,6 +28,7 @@ export default async function ProductCalculator(props: {
         alertText={dictionary.globals.alert}
         dictionary={dictionary}
         product={product}
+        productType={product.slug}
       />
     </div>
   );
