@@ -41,7 +41,10 @@ export const CalculatorForm = ({
           <Title title={`${product.name}`} variant="sectionTitle">
             {dictionary.globals.resultsLabels.title} {product.name}
           </Title>
-          <Results resultsLabels={dictionary.globals.resultsLabels} />
+          <Results
+            resultsLabels={dictionary.globals.resultsLabels}
+            productType={productType}
+          />
           <ThreeScene
             filename={product.slug}
             labels={dictionary.globals.resultsLabels}
