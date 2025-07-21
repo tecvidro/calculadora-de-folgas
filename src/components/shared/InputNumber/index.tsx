@@ -71,6 +71,7 @@ export const InputNumber = ({
           min="1"
           onBlur={handleBlur}
           onChange={handleChange}
+          onFocus={(event) => event.target.select()}
           type="number"
           value={inputValue}
         />

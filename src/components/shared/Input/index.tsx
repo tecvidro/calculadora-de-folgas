@@ -47,6 +47,7 @@ export const Input = ({
         type="number"
         onChange={handleChange}
         onBlur={handleBlur}
+        onFocus={(event) => event.target.select()}
       />
     </fieldset>
   )

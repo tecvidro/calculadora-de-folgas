@@ -25,7 +25,7 @@ export default function Model({
       <InputOptions
         label={label}
         name="model"
-        onValueChange={setUseDefaultLockDiscounts}
+        onChange={setUseDefaultLockDiscounts}
         options={booleanOptions}
         value={useDefaultLockDiscounts}
       />
