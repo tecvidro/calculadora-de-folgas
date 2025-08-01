@@ -19,9 +19,12 @@ import type { GLTF } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import { useCalculator } from '@/context/calculator-context'
 
 const ThreeScene = () => {
-  const { gapHeight } = useCalculator()
+  const { gapHeight, gapWidth } = useCalculator()
   const containerRef = useRef<HTMLDivElement>(null)
   const [trilhoSup, setTrilhoSup] = useState<GLTF | null>(null)
+  const [trilhoInf, setTrilhoInf] = useState<GLTF | null>(null)
+  const [initialWidthSup, setInitialWidthSup] = useState<number | null>(null)
+  const [initialWidthInf, setInitialWidthInf] = useState<number | null>(null)
 
   // Renderer setup
   const setupRenderers = useCallback((container: HTMLDivElement) => {
@@ -78,8 +81,11 @@ const ThreeScene = () => {
       (gltf) => {
         const boundingBox = new Box3().setFromObject(gltf.scene)
         const boxCenter = boundingBox.getCenter(new Vector3())
+        const initialSize = boundingBox.getSize(new Vector3())
+        setInitialWidthInf(initialSize.x)
         gltf.scene.position.sub(boxCenter)
         threeScene.add(gltf.scene)
+        setTrilhoInf(gltf)
       },
       undefined
     )
@@ -90,6 +96,8 @@ const ThreeScene = () => {
       (trilhoSupGltf) => {
         const boundingBox = new Box3().setFromObject(trilhoSupGltf.scene)
         const boxCenter = boundingBox.getCenter(new Vector3())
+        const initialSize = boundingBox.getSize(new Vector3())
+        setInitialWidthSup(initialSize.x)
         trilhoSupGltf.scene.position.sub(boxCenter)
         threeScene.add(trilhoSupGltf.scene)
         setTrilhoSup(trilhoSupGltf)
@@ -144,6 +152,18 @@ const ThreeScene = () => {
       trilhoSup.scene.position.y = gapHeight / 1000
     }
   }, [gapHeight, trilhoSup])
+
+  useEffect(() => {
+    if (trilhoSup && initialWidthSup) {
+      trilhoSup.scene.scale.x = gapWidth / initialWidthSup / 1000
+    }
+  }, [gapWidth, trilhoSup, initialWidthSup])
+
+  useEffect(() => {
+    if (trilhoInf && initialWidthInf) {
+      trilhoInf.scene.scale.x = gapWidth / initialWidthInf / 1000
+    }
+  }, [gapWidth, trilhoInf, initialWidthInf])
 
   return (
     <div
