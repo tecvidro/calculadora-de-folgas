@@ -23,8 +23,7 @@ const ThreeScene = () => {
   const containerRef = useRef<HTMLDivElement>(null)
   const [trilhoSup, setTrilhoSup] = useState<GLTF | null>(null)
   const [trilhoInf, setTrilhoInf] = useState<GLTF | null>(null)
-  const [initialWidthSup, setInitialWidthSup] = useState<number | null>(null)
-  const [initialWidthInf, setInitialWidthInf] = useState<number | null>(null)
+  const [initialWidth, setInitialWidth] = useState<number | null>(null)
 
   // Renderer setup
   const setupRenderers = useCallback((container: HTMLDivElement) => {
@@ -69,7 +68,7 @@ const ThreeScene = () => {
     []
   )
 
-  const loadModel = useCallback((threeScene: Scene) => {
+  const loadModels = useCallback((threeScene: Scene) => {
     const loader = new GLTFLoader()
     const dracoLoader = new DRACOLoader()
     dracoLoader.setDecoderPath('/draco/')
@@ -82,7 +81,7 @@ const ThreeScene = () => {
         const boundingBox = new Box3().setFromObject(gltf.scene)
         const boxCenter = boundingBox.getCenter(new Vector3())
         const initialSize = boundingBox.getSize(new Vector3())
-        setInitialWidthInf(initialSize.x)
+        setInitialWidth(initialSize.x)
         gltf.scene.position.sub(boxCenter)
         threeScene.add(gltf.scene)
         setTrilhoInf(gltf)
@@ -97,7 +96,7 @@ const ThreeScene = () => {
         const boundingBox = new Box3().setFromObject(trilhoSupGltf.scene)
         const boxCenter = boundingBox.getCenter(new Vector3())
         const initialSize = boundingBox.getSize(new Vector3())
-        setInitialWidthSup(initialSize.x)
+        setInitialWidth(initialSize.x)
         trilhoSupGltf.scene.position.sub(boxCenter)
         threeScene.add(trilhoSupGltf.scene)
         setTrilhoSup(trilhoSupGltf)
@@ -111,13 +110,12 @@ const ThreeScene = () => {
     if (typeof window === 'undefined' || !currentContainer) {
       return
     }
-
     const { renderer } = setupRenderers(currentContainer)
     const scene = setupScene(renderer)
     const camera = setupCamera(currentContainer)
     const controls = setupControls(camera, renderer)
 
-    loadModel(scene)
+    loadModels(scene)
 
     const animate = () => {
       requestAnimationFrame(animate)
@@ -145,25 +143,15 @@ const ThreeScene = () => {
     return () => {
       window.removeEventListener('resize', handleResize)
     }
-  }, [loadModel, setupCamera, setupControls, setupRenderers, setupScene])
+  }, [loadModels, setupCamera, setupControls, setupRenderers, setupScene])
 
   useEffect(() => {
-    if (trilhoSup) {
+    if (trilhoSup && trilhoInf && initialWidth) {
+      trilhoSup.scene.scale.x = gapWidth / initialWidth / 1000
+      trilhoInf.scene.scale.x = gapWidth / initialWidth / 1000
       trilhoSup.scene.position.y = gapHeight / 1000
     }
-  }, [gapHeight, trilhoSup])
-
-  useEffect(() => {
-    if (trilhoSup && initialWidthSup) {
-      trilhoSup.scene.scale.x = gapWidth / initialWidthSup / 1000
-    }
-  }, [gapWidth, trilhoSup, initialWidthSup])
-
-  useEffect(() => {
-    if (trilhoInf && initialWidthInf) {
-      trilhoInf.scene.scale.x = gapWidth / initialWidthInf / 1000
-    }
-  }, [gapWidth, trilhoInf, initialWidthInf])
+  }, [gapWidth, trilhoSup, trilhoInf, initialWidth, gapHeight])
 
   return (
     <div
