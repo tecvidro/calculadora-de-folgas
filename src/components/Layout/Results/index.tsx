@@ -3,6 +3,7 @@ import { Box } from "@/components/shared/Box";
 import { useCalculator } from "@/context/calculator-context";
 import type { ResultsLabels } from "@/Types/types";
 import { calculator } from "@/utils/calculator";
+import { useEffect } from "react";
 
 type CalculatorResults = {
   panelsWidth: number;
@@ -36,6 +37,7 @@ export const Results = ({ resultsLabels, productType }: ResultsProps) => {
     gapWidthB,
     gapHeightB,
     lockDiscountsB,
+    setFinalHeight,
   } = useCalculator();
 
   const isVDPLVDC = productType === "vdpl-vdc";
@@ -81,6 +83,10 @@ export const Results = ({ resultsLabels, productType }: ResultsProps) => {
     },
   };
   const finalResultsB = calculator(paramsB);
+
+  useEffect(() => {
+    setFinalHeight(finalResultsA.finalHeight);
+  }, [finalResultsA.finalHeight, setFinalHeight]);
 
   const renderResults = (data: SideData, sideLabel: string) => (
     <div className="flex w-full flex-col gap-4">

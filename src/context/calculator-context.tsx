@@ -38,6 +38,9 @@ interface CalculatorContextType {
   ) => void
   useDefaultLockDiscountsB: boolean
   setUseDefaultLockDiscountsB: (useDefault: boolean) => void
+
+  finalHeight: number
+  setFinalHeight: (height: number) => void
 }
 
 const CalculatorContext = createContext<CalculatorContextType | undefined>(
@@ -90,6 +93,8 @@ export const CalculatorProvider = ({
       : initialLockDiscounts.option || initialLockDiscounts.default
   )
 
+  const [finalHeight, setFinalHeight] = useState<number>(0)
+
   useEffect(() => {
     if (useDefaultLockDiscounts) {
       setLockDiscounts(initialLockDiscounts.default)
@@ -137,6 +142,8 @@ export const CalculatorProvider = ({
         setLockDiscountsB,
         useDefaultLockDiscountsB,
         setUseDefaultLockDiscountsB,
+        finalHeight,
+        setFinalHeight,
       }}
     >
       {children}

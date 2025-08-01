@@ -15,11 +15,13 @@ import {
   OrbitControls,
   RoomEnvironment,
 } from 'three/examples/jsm/Addons.js'
+import type { GLTF } from 'three/examples/jsm/loaders/GLTFLoader.js'
+import { useCalculator } from '@/context/calculator-context'
 
 const ThreeScene = () => {
+  const { gapHeight, finalHeight } = useCalculator()
   const containerRef = useRef<HTMLDivElement>(null)
-
-  const finalHeight = 3
+  const trilhoSupRef = useRef<GLTF | null>(null)
 
   // Renderer setup
   const setupRenderers = useCallback((container: HTMLDivElement) => {
@@ -86,17 +88,18 @@ const ThreeScene = () => {
       // Load trilho Superior
       loader.load(
         '/models/parts/trilho-sup.glb',
-        (gltf) => {
-          const boundingBox = new Box3().setFromObject(gltf.scene)
+        (trilhoSup) => {
+          const boundingBox = new Box3().setFromObject(trilhoSup.scene)
           const boxCenter = boundingBox.getCenter(new Vector3())
-          gltf.scene.position.sub(boxCenter)
-          gltf.scene.position.y = finalHeight
-          threeScene.add(gltf.scene)
+          trilhoSup.scene.position.sub(boxCenter)
+          trilhoSup.scene.position.y = gapHeight / 1000
+          threeScene.add(trilhoSup.scene)
+          trilhoSupRef.current = trilhoSup
         },
         undefined
       )
     },
-    [finalHeight]
+    [gapHeight]
   )
 
   useEffect(() => {
@@ -114,6 +117,10 @@ const ThreeScene = () => {
 
     const animate = () => {
       requestAnimationFrame(animate)
+      if (trilhoSupRef.current) {
+        trilhoSupRef.current.scene.position.y = finalHeight / 1000
+      }
+
       controls.update()
       renderer.render(scene, camera)
     }
@@ -137,7 +144,14 @@ const ThreeScene = () => {
     return () => {
       window.removeEventListener('resize', handleResize)
     }
-  }, [setupRenderers, setupScene, setupCamera, setupControls, loadModel])
+  }, [
+    setupRenderers,
+    setupScene,
+    setupCamera,
+    setupControls,
+    loadModel,
+    finalHeight,
+  ])
 
   return (
     <div
