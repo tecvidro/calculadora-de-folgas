@@ -1,5 +1,5 @@
 'use client'
-import { useCallback, useEffect, useRef } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import {
   Box3,
   Color,
@@ -19,9 +19,9 @@ import type { GLTF } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import { useCalculator } from '@/context/calculator-context'
 
 const ThreeScene = () => {
-  const { gapHeight, finalHeight } = useCalculator()
+  const { gapHeight } = useCalculator()
   const containerRef = useRef<HTMLDivElement>(null)
-  const trilhoSupRef = useRef<GLTF | null>(null)
+  const [trilhoSup, setTrilhoSup] = useState<GLTF | null>(null)
 
   // Renderer setup
   const setupRenderers = useCallback((container: HTMLDivElement) => {
@@ -66,41 +66,37 @@ const ThreeScene = () => {
     []
   )
 
-  const loadModel = useCallback(
-    (threeScene: Scene) => {
-      const loader = new GLTFLoader()
-      const dracoLoader = new DRACOLoader()
-      dracoLoader.setDecoderPath('/draco/')
-      loader.setDRACOLoader(dracoLoader)
+  const loadModel = useCallback((threeScene: Scene) => {
+    const loader = new GLTFLoader()
+    const dracoLoader = new DRACOLoader()
+    dracoLoader.setDecoderPath('/draco/')
+    loader.setDRACOLoader(dracoLoader)
 
-      // Load trilho inferiror
-      loader.load(
-        '/models/parts/trilho-inf.glb',
-        (gltf) => {
-          const boundingBox = new Box3().setFromObject(gltf.scene)
-          const boxCenter = boundingBox.getCenter(new Vector3())
-          gltf.scene.position.sub(boxCenter)
-          threeScene.add(gltf.scene)
-        },
-        undefined
-      )
+    // Load trilho inferiror
+    loader.load(
+      '/models/parts/trilho-inf.glb',
+      (gltf) => {
+        const boundingBox = new Box3().setFromObject(gltf.scene)
+        const boxCenter = boundingBox.getCenter(new Vector3())
+        gltf.scene.position.sub(boxCenter)
+        threeScene.add(gltf.scene)
+      },
+      undefined
+    )
 
-      // Load trilho Superior
-      loader.load(
-        '/models/parts/trilho-sup.glb',
-        (trilhoSup) => {
-          const boundingBox = new Box3().setFromObject(trilhoSup.scene)
-          const boxCenter = boundingBox.getCenter(new Vector3())
-          trilhoSup.scene.position.sub(boxCenter)
-          trilhoSup.scene.position.y = gapHeight / 1000
-          threeScene.add(trilhoSup.scene)
-          trilhoSupRef.current = trilhoSup
-        },
-        undefined
-      )
-    },
-    [gapHeight]
-  )
+    // Load trilho Superior
+    loader.load(
+      '/models/parts/trilho-sup.glb',
+      (trilhoSupGltf) => {
+        const boundingBox = new Box3().setFromObject(trilhoSupGltf.scene)
+        const boxCenter = boundingBox.getCenter(new Vector3())
+        trilhoSupGltf.scene.position.sub(boxCenter)
+        threeScene.add(trilhoSupGltf.scene)
+        setTrilhoSup(trilhoSupGltf)
+      },
+      undefined
+    )
+  }, [])
 
   useEffect(() => {
     const currentContainer = containerRef.current
@@ -117,9 +113,6 @@ const ThreeScene = () => {
 
     const animate = () => {
       requestAnimationFrame(animate)
-      if (trilhoSupRef.current) {
-        trilhoSupRef.current.scene.position.y = finalHeight / 1000
-      }
 
       controls.update()
       renderer.render(scene, camera)
@@ -144,14 +137,13 @@ const ThreeScene = () => {
     return () => {
       window.removeEventListener('resize', handleResize)
     }
-  }, [
-    setupRenderers,
-    setupScene,
-    setupCamera,
-    setupControls,
-    loadModel,
-    finalHeight,
-  ])
+  }, [loadModel, setupCamera, setupControls, setupRenderers, setupScene])
+
+  useEffect(() => {
+    if (trilhoSup) {
+      trilhoSup.scene.position.y = gapHeight / 1000
+    }
+  }, [gapHeight, trilhoSup])
 
   return (
     <div
