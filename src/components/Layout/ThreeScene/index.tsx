@@ -1,8 +1,9 @@
 'use client'
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef } from 'react'
 import {
   Box3,
   Color,
+  type Group,
   PerspectiveCamera,
   PMREMGenerator,
   Scene,
@@ -15,38 +16,59 @@ import {
   OrbitControls,
   RoomEnvironment,
 } from 'three/examples/jsm/Addons.js'
-import type { GLTF } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import { useCalculator } from '@/context/calculator-context'
 
 const ThreeScene = () => {
   const { gapHeight, gapWidth } = useCalculator()
   const containerRef = useRef<HTMLDivElement>(null)
-  const [trilhoSup, setTrilhoSup] = useState<GLTF | null>(null)
-  const [trilhoInf, setTrilhoInf] = useState<GLTF | null>(null)
-  const [initialWidth, setInitialWidth] = useState<number | null>(null)
 
-  // Renderer setup
-  const setupRenderers = useCallback((container: HTMLDivElement) => {
+  const trilhoSupRef = useRef<Group | null>(null)
+  const trilhoInfRef = useRef<Group | null>(null)
+  const initialWidthRef = useRef<number | null>(null)
+
+  const rendererRef = useRef<WebGLRenderer | null>(null)
+  const sceneRef = useRef<Scene | null>(null)
+  const cameraRef = useRef<PerspectiveCamera | null>(null)
+  const controlsRef = useRef<OrbitControls | null>(null)
+
+  // Agora useCallback para memorizar a função e evitar warning de dependências
+  const updateTransforms = useCallback(() => {
+    if (
+      !(
+        trilhoSupRef.current &&
+        trilhoInfRef.current &&
+        initialWidthRef.current
+      ) ||
+      gapWidth === 0
+    ) {
+      return
+    }
+
+    const scaleX = gapWidth / initialWidthRef.current / 1000
+    trilhoSupRef.current.scale.set(scaleX, 1, 1)
+    trilhoInfRef.current.scale.set(scaleX, 1, 1)
+    trilhoSupRef.current.position.y = gapHeight / 1000
+  }, [gapHeight, gapWidth])
+
+  useEffect(() => {
+    if (!containerRef.current) {
+      return
+    }
+    const container = containerRef.current
+
     const renderer = new WebGLRenderer({ antialias: true })
     renderer.setSize(container.clientWidth, container.clientHeight)
     container.appendChild(renderer.domElement)
+    rendererRef.current = renderer
 
-    return { renderer }
-  }, [])
-
-  // Scene setup
-  const setupScene = useCallback((renderer: WebGLRenderer) => {
-    const environment = new RoomEnvironment()
-    const pmremGenerator = new PMREMGenerator(renderer)
     const scene = new Scene()
     scene.background = new Color(0xdd_dd_dd)
+
+    const environment = new RoomEnvironment()
+    const pmremGenerator = new PMREMGenerator(renderer)
     scene.environment = pmremGenerator.fromScene(environment).texture
+    sceneRef.current = scene
 
-    return scene
-  }, [])
-
-  // Camera setup
-  const setupCamera = useCallback((container: HTMLDivElement) => {
     const camera = new PerspectiveCamera(
       45,
       container.clientWidth / container.clientHeight,
@@ -54,104 +76,75 @@ const ThreeScene = () => {
       1000
     )
     camera.position.z = 5
+    cameraRef.current = camera
 
-    return camera
-  }, [])
+    const controls = new OrbitControls(camera, renderer.domElement)
+    controls.enableDamping = true
+    controlsRef.current = controls
 
-  // Controls setup
-  const setupControls = useCallback(
-    (camera: PerspectiveCamera, renderer: WebGLRenderer) => {
-      const controls = new OrbitControls(camera, renderer.domElement)
-      controls.enableDamping = true
-      return controls
-    },
-    []
-  )
-
-  const loadModels = useCallback((threeScene: Scene) => {
     const loader = new GLTFLoader()
     const dracoLoader = new DRACOLoader()
     dracoLoader.setDecoderPath('/draco/')
     loader.setDRACOLoader(dracoLoader)
 
-    // Load trilho inferiror
-    loader.load(
-      '/models/parts/trilho-inf.glb',
-      (gltf) => {
-        const boundingBox = new Box3().setFromObject(gltf.scene)
-        const boxCenter = boundingBox.getCenter(new Vector3())
-        const initialSize = boundingBox.getSize(new Vector3())
-        setInitialWidth(initialSize.x)
-        gltf.scene.position.sub(boxCenter)
-        threeScene.add(gltf.scene)
-        setTrilhoInf(gltf)
-      },
-      undefined
-    )
-
-    // Load trilho Superior
-    loader.load(
-      '/models/parts/trilho-sup.glb',
-      (trilhoSupGltf) => {
-        const boundingBox = new Box3().setFromObject(trilhoSupGltf.scene)
-        const boxCenter = boundingBox.getCenter(new Vector3())
-        const initialSize = boundingBox.getSize(new Vector3())
-        setInitialWidth(initialSize.x)
-        trilhoSupGltf.scene.position.sub(boxCenter)
-        threeScene.add(trilhoSupGltf.scene)
-        setTrilhoSup(trilhoSupGltf)
-      },
-      undefined
-    )
-  }, [])
-
-  useEffect(() => {
-    const currentContainer = containerRef.current
-    if (typeof window === 'undefined' || !currentContainer) {
-      return
+    function centerModel(gltfGroup: Group) {
+      const box = new Box3().setFromObject(gltfGroup)
+      const center = box.getCenter(new Vector3())
+      gltfGroup.position.sub(center)
+      return box.getSize(new Vector3())
     }
-    const { renderer } = setupRenderers(currentContainer)
-    const scene = setupScene(renderer)
-    const camera = setupCamera(currentContainer)
-    const controls = setupControls(camera, renderer)
 
-    loadModels(scene)
+    loader.load('/models/parts/trilho-inf.glb', (gltf) => {
+      const group = gltf.scene
+      const size = centerModel(group)
+      initialWidthRef.current = size.x
+      trilhoInfRef.current = group
+      scene.add(group)
+      updateTransforms()
+    })
+
+    loader.load('/models/parts/trilho-sup.glb', (gltf) => {
+      const group = gltf.scene
+      centerModel(group)
+      trilhoSupRef.current = group
+      scene.add(group)
+      updateTransforms()
+    })
 
     const animate = () => {
       requestAnimationFrame(animate)
-
       controls.update()
       renderer.render(scene, camera)
     }
-
     animate()
 
-    const handleResize = () => {
-      if (currentContainer) {
-        camera.aspect =
-          currentContainer.clientWidth / currentContainer.clientHeight
-        camera.updateProjectionMatrix()
-        renderer.setSize(
-          currentContainer.clientWidth,
-          currentContainer.clientHeight
-        )
+    const onResize = () => {
+      if (!container) {
+        return
       }
+      camera.aspect = container.clientWidth / container.clientHeight
+      camera.updateProjectionMatrix()
+      renderer.setSize(container.clientWidth, container.clientHeight)
     }
-
-    window.addEventListener('resize', handleResize)
+    window.addEventListener('resize', onResize)
 
     return () => {
-      window.removeEventListener('resize', handleResize)
+      window.removeEventListener('resize', onResize)
+      renderer.dispose()
+      container.removeChild(renderer.domElement)
+      trilhoInfRef.current = null
+      trilhoSupRef.current = null
+      initialWidthRef.current = null
+      sceneRef.current = null
+      cameraRef.current = null
+      controlsRef.current = null
+      rendererRef.current = null
     }
-  }, [loadModels, setupCamera, setupControls, setupRenderers, setupScene])
+  }, [updateTransforms])
 
   useEffect(() => {
-    if (trilhoSup && trilhoInf && initialWidth) {
-      trilhoSup.scene.scale.x = gapWidth / initialWidth / 1000
-      trilhoInf.scene.scale.x = gapWidth / initialWidth / 1000
-      trilhoSup.scene.position.y = gapHeight / 1000
-    }
-  }, [gapWidth, trilhoSup, trilhoInf, initialWidth, gapHeight])
+    updateTransforms()
+  }, [updateTransforms])
 
   return (
     <div
