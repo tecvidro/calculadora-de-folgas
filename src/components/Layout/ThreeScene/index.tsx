@@ -31,7 +31,13 @@ const ThreeScene = () => {
   const cameraRef = useRef<PerspectiveCamera | null>(null)
   const controlsRef = useRef<OrbitControls | null>(null)
 
-  // Agora useCallback para memorizar a função e evitar warning de dependências
+  const centerModel = useCallback((gltfGroup: Group) => {
+    const box = new Box3().setFromObject(gltfGroup)
+    const center = box.getCenter(new Vector3())
+    gltfGroup.position.sub(center)
+    return box.getSize(new Vector3())
+  }, [])
+
   const updateTransforms = useCallback(() => {
     if (
       !(
@@ -87,13 +93,6 @@ const ThreeScene = () => {
     dracoLoader.setDecoderPath('/draco/')
     loader.setDRACOLoader(dracoLoader)
 
-    function centerModel(gltfGroup: Group) {
-      const box = new Box3().setFromObject(gltfGroup)
-      const center = box.getCenter(new Vector3())
-      gltfGroup.position.sub(center)
-      return box.getSize(new Vector3())
-    }
-
     loader.load('/models/parts/trilho-inf.glb', (gltf) => {
       const group = gltf.scene
       const size = centerModel(group)
@@ -105,7 +104,8 @@ const ThreeScene = () => {
 
     loader.load('/models/parts/trilho-sup.glb', (gltf) => {
       const group = gltf.scene
-      centerModel(group)
+      const size = centerModel(group)
+      initialWidthRef.current = size.x
       trilhoSupRef.current = group
       scene.add(group)
       updateTransforms()
@@ -140,7 +140,7 @@ const ThreeScene = () => {
       controlsRef.current = null
       rendererRef.current = null
     }
-  }, [updateTransforms])
+  }, [centerModel])
 
   useEffect(() => {
     updateTransforms()
