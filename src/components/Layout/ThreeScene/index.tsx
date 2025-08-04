@@ -1,5 +1,5 @@
 'use client'
-import { useCallback, useEffect, useRef } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import {
   Box3,
   Color,
@@ -24,12 +24,15 @@ const ThreeScene = () => {
 
   const trilhoSupRef = useRef<Group | null>(null)
   const trilhoInfRef = useRef<Group | null>(null)
-  const initialWidthRef = useRef<number | null>(null)
+  const initialTrilhoInfWidthRef = useRef<number | null>(null)
+  const initialTrilhoSupWidthRef = useRef<number | null>(null)
 
   const rendererRef = useRef<WebGLRenderer | null>(null)
   const sceneRef = useRef<Scene | null>(null)
   const cameraRef = useRef<PerspectiveCamera | null>(null)
   const controlsRef = useRef<OrbitControls | null>(null)
+
+  const [modelsLoaded, setModelsLoaded] = useState(false)
 
   const centerModel = useCallback((gltfGroup: Group) => {
     const box = new Box3().setFromObject(gltfGroup)
@@ -43,16 +46,19 @@ const ThreeScene = () => {
       !(
         trilhoSupRef.current &&
         trilhoInfRef.current &&
-        initialWidthRef.current
+        initialTrilhoInfWidthRef.current &&
+        initialTrilhoSupWidthRef.current
       ) ||
       gapWidth === 0
     ) {
       return
     }
 
-    const scaleX = gapWidth / initialWidthRef.current / 1000
-    trilhoSupRef.current.scale.set(scaleX, 1, 1)
+    const scaleX = gapWidth / initialTrilhoInfWidthRef.current / 1000
     trilhoInfRef.current.scale.set(scaleX, 1, 1)
+
+    const scaleXSup = gapWidth / initialTrilhoSupWidthRef.current / 1000
+    trilhoSupRef.current.scale.set(scaleXSup, 1, 1)
     trilhoSupRef.current.position.y = gapHeight / 1000
   }, [gapHeight, gapWidth])
 
@@ -93,22 +99,30 @@ const ThreeScene = () => {
     dracoLoader.setDecoderPath('/draco/')
     loader.setDRACOLoader(dracoLoader)
 
-    loader.load('/models/parts/trilho-inf.glb', (gltf) => {
-      const group = gltf.scene
-      const size = centerModel(group)
-      initialWidthRef.current = size.x
-      trilhoInfRef.current = group
-      scene.add(group)
-      updateTransforms()
+    const loadTrilhoInf = new Promise<void>((resolve) => {
+      loader.load('/models/parts/trilho-inf.glb', (gltf) => {
+        const group = gltf.scene
+        const size = centerModel(group)
+        initialTrilhoInfWidthRef.current = size.x
+        trilhoInfRef.current = group
+        scene.add(group)
+        resolve()
+      })
     })
 
-    loader.load('/models/parts/trilho-sup.glb', (gltf) => {
-      const group = gltf.scene
-      const size = centerModel(group)
-      initialWidthRef.current = size.x
-      trilhoSupRef.current = group
-      scene.add(group)
-      updateTransforms()
+    const loadTrilhoSup = new Promise<void>((resolve) => {
+      loader.load('/models/parts/trilho-sup.glb', (gltf) => {
+        const group = gltf.scene
+        const size = centerModel(group)
+        initialTrilhoSupWidthRef.current = size.x
+        trilhoSupRef.current = group
+        scene.add(group)
+        resolve()
+      })
+    })
+
+    Promise.all([loadTrilhoInf, loadTrilhoSup]).then(() => {
+      setModelsLoaded(true)
     })
 
     const animate = () => {
@@ -134,7 +148,8 @@ const ThreeScene = () => {
       container.removeChild(renderer.domElement)
       trilhoInfRef.current = null
       trilhoSupRef.current = null
-      initialWidthRef.current = null
+      initialTrilhoInfWidthRef.current = null
+      initialTrilhoSupWidthRef.current = null
       sceneRef.current = null
       cameraRef.current = null
       controlsRef.current = null
@@ -143,8 +158,10 @@ const ThreeScene = () => {
   }, [centerModel])
 
   useEffect(() => {
-    updateTransforms()
-  }, [updateTransforms])
+    if (modelsLoaded) {
+      updateTransforms()
+    }
+  }, [updateTransforms, modelsLoaded])
 
   return (
     <div
