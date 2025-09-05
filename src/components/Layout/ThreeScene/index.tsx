@@ -19,11 +19,12 @@ import {
 import { useCalculator } from '@/context/calculator-context'
 
 const ThreeScene = () => {
-  //TODO: Add gapWidth to control the profiles width
-
-  const { gapHeight } = useCalculator()
+  const { gapWidth, gapHeight } = useCalculator()
   const containerRef = useRef<HTMLDivElement>(null)
   const modelsRef = useRef<Record<string, Object3D>>({})
+  const originalDimensionsRef = useRef<Record<string, Vector3>>({})
+  const sceneRef = useRef<Scene | null>(null) // Nova ref para a scene
+  const clonedModelsRef = useRef<Record<string, Object3D>>({}) // Nova ref para clones
 
   const [modelsLoaded, setModelsLoaded] = useState(0)
 
@@ -153,8 +154,6 @@ const ThreeScene = () => {
     []
   )
 
-  // Set position
-
   // LOADER
   const loadModel = useCallback(
     (
@@ -172,6 +171,8 @@ const ThreeScene = () => {
         `/models/parts/${modelFilename}.glb`,
         (gltf) => {
           const boundingBox = new Box3().setFromObject(gltf.scene)
+          const size = boundingBox.getSize(new Vector3())
+          originalDimensionsRef.current[modelFilename] = size.clone() // Store original size
           const boxCenter = boundingBox.getCenter(new Vector3())
           gltf.scene.position.sub(boxCenter)
           threeScene.add(gltf.scene)
@@ -195,15 +196,13 @@ const ThreeScene = () => {
 
     const { renderer } = setupRenderers(currentContainer)
     const scene = setupScene(renderer)
+    sceneRef.current = scene // Armazenar referência da scene
+
     const camera = setupCamera(currentContainer)
     const controls = setupControls(camera, renderer)
 
     loadModel(scene, camera, controls, 'trilho-sup')
     loadModel(scene, camera, controls, 'trilho-inf')
-
-    if (modelsRef.current['trilho-sup']) {
-      modelsRef.current['trilho-sup'].position.set(1, 1, 1)
-    }
 
     const frameId = createAnimationLoop(controls, renderer, scene, camera)
     const handleResize = createResizeHandler(currentContainer, camera, renderer)
@@ -229,13 +228,55 @@ const ThreeScene = () => {
   ])
 
   useEffect(() => {
-    if (modelsLoaded >= 2) {
+    if (modelsLoaded >= 2 && sceneRef.current) {
       const trilhoSup = modelsRef.current['trilho-sup']
-      if (trilhoSup) {
+      const trilhoSupOriginalSize = originalDimensionsRef.current['trilho-sup']
+
+      if (trilhoSup && trilhoSupOriginalSize) {
+        const originalWidth = trilhoSupOriginalSize.x
+        const desiredWidth = gapWidth / 1000
+
+        if (originalWidth > 0) {
+          const scaleFactor = desiredWidth / originalWidth
+          trilhoSup.scale.x = scaleFactor
+        }
+
         trilhoSup.position.set(0, gapHeight / 1000, 0)
+
+        // Remover clone anterior se existir
+        if (clonedModelsRef.current['trilho-sup-clone']) {
+          sceneRef.current.remove(clonedModelsRef.current['trilho-sup-clone'])
+        }
+
+        // Criar novo clone
+        const trilhoSup2 = trilhoSup.clone()
+        trilhoSup2.position.set(0, gapHeight / 1000, 0.03)
+        sceneRef.current.add(trilhoSup2)
+
+        // Armazenar referência do clone
+        clonedModelsRef.current['trilho-sup-clone'] = trilhoSup2
       }
     }
-  }, [modelsLoaded, gapHeight])
+  }, [modelsLoaded, gapWidth, gapHeight])
+
+  useEffect(() => {
+    if (modelsLoaded >= 2) {
+      const trilhoInf = modelsRef.current['trilho-inf']
+      const trilhoInfOriginalSize = originalDimensionsRef.current['trilho-inf']
+
+      if (trilhoInf && trilhoInfOriginalSize) {
+        const originalWidth = trilhoInfOriginalSize.x
+        const desiredWidth = gapWidth / 1000
+
+        if (originalWidth > 0) {
+          const scaleFactor = desiredWidth / originalWidth
+          trilhoInf.scale.x = scaleFactor
+        }
+
+        trilhoInf.position.set(0, 0, 0)
+      }
+    }
+  }, [modelsLoaded, gapWidth])
 
   return (
     <div
