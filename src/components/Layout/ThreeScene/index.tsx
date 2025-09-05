@@ -19,7 +19,7 @@ import {
 import { useCalculator } from '@/context/calculator-context'
 
 const ThreeScene = () => {
-  const { gapWidth, gapHeight } = useCalculator()
+  const { gapWidth, gapHeight, panelCount, doorsCount } = useCalculator()
   const containerRef = useRef<HTMLDivElement>(null)
   const modelsRef = useRef<Record<string, Object3D>>({})
   const originalDimensionsRef = useRef<Record<string, Vector3>>({})
@@ -227,37 +227,68 @@ const ThreeScene = () => {
     createCleanup,
   ])
 
+  const scaleAndPositionTrilhoSup = useCallback(
+    (trilhoSup: Object3D, trilhoSupOriginalSize: Vector3) => {
+      const originalWidth = trilhoSupOriginalSize.x
+      const desiredWidth = gapWidth / 1000
+
+      if (originalWidth > 0) {
+        const scaleFactor = desiredWidth / originalWidth
+        trilhoSup.scale.x = scaleFactor
+      }
+
+      trilhoSup.position.set(0, gapHeight / 1000, 0)
+    },
+    [gapWidth, gapHeight]
+  )
+
+  const clearTrilhoSupClones = useCallback(() => {
+    if (!sceneRef.current) {
+      return
+    }
+    for (const key of Object.keys(clonedModelsRef.current).filter((k) =>
+      k.startsWith('trilho-sup-clone')
+    )) {
+      sceneRef.current.remove(clonedModelsRef.current[key])
+      delete clonedModelsRef.current[key]
+    }
+  }, [])
+
+  const createTrilhoSupClones = useCallback(
+    (trilhoSup: Object3D) => {
+      if (!sceneRef.current) {
+        return
+      }
+      const numberOfClones =
+        panelCount + doorsCount > 1 ? panelCount + doorsCount - 1 : 0
+
+      for (let i = 0; i < numberOfClones; i++) {
+        const trilhoSupClone = trilhoSup.clone()
+        trilhoSupClone.position.set(0, gapHeight / 1000, 0.03 * (i + 1))
+        sceneRef.current.add(trilhoSupClone)
+        clonedModelsRef.current[`trilho-sup-clone-${i}`] = trilhoSupClone
+      }
+    },
+    [panelCount, doorsCount, gapHeight]
+  )
+
   useEffect(() => {
     if (modelsLoaded >= 2 && sceneRef.current) {
       const trilhoSup = modelsRef.current['trilho-sup']
       const trilhoSupOriginalSize = originalDimensionsRef.current['trilho-sup']
 
       if (trilhoSup && trilhoSupOriginalSize) {
-        const originalWidth = trilhoSupOriginalSize.x
-        const desiredWidth = gapWidth / 1000
-
-        if (originalWidth > 0) {
-          const scaleFactor = desiredWidth / originalWidth
-          trilhoSup.scale.x = scaleFactor
-        }
-
-        trilhoSup.position.set(0, gapHeight / 1000, 0)
-
-        // Remover clone anterior se existir
-        if (clonedModelsRef.current['trilho-sup-clone']) {
-          sceneRef.current.remove(clonedModelsRef.current['trilho-sup-clone'])
-        }
-
-        // Criar novo clone
-        const trilhoSup2 = trilhoSup.clone()
-        trilhoSup2.position.set(0, gapHeight / 1000, 0.03)
-        sceneRef.current.add(trilhoSup2)
-
-        // Armazenar referência do clone
-        clonedModelsRef.current['trilho-sup-clone'] = trilhoSup2
+        scaleAndPositionTrilhoSup(trilhoSup, trilhoSupOriginalSize)
+        clearTrilhoSupClones()
+        createTrilhoSupClones(trilhoSup)
       }
     }
-  }, [modelsLoaded, gapWidth, gapHeight])
+  }, [
+    modelsLoaded,
+    scaleAndPositionTrilhoSup,
+    clearTrilhoSupClones,
+    createTrilhoSupClones,
+  ])
 
   useEffect(() => {
     if (modelsLoaded >= 2) {
