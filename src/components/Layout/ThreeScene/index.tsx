@@ -20,6 +20,7 @@ import { useCalculator } from '@/context/calculator-context'
 
 const ThreeScene = () => {
   const { gapWidth, gapHeight, panelCount, doorsCount } = useCalculator()
+  let totalPanels = panelCount + doorsCount
   const containerRef = useRef<HTMLDivElement>(null)
   const modelsRef = useRef<Record<string, Object3D>>({})
   const originalDimensionsRef = useRef<Record<string, Vector3>>({})
@@ -203,6 +204,7 @@ const ThreeScene = () => {
 
     loadModel(scene, camera, controls, 'trilho-sup')
     loadModel(scene, camera, controls, 'trilho-inf')
+    loadModel(scene, camera, controls, 'perfil-u-laminado')
 
     const frameId = createAnimationLoop(controls, renderer, scene, camera)
     const handleResize = createResizeHandler(currentContainer, camera, renderer)
@@ -231,19 +233,31 @@ const ThreeScene = () => {
     (
       object: Object3D,
       originalSize: Vector3,
+      desiredSize: { width?: number; height?: number },
       position: { x: number; y: number; z: number }
     ) => {
       const originalWidth = originalSize.x
-      const desiredWidth = gapWidth / 1000
+      const originalHeight = originalSize.y
+      const desiredWidth = desiredSize.width
+        ? desiredSize.width
+        : originalSize.x
+      const desiredHeight = desiredSize.height
+        ? desiredSize.height
+        : originalSize.y
 
-      if (originalWidth > 0) {
-        const scaleFactor = desiredWidth / originalWidth
-        object.scale.x = scaleFactor
+      if (originalWidth > 0 && desiredSize.width) {
+        const scaleFactorWidth = desiredWidth / originalWidth
+        object.scale.x = scaleFactorWidth
+      }
+
+      if (originalHeight > 0 && desiredSize.height) {
+        const scaleFactorHeight = desiredHeight / originalHeight
+        object.scale.y = scaleFactorHeight
       }
 
       object.position.set(position.x, position.y, position.z)
     },
-    [gapWidth]
+    []
   )
 
   const clearClones = useCallback((name: string) => {
@@ -258,7 +272,7 @@ const ThreeScene = () => {
     }
   }, [])
 
-  const createClones = useCallback(
+  const createTracksClones = useCallback(
     (object: Object3D, name: string) => {
       if (!sceneRef.current) {
         return
@@ -288,16 +302,28 @@ const ThreeScene = () => {
       const trilhoSupOriginalSize = originalDimensionsRef.current['trilho-sup']
 
       if (trilhoSup && trilhoSupOriginalSize) {
-        scaleAndPosition(trilhoSup, trilhoSupOriginalSize, {
-          x: 0,
-          y: gapHeight / 1000,
-          z: 0,
-        })
+        scaleAndPosition(
+          trilhoSup,
+          trilhoSupOriginalSize,
+          { width: gapWidth / 1000 },
+          {
+            x: 0,
+            y: gapHeight / 1000,
+            z: 0,
+          }
+        )
         clearClones('trilho-sup')
-        createClones(trilhoSup, 'trilho-sup')
+        createTracksClones(trilhoSup, 'trilho-sup')
       }
     }
-  }, [modelsLoaded, gapHeight, scaleAndPosition, clearClones, createClones])
+  }, [
+    modelsLoaded,
+    gapHeight,
+    gapWidth,
+    scaleAndPosition,
+    clearClones,
+    createTracksClones,
+  ])
 
   // TRILHOS INFERIORES
   useEffect(() => {
@@ -306,12 +332,58 @@ const ThreeScene = () => {
       const trilhoInfOriginalSize = originalDimensionsRef.current['trilho-inf']
 
       if (trilhoInf && trilhoInfOriginalSize) {
-        scaleAndPosition(trilhoInf, trilhoInfOriginalSize, { x: 0, y: 0, z: 0 })
+        scaleAndPosition(
+          trilhoInf,
+          trilhoInfOriginalSize,
+          { width: gapWidth / 1000 },
+          { x: 0, y: 0, z: 0 }
+        )
         clearClones('trilho-inf')
-        createClones(trilhoInf, 'trilho-inf')
+        createTracksClones(trilhoInf, 'trilho-inf')
       }
     }
-  }, [modelsLoaded, scaleAndPosition, clearClones, createClones])
+  }, [
+    modelsLoaded,
+    gapWidth,
+    scaleAndPosition,
+    clearClones,
+    createTracksClones,
+  ])
+
+  // PERFIL U
+  useEffect(() => {
+    if (modelsLoaded >= 2 && sceneRef.current) {
+      const perfilU = modelsRef.current['perfil-u-laminado']
+      const perfilUOriginalSize =
+        originalDimensionsRef.current['perfil-u-laminado']
+      if (perfilU && perfilUOriginalSize) {
+        scaleAndPosition(
+          perfilU,
+          perfilUOriginalSize,
+          { height: gapHeight / 1000 - 0.04 },
+          { x: 0, y: 0, z: 0 }
+        )
+        clearClones('perfilU')
+
+        const pertfilUClone = perfilU.clone()
+        pertfilUClone.position.set(
+          gapWidth / 1000,
+          0,
+          (totalPanels - 1) * 0.031
+        )
+        sceneRef.current.add(pertfilUClone)
+        pertfilUClone.rotateY(3.14)
+        clonedModelsRef.current['perfilU-clone'] = pertfilUClone
+      }
+    }
+  }, [
+    modelsLoaded,
+    gapWidth,
+    gapHeight,
+    totalPanels,
+    clearClones,
+    scaleAndPosition,
+  ])
 
   return (
     <div
