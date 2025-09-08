@@ -17,11 +17,11 @@ import {
   RoomEnvironment,
 } from 'three/examples/jsm/Addons.js'
 import { useCalculator } from '@/context/calculator-context'
-import { p } from 'motion/react-client'
 
 const ThreeScene = () => {
-  const { gapWidth, gapHeight, panelCount, doorsCount } = useCalculator()
-  let totalPanels = panelCount + doorsCount
+  const { gapWidth, gapHeight, panelCount, doorsCount, doorsWidth } =
+    useCalculator()
+  const totalPanels = panelCount + doorsCount
   const containerRef = useRef<HTMLDivElement>(null)
   const modelsRef = useRef<Record<string, Object3D>>({})
   const originalDimensionsRef = useRef<Record<string, Vector3>>({})
@@ -190,6 +190,7 @@ const ThreeScene = () => {
     [fitCameraToScene]
   )
 
+  // SETUP SCENE
   useEffect(() => {
     const currentContainer = containerRef.current
     if (typeof window === 'undefined' || !currentContainer) {
@@ -306,6 +307,7 @@ const ThreeScene = () => {
       }
       const pertfilUClone = object.clone()
       pertfilUClone.position.set(gapWidth / 1000, 0, (totalPanels - 1) * 0.031)
+
       sceneRef.current.add(pertfilUClone)
       pertfilUClone.rotateY(Math.PI)
       clonedModelsRef.current[`${name}-clone`] = pertfilUClone
@@ -345,7 +347,7 @@ const ThreeScene = () => {
 
   // TRILHOS INFERIORES
   useEffect(() => {
-    if (modelsLoaded >= 2 && sceneRef.current) {
+    if (modelsLoaded >= 4 && sceneRef.current) {
       const trilhoInf = modelsRef.current['trilho-inf']
       const trilhoInfOriginalSize = originalDimensionsRef.current['trilho-inf']
 
@@ -370,7 +372,7 @@ const ThreeScene = () => {
 
   // PERFIL U
   useEffect(() => {
-    if (modelsLoaded >= 2 && sceneRef.current) {
+    if (modelsLoaded >= 4 && sceneRef.current) {
       const perfilU = modelsRef.current['perfil-u-laminado']
       const perfilUOriginalSize =
         originalDimensionsRef.current['perfil-u-laminado']
@@ -395,16 +397,20 @@ const ThreeScene = () => {
 
   // PORTA
   useEffect(() => {
-    if (modelsLoaded >= 2 && sceneRef.current) {
+    if (modelsLoaded >= 4 && sceneRef.current) {
       const porta = modelsRef.current['porta-vdpl']
+
       if (porta) {
         const bone = porta.getObjectByName('BN-Porta-W')
+        porta.position.set(0.0152, 0, 0)
         if (bone) {
-          bone.position.x = 1
+          bone.position.x = doorsWidth / 1000
         }
       }
+      clearClones('porta-vdpl')
+      createDoorAndUProfileClone(porta, 'porta-vdpl')
     }
-  }, [modelsLoaded])
+  }, [modelsLoaded, doorsWidth, createDoorAndUProfileClone, clearClones])
 
   return (
     <div

@@ -36,15 +36,18 @@ export const calculator = ({ params }: Calculator) => {
 
   const panelsWidth = Math.ceil(totalGap / (panelsCount + doorsCount))
 
-  const doorsWidth = Array.from({ length: doorsCount }, (_, index) => {
+  const doorsWidths = Array.from({ length: doorsCount }, (_, index) => {
     const doorWidth =
       panelsWidth + params.lock[index] - params.adjustments.doorAdjustment
     return { id: index + 1, width: Math.ceil(doorWidth) }
   })
 
+  const doorsWidth = doorsWidths[0]?.width || 0
+
   return {
     panelsWidth,
-    doorsWidth,
+    doorsWidths,
     finalHeight,
+    doorsWidth,
   }
 }

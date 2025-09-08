@@ -41,6 +41,10 @@ interface CalculatorContextType {
 
   finalHeight: number
   setFinalHeight: (height: number) => void
+  doorsWidth: number
+  setDoorsWidth: (width: number) => void
+  doorsWidthB: number
+  setDoorsWidthB: (width: number) => void
   isReady: boolean
 }
 
@@ -95,6 +99,8 @@ export const CalculatorProvider = ({
   )
 
   const [finalHeight, setFinalHeight] = useState<number>(0)
+  const [doorsWidth, setDoorsWidth] = useState<number>(0)
+  const [doorsWidthB, setDoorsWidthB] = useState<number>(0)
 
   const isReady = gapWidth > 0 && gapHeight >= 0
 
@@ -147,6 +153,10 @@ export const CalculatorProvider = ({
         setUseDefaultLockDiscountsB,
         finalHeight,
         setFinalHeight,
+        doorsWidth,
+        setDoorsWidth,
+        doorsWidthB,
+        setDoorsWidthB,
         isReady,
       }}
     >

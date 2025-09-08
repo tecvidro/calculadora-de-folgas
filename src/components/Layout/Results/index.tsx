@@ -7,8 +7,9 @@ import { useEffect } from "react";
 
 type CalculatorResults = {
   panelsWidth: number;
-  doorsWidth: { id: number; width: number }[];
+  doorsWidths: { id: number; width: number }[];
   finalHeight: number;
+  doorsWidth: number;
 };
 
 type SideData = {
@@ -38,6 +39,8 @@ export const Results = ({ resultsLabels, productType }: ResultsProps) => {
     gapHeightB,
     lockDiscountsB,
     setFinalHeight,
+    setDoorsWidth,
+    setDoorsWidthB,
   } = useCalculator();
 
   const isVDPLVDC = productType === "vdpl-vdc";
@@ -84,9 +87,14 @@ export const Results = ({ resultsLabels, productType }: ResultsProps) => {
   };
   const finalResultsB = calculator(paramsB);
 
+    useEffect(() => {
+    setFinalHeight(finalResultsA.finalHeight)
+    setDoorsWidth(finalResultsA.doorsWidth)
+  }, [finalResultsA, setFinalHeight, setDoorsWidth])
+
   useEffect(() => {
-    setFinalHeight(finalResultsA.finalHeight);
-  }, [finalResultsA.finalHeight, setFinalHeight]);
+    setDoorsWidthB(finalResultsB.doorsWidth)
+  }, [finalResultsB, setDoorsWidthB])
 
   const renderResults = (data: SideData, sideLabel: string) => (
     <div className="flex w-full flex-col gap-4">
@@ -124,8 +132,8 @@ export const Results = ({ resultsLabels, productType }: ResultsProps) => {
               <h4 className="font-bold">Painéis:</h4>
               <p>Largura: {data.finalResults.panelsWidth}mm</p>
               <p>Altura: {data.finalResults.finalHeight}mm</p>
-              {!!data.finalResults.doorsWidth &&
-                data.finalResults.doorsWidth.map((item) => (
+              {!!data.finalResults.doorsWidths &&
+                data.finalResults.doorsWidths.map((item) => (
                   <div key={item.id}>
                     <h4 className="font-bold">Porta {item.id}:</h4>
                     <p>Largura: {item.width}mm</p>
