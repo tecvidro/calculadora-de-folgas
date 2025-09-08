@@ -206,6 +206,7 @@ const ThreeScene = () => {
     loadModel(scene, camera, controls, 'trilho-sup')
     loadModel(scene, camera, controls, 'trilho-inf')
     loadModel(scene, camera, controls, 'perfil-u-laminado')
+    loadModel(scene, camera, controls, 'porta-vdpl')
 
     const frameId = createAnimationLoop(controls, renderer, scene, camera)
     const handleResize = createResizeHandler(currentContainer, camera, renderer)
@@ -391,6 +392,19 @@ const ThreeScene = () => {
     createDoorAndUProfileClone,
     scaleAndPosition,
   ])
+
+  // PORTA
+  useEffect(() => {
+    if (modelsLoaded >= 2 && sceneRef.current) {
+      const porta = modelsRef.current['porta-vdpl']
+      if (porta) {
+        const bone = porta.getObjectByName('BN-Porta-W')
+        if (bone) {
+          bone.position.x = 1
+        }
+      }
+    }
+  }, [modelsLoaded])
 
   return (
     <div
