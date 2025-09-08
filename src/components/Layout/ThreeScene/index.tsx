@@ -17,6 +17,7 @@ import {
   RoomEnvironment,
 } from 'three/examples/jsm/Addons.js'
 import { useCalculator } from '@/context/calculator-context'
+import { p } from 'motion/react-client'
 
 const ThreeScene = () => {
   const { gapWidth, gapHeight, panelCount, doorsCount } = useCalculator()
@@ -272,6 +273,7 @@ const ThreeScene = () => {
     }
   }, [])
 
+  // CREATE TRACKS CLONES
   const createTracksClones = useCallback(
     (object: Object3D, name: string) => {
       if (!sceneRef.current) {
@@ -293,6 +295,21 @@ const ThreeScene = () => {
       }
     },
     [panelCount, doorsCount]
+  )
+
+  // CREATE DOOR/U-PROFILE CLONE
+  const createDoorAndUProfileClone = useCallback(
+    (object: Object3D, name: string) => {
+      if (!sceneRef.current) {
+        return
+      }
+      const pertfilUClone = object.clone()
+      pertfilUClone.position.set(gapWidth / 1000, 0, (totalPanels - 1) * 0.031)
+      sceneRef.current.add(pertfilUClone)
+      pertfilUClone.rotateY(Math.PI)
+      clonedModelsRef.current[`${name}-clone`] = pertfilUClone
+    },
+    [totalPanels, gapWidth]
   )
 
   // TRILHOS SUPERIORES
@@ -363,25 +380,15 @@ const ThreeScene = () => {
           { height: gapHeight / 1000 - 0.04 },
           { x: 0, y: 0, z: 0 }
         )
-        clearClones('perfilU')
-
-        const pertfilUClone = perfilU.clone()
-        pertfilUClone.position.set(
-          gapWidth / 1000,
-          0,
-          (totalPanels - 1) * 0.031
-        )
-        sceneRef.current.add(pertfilUClone)
-        pertfilUClone.rotateY(3.14)
-        clonedModelsRef.current['perfilU-clone'] = pertfilUClone
+        clearClones('perfil-u')
+        createDoorAndUProfileClone(perfilU, 'perfil-u')
       }
     }
   }, [
     modelsLoaded,
-    gapWidth,
     gapHeight,
-    totalPanels,
     clearClones,
+    createDoorAndUProfileClone,
     scaleAndPosition,
   ])
 
