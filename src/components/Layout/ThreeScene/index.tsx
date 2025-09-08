@@ -17,6 +17,7 @@ import {
   RoomEnvironment,
 } from 'three/examples/jsm/Addons.js'
 import { useCalculator } from '@/context/calculator-context'
+import { Yarndings_12_Charted } from 'next/font/google'
 
 const ThreeScene = () => {
   const { gapWidth, gapHeight, panelCount, doorsCount, doorsWidth } =
@@ -162,7 +163,8 @@ const ThreeScene = () => {
       threeScene: Scene,
       perspectiveCamera: PerspectiveCamera,
       orbitControls: OrbitControls,
-      modelFilename: string
+      modelFilename: string,
+      refName: string
     ) => {
       const loader = new GLTFLoader()
       const dracoLoader = new DRACOLoader()
@@ -174,12 +176,12 @@ const ThreeScene = () => {
         (gltf) => {
           const boundingBox = new Box3().setFromObject(gltf.scene)
           const size = boundingBox.getSize(new Vector3())
-          originalDimensionsRef.current[modelFilename] = size.clone() // Store original size
+          originalDimensionsRef.current[refName] = size.clone() // Store original size
           const boxCenter = boundingBox.getCenter(new Vector3())
           gltf.scene.position.sub(boxCenter)
           threeScene.add(gltf.scene)
-          modelsRef.current[modelFilename] = gltf.scene
-          modelsRef.current[modelFilename].position.set(0, 0, 0)
+          modelsRef.current[refName] = gltf.scene
+          modelsRef.current[refName].position.set(1, 0, 0)
           fitCameraToScene(perspectiveCamera, orbitControls, gltf.scene)
 
           setModelsLoaded((prev) => prev + 1)
@@ -204,10 +206,13 @@ const ThreeScene = () => {
     const camera = setupCamera(currentContainer)
     const controls = setupControls(camera, renderer)
 
-    loadModel(scene, camera, controls, 'trilho-sup')
-    loadModel(scene, camera, controls, 'trilho-inf')
-    loadModel(scene, camera, controls, 'perfil-u-laminado')
-    loadModel(scene, camera, controls, 'porta-vdpl')
+    loadModel(scene, camera, controls, 'trilho-sup', 'trilho-sup')
+    loadModel(scene, camera, controls, 'trilho-inf', 'trilho-inf')
+    loadModel(scene, camera, controls, 'perfil-u-laminado', 'perfil-u-laminado')
+    loadModel(scene, camera, controls, 'porta-vdpl', 'porta-vdpl-1')
+    if (doorsCount > 1) {
+      loadModel(scene, camera, controls, 'porta-vdpl-dir', 'porta-vdpl-2')
+    }
 
     const frameId = createAnimationLoop(controls, renderer, scene, camera)
     const handleResize = createResizeHandler(currentContainer, camera, renderer)
@@ -230,6 +235,7 @@ const ThreeScene = () => {
     createAnimationLoop,
     createResizeHandler,
     createCleanup,
+    doorsCount,
   ])
 
   const scaleAndPosition = useCallback(
@@ -299,8 +305,8 @@ const ThreeScene = () => {
     [panelCount, doorsCount]
   )
 
-  // CREATE DOOR/U-PROFILE CLONE
-  const createDoorAndUProfileClone = useCallback(
+  // CREATE U-PROFILE CLONE
+  const createUProfileClone = useCallback(
     (object: Object3D, name: string) => {
       if (!sceneRef.current) {
         return
@@ -384,33 +390,50 @@ const ThreeScene = () => {
           { x: 0, y: 0, z: 0 }
         )
         clearClones('perfil-u')
-        createDoorAndUProfileClone(perfilU, 'perfil-u')
+        createUProfileClone(perfilU, 'perfil-u')
       }
     }
   }, [
     modelsLoaded,
     gapHeight,
     clearClones,
-    createDoorAndUProfileClone,
+    createUProfileClone,
     scaleAndPosition,
   ])
 
   // PORTA
   useEffect(() => {
     if (modelsLoaded >= 4 && sceneRef.current) {
-      const porta = modelsRef.current['porta-vdpl']
+      const porta1 = modelsRef.current['porta-vdpl-1']
 
-      if (porta) {
-        const bone = porta.getObjectByName('BN-Porta-W')
-        porta.position.set(0.0152, 0, 0)
+      if (porta1) {
+        const bone = porta1.getObjectByName('BN-Porta-W')
+        porta1.position.set(0.0152, 0, 0)
         if (bone) {
           bone.position.x = doorsWidth / 1000
         }
       }
-      clearClones('porta-vdpl')
-      createDoorAndUProfileClone(porta, 'porta-vdpl')
     }
-  }, [modelsLoaded, doorsWidth, createDoorAndUProfileClone, clearClones])
+  }, [modelsLoaded, doorsWidth])
+
+  // PORTA DIREITA
+  useEffect(() => {
+    if (modelsLoaded >= 4 && sceneRef.current) {
+      const portaDir = modelsRef.current['porta-vdpl-2']
+
+      if (portaDir) {
+        const bone = portaDir.getObjectByName('BN-Porta-W')
+        portaDir.position.set(
+          gapWidth / 1000 - 0.0152,
+          0,
+          (totalPanels - 1) * 0.031
+        )
+        if (bone) {
+          bone.position.x = doorsWidth / 1000
+        }
+      }
+    }
+  }, [modelsLoaded, doorsWidth, gapWidth, totalPanels])
 
   return (
     <div
