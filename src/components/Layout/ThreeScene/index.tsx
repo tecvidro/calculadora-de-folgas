@@ -227,35 +227,39 @@ const ThreeScene = () => {
     createCleanup,
   ])
 
-  const scaleAndPositionTrilhoSup = useCallback(
-    (trilhoSup: Object3D, trilhoSupOriginalSize: Vector3) => {
-      const originalWidth = trilhoSupOriginalSize.x
+  const scaleAndPosition = useCallback(
+    (
+      object: Object3D,
+      originalSize: Vector3,
+      position: { x: number; y: number; z: number }
+    ) => {
+      const originalWidth = originalSize.x
       const desiredWidth = gapWidth / 1000
 
       if (originalWidth > 0) {
         const scaleFactor = desiredWidth / originalWidth
-        trilhoSup.scale.x = scaleFactor
+        object.scale.x = scaleFactor
       }
 
-      trilhoSup.position.set(0, gapHeight / 1000, 0)
+      object.position.set(position.x, position.y, position.z)
     },
-    [gapWidth, gapHeight]
+    [gapWidth]
   )
 
-  const clearTrilhoSupClones = useCallback(() => {
+  const clearClones = useCallback((name: string) => {
     if (!sceneRef.current) {
       return
     }
     for (const key of Object.keys(clonedModelsRef.current).filter((k) =>
-      k.startsWith('trilho-sup-clone')
+      k.startsWith(`${name}-clone`)
     )) {
       sceneRef.current.remove(clonedModelsRef.current[key])
       delete clonedModelsRef.current[key]
     }
   }, [])
 
-  const createTrilhoSupClones = useCallback(
-    (trilhoSup: Object3D) => {
+  const createClones = useCallback(
+    (object: Object3D, name: string) => {
       if (!sceneRef.current) {
         return
       }
@@ -263,51 +267,51 @@ const ThreeScene = () => {
         panelCount + doorsCount > 1 ? panelCount + doorsCount - 1 : 0
 
       for (let i = 0; i < numberOfClones; i++) {
-        const trilhoSupClone = trilhoSup.clone()
-        trilhoSupClone.position.set(0, gapHeight / 1000, 0.03 * (i + 1))
+        const trilhoSupClone = object.clone()
+        const objectPosition = object.position
+        trilhoSupClone.position.set(
+          objectPosition.x,
+          objectPosition.y,
+          objectPosition.z + 0.031 * (i + 1)
+        )
         sceneRef.current.add(trilhoSupClone)
-        clonedModelsRef.current[`trilho-sup-clone-${i}`] = trilhoSupClone
+        clonedModelsRef.current[`${name}-clone-${i}`] = trilhoSupClone
       }
     },
-    [panelCount, doorsCount, gapHeight]
+    [panelCount, doorsCount]
   )
 
+  // TRILHOS SUPERIORES
   useEffect(() => {
     if (modelsLoaded >= 2 && sceneRef.current) {
       const trilhoSup = modelsRef.current['trilho-sup']
       const trilhoSupOriginalSize = originalDimensionsRef.current['trilho-sup']
 
       if (trilhoSup && trilhoSupOriginalSize) {
-        scaleAndPositionTrilhoSup(trilhoSup, trilhoSupOriginalSize)
-        clearTrilhoSupClones()
-        createTrilhoSupClones(trilhoSup)
+        scaleAndPosition(trilhoSup, trilhoSupOriginalSize, {
+          x: 0,
+          y: gapHeight / 1000,
+          z: 0,
+        })
+        clearClones('trilho-sup')
+        createClones(trilhoSup, 'trilho-sup')
       }
     }
-  }, [
-    modelsLoaded,
-    scaleAndPositionTrilhoSup,
-    clearTrilhoSupClones,
-    createTrilhoSupClones,
-  ])
+  }, [modelsLoaded, gapHeight, scaleAndPosition, clearClones, createClones])
 
+  // TRILHOS INFERIORES
   useEffect(() => {
-    if (modelsLoaded >= 2) {
+    if (modelsLoaded >= 2 && sceneRef.current) {
       const trilhoInf = modelsRef.current['trilho-inf']
       const trilhoInfOriginalSize = originalDimensionsRef.current['trilho-inf']
 
       if (trilhoInf && trilhoInfOriginalSize) {
-        const originalWidth = trilhoInfOriginalSize.x
-        const desiredWidth = gapWidth / 1000
-
-        if (originalWidth > 0) {
-          const scaleFactor = desiredWidth / originalWidth
-          trilhoInf.scale.x = scaleFactor
-        }
-
-        trilhoInf.position.set(0, 0, 0)
+        scaleAndPosition(trilhoInf, trilhoInfOriginalSize, { x: 0, y: 0, z: 0 })
+        clearClones('trilho-inf')
+        createClones(trilhoInf, 'trilho-inf')
       }
     }
-  }, [modelsLoaded, gapWidth])
+  }, [modelsLoaded, scaleAndPosition, clearClones, createClones])
 
   return (
     <div
