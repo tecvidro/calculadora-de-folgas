@@ -1,30 +1,30 @@
-"use client";
+'use client'
 
-import { v4 as uuidv4 } from "uuid";
-import { Box } from "@/components/shared/Box";
-import { useCalculator } from "@/context/calculator-context";
-import type { ResultsLabels } from "@/Types/types";
-import { calculator } from "@/utils/calculator";
+import { v4 as uuidv4 } from 'uuid'
+import { Box } from '@/components/shared/Box'
+import { useCalculator } from '@/context/calculator-context'
+import type { ResultsLabels } from '@/Types/types'
+import { calculator } from '@/utils/calculator'
 
 type CalculatorResults = {
-  panelsWidth: number;
-  doorsWidth: { id: number; width: number }[];
-  finalHeight: number;
-};
+  panelsWidth: number
+  doorsWidth: { id: number; width: number }[]
+  finalHeight: number
+}
 
 type SideData = {
-  panelCount: number;
-  doorsCount: number;
-  gapWidth: number;
-  gapHeight: number;
-  lockDiscounts: number[];
-  finalResults: CalculatorResults;
-};
+  panelCount: number
+  doorsCount: number
+  gapWidth: number
+  gapHeight: number
+  lockDiscounts: number[]
+  finalResults: CalculatorResults
+}
 
 type PrintResultsProps = {
-  resultsLabels: ResultsLabels;
-  productType: string;
-};
+  resultsLabels: ResultsLabels
+  productType: string
+}
 
 export const PrintResults = ({
   resultsLabels,
@@ -41,9 +41,9 @@ export const PrintResults = ({
     gapWidthB,
     gapHeightB,
     lockDiscountsB,
-  } = useCalculator();
+  } = useCalculator()
 
-  const isVDPLVDC = productType === "vdpl-vdc";
+  const isVDPLVDC = productType === 'vdpl-vdc'
 
   const paramsA = {
     params: {
@@ -63,8 +63,8 @@ export const PrintResults = ({
         heightDiscount: 85,
       },
     },
-  };
-  const finalResultsA = calculator(paramsA);
+  }
+  const finalResultsA = calculator(paramsA)
 
   const paramsB = {
     params: {
@@ -84,8 +84,8 @@ export const PrintResults = ({
         heightDiscount: 85,
       },
     },
-  };
-  const finalResultsB = calculator(paramsB);
+  }
+  const finalResultsB = calculator(paramsB)
 
   const renderSideResults = (data: SideData, sideLabel: string) => (
     <div className="flex w-full flex-col items-center gap-4">
@@ -140,7 +140,7 @@ export const PrintResults = ({
         </Box>
       </div>
     </div>
-  );
+  )
 
   return (
     <div className="[&>div]:print:first:break-after-page">
@@ -151,9 +151,12 @@ export const PrintResults = ({
           gapWidth,
           gapHeight,
           lockDiscounts,
-          finalResults: finalResultsA,
+          finalResults: {
+            ...finalResultsA,
+            doorsWidth: finalResultsA.doorsWidths,
+          },
         },
-        isVDPLVDC ? "Lado A" : "",
+        isVDPLVDC ? 'Lado A' : ''
       )}
       {isVDPLVDC && (
         <div className="mt-4">
@@ -164,12 +167,15 @@ export const PrintResults = ({
               gapWidth: gapWidthB,
               gapHeight: gapHeightB,
               lockDiscounts: lockDiscountsB,
-              finalResults: finalResultsB,
+              finalResults: {
+                ...finalResultsB,
+                doorsWidth: finalResultsB.doorsWidths,
+              },
             },
-            "Lado B",
+            'Lado B'
           )}
         </div>
       )}
     </div>
-  );
-};
+  )
+}
