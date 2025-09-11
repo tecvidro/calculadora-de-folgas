@@ -427,18 +427,24 @@ const ThreeScene = () => {
       const portaDir = modelsRef.current['porta-vdpl-2']
 
       if (portaDir) {
-        const boneCTRL = portaDir.getObjectByName('BN-Porta-W')
+        const height = (gapHeight - 85) / 1000
+        const boneCTRL = portaDir.getObjectByName('BN_CTRL')
+        const boneW = portaDir.getObjectByName('BN_W')
+        const boneH = portaDir.getObjectByName('BN_H')
         portaDir.position.set(
           gapWidth / 1000 - 0.0152,
           0,
           (totalPanels - 1) * 0.031
         )
-        if (boneCTRL) {
+        if (boneCTRL && boneW && boneH) {
           boneCTRL.position.x = doorsWidth / 1000
+          boneCTRL.position.y = height
+          boneW.position.x = doorsWidth / 1000
+          boneH.position.y = height
         }
       }
     }
-  }, [modelsLoaded, doorsWidth, gapWidth, totalPanels])
+  }, [modelsLoaded, doorsWidth, gapWidth, totalPanels, gapHeight])
 
   return (
     <div
