@@ -55,6 +55,7 @@ export default function Lock({
         ).map((_, i) => (
           <InputNumber
             disabled={disabled}
+            hasPlusMinusButton={false}
             key={uuidv4()}
             label={`${label} ${i + 1}`}
             name={`${label}_${i + 1}`}
