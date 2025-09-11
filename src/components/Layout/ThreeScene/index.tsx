@@ -17,7 +17,6 @@ import {
   RoomEnvironment,
 } from 'three/examples/jsm/Addons.js'
 import { useCalculator } from '@/context/calculator-context'
-import { Yarndings_12_Charted } from 'next/font/google'
 
 const ThreeScene = () => {
   const { gapWidth, gapHeight, panelCount, doorsCount, doorsWidth } =
@@ -407,14 +406,20 @@ const ThreeScene = () => {
       const porta1 = modelsRef.current['porta-vdpl-1']
 
       if (porta1) {
-        const bone = porta1.getObjectByName('BN-Porta-W')
+        const height = (gapHeight - 85) / 1000
+        const boneCTRL = porta1.getObjectByName('BN_CTRL')
+        const boneW = porta1.getObjectByName('BN_W')
+        const boneH = porta1.getObjectByName('BN_H')
         porta1.position.set(0.0152, 0, 0)
-        if (bone) {
-          bone.position.x = doorsWidth / 1000
+        if (boneCTRL && boneW && boneH) {
+          boneCTRL.position.x = doorsWidth / 1000
+          boneCTRL.position.y = height
+          boneW.position.x = doorsWidth / 1000
+          boneH.position.y = height
         }
       }
     }
-  }, [modelsLoaded, doorsWidth])
+  }, [modelsLoaded, doorsWidth, gapHeight])
 
   // PORTA DIREITA
   useEffect(() => {
@@ -422,14 +427,14 @@ const ThreeScene = () => {
       const portaDir = modelsRef.current['porta-vdpl-2']
 
       if (portaDir) {
-        const bone = portaDir.getObjectByName('BN-Porta-W')
+        const boneCTRL = portaDir.getObjectByName('BN-Porta-W')
         portaDir.position.set(
           gapWidth / 1000 - 0.0152,
           0,
           (totalPanels - 1) * 0.031
         )
-        if (bone) {
-          bone.position.x = doorsWidth / 1000
+        if (boneCTRL) {
+          boneCTRL.position.x = doorsWidth / 1000
         }
       }
     }
