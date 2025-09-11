@@ -1,33 +1,33 @@
-"use client";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { i18n, type Locale } from "../../../i18n-config";
-import { Flag } from "../Flags";
+'use client'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import { i18n, type Locale } from '../../../i18n-config'
+import { Flag } from '../Flags'
 
 export default function LocaleSwitcher() {
-  const pathname = usePathname();
+  const pathname = usePathname()
 
   const getCurrentLocale = (): Locale => {
     if (!pathname) {
-      return i18n.defaultLocale;
+      return i18n.defaultLocale
     }
-    const segments = pathname.split("/");
-    const potentialLocale = segments[1] as Locale;
+    const segments = pathname.split('/')
+    const potentialLocale = segments[1] as Locale
     return i18n.locales.includes(potentialLocale)
       ? potentialLocale
-      : i18n.defaultLocale;
-  };
+      : i18n.defaultLocale
+  }
 
-  const currentLocale = getCurrentLocale();
+  const currentLocale = getCurrentLocale()
 
   const redirectedPathname = (locale: Locale) => {
     if (!pathname) {
-      return "/";
+      return '/'
     }
-    const segments = pathname.split("/");
-    segments[1] = locale;
-    return segments.join("/");
-  };
+    const segments = pathname.split('/')
+    segments[1] = locale
+    return segments.join('/')
+  }
 
   return (
     <div>
@@ -44,12 +44,14 @@ export default function LocaleSwitcher() {
                   <div className="size-5 transition group-hover:scale-120">
                     <Flag locale={locale} />
                   </div>
-                  <span className="group-hover:text-blue">{locale}</span>
+                  <span className="text-white group-hover:text-blue">
+                    {locale}
+                  </span>
                 </Link>
               </li>
-            );
+            )
           })}
       </ul>
     </div>
-  );
+  )
 }

@@ -31,7 +31,7 @@ export function Card({
             width={500}
           />
         </div>
-        <span className="flex w-fit rounded-sm bg-blue px-2 py-1 text-sm text-white">
+        <span className="flex w-fit rounded-sm bg-main px-2 py-1 text-sm text-white">
           {model}
         </span>
         <span className="font-bold text-2xl">{name}</span>

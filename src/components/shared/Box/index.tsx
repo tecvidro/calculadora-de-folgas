@@ -7,7 +7,7 @@ const boxVariants = cva('rounded-md p-4', {
       dashed: 'border-1 border-gray-400 border-dashed bg-white',
       gray: 'bg-gray-100',
       red: 'bg-red text-white',
-      blue: 'bg-blue text-white',
+      blue: 'bg-main text-white',
       white: 'bg-white',
     },
   },
