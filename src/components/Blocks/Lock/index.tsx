@@ -39,6 +39,8 @@ export default function Lock({
           return newValues
         })
         break
+      default:
+        return
     }
   }
 

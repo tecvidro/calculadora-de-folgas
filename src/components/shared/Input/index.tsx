@@ -41,13 +41,13 @@ export const Input = ({
       {!!description && <div>{description}</div>}
       <input
         className="rounded border p-2 text-center disabled:bg-gray-100"
-        value={value}
         disabled={disabled}
         id={name}
-        type="number"
-        onChange={handleChange}
         onBlur={handleBlur}
+        onChange={handleChange}
         onFocus={(event) => event.target.select()}
+        type="number"
+        value={value}
       />
     </fieldset>
   )
