@@ -25,10 +25,13 @@ const ThreeScene = () => {
   const containerRef = useRef<HTMLDivElement>(null)
   const modelsRef = useRef<Record<string, Object3D>>({})
   const originalDimensionsRef = useRef<Record<string, Vector3>>({})
-  const sceneRef = useRef<Scene | null>(null) // Nova ref para a scene
-  const clonedModelsRef = useRef<Record<string, Object3D>>({}) // Nova ref para clones
+  const sceneRef = useRef<Scene | null>(null)
+  const clonedModelsRef = useRef<Record<string, Object3D>>({})
 
   const [modelsLoaded, setModelsLoaded] = useState(0)
+
+  const cameraRef = useRef<PerspectiveCamera | null>(null)
+  const controlsRef = useRef<OrbitControls | null>(null)
 
   // RENDERERS
   const setupRenderers = useCallback((container: HTMLDivElement) => {
@@ -181,14 +184,13 @@ const ThreeScene = () => {
           threeScene.add(gltf.scene)
           modelsRef.current[refName] = gltf.scene
           modelsRef.current[refName].position.set(1, 0, 0)
-          fitCameraToScene(perspectiveCamera, orbitControls, gltf.scene)
 
           setModelsLoaded((prev) => prev + 1)
         },
         undefined
       )
     },
-    [fitCameraToScene]
+    []
   )
 
   // SETUP SCENE
@@ -203,7 +205,9 @@ const ThreeScene = () => {
     sceneRef.current = scene // Armazenar referência da scene
 
     const camera = setupCamera(currentContainer)
+    cameraRef.current = camera
     const controls = setupControls(camera, renderer)
+    controlsRef.current = controls
 
     loadModel(scene, camera, controls, 'trilho-sup', 'trilho-sup')
     loadModel(scene, camera, controls, 'trilho-inf', 'trilho-inf')
@@ -445,6 +449,27 @@ const ThreeScene = () => {
       }
     }
   }, [modelsLoaded, doorsWidth, gapWidth, totalPanels, gapHeight])
+
+  // RECENTER SCENE
+  //biome-ignore lint: need all the dependencies to run
+  useEffect(() => {
+    if (
+      sceneRef.current &&
+      cameraRef.current &&
+      controlsRef.current &&
+      modelsLoaded >= 4
+    ) {
+      fitCameraToScene(cameraRef.current, controlsRef.current, sceneRef.current)
+    }
+  }, [
+    gapWidth,
+    gapHeight,
+    panelCount,
+    doorsCount,
+    doorsWidth,
+    modelsLoaded,
+    fitCameraToScene,
+  ])
 
   return (
     <div
