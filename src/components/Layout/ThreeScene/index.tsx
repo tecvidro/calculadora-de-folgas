@@ -19,14 +19,8 @@ import {
 import { useCalculator } from '@/context/calculator-context'
 
 const ThreeScene = () => {
-  const {
-    gapWidth,
-    gapHeight,
-    panelCount,
-    doorsCount,
-    doorsWidth,
-    lockDiscounts,
-  } = useCalculator()
+  const { gapWidth, gapHeight, panelCount, doorsCount, doorsWidth } =
+    useCalculator()
   const totalPanels = panelCount + doorsCount
   const containerRef = useRef<HTMLDivElement>(null)
   const modelsRef = useRef<Record<string, Object3D>>({})
@@ -218,8 +212,6 @@ const ThreeScene = () => {
       loadModel(scene, 'porta-vdpl-dir', 'porta-vdpl-2')
     }
 
-    //TODO: Load panels GLB
-
     const frameId = createAnimationLoop(controls, renderer, scene, camera)
     const handleResize = createResizeHandler(currentContainer, camera, renderer)
 
@@ -302,7 +294,7 @@ const ThreeScene = () => {
         trilhoSupClone.position.set(
           objectPosition.x,
           objectPosition.y,
-          objectPosition.z + 0.031 * (i + 1)
+          objectPosition.z - 0.031 * (i + 1)
         )
         sceneRef.current.add(trilhoSupClone)
         clonedModelsRef.current[`${name}-clone-${i}`] = trilhoSupClone
@@ -318,7 +310,11 @@ const ThreeScene = () => {
         return
       }
       const pertfilUClone = object.clone()
-      pertfilUClone.position.set(gapWidth / 1000, 0, (totalPanels - 1) * 0.031)
+      pertfilUClone.position.set(
+        gapWidth / 1000,
+        0,
+        (totalPanels - 1) * 0.031 * -1
+      )
 
       sceneRef.current.add(pertfilUClone)
       pertfilUClone.rotateY(Math.PI)
@@ -428,28 +424,6 @@ const ThreeScene = () => {
     }
   }, [modelsLoaded, doorsWidth, gapHeight]) // PORTA
 
-  // PAINEIS
-  useEffect(() => {
-    if (modelsLoaded >= 4 && sceneRef.current) {
-      const painel = modelsRef.current['painel-1']
-      const panel_x = (doorsWidth + lockDiscounts[0]) / 1000
-
-      if (painel) {
-        const height = (gapHeight - 85) / 1000
-        const boneCTRL = painel.getObjectByName('BN_PNL_CTRL')
-        const boneW = painel.getObjectByName('BN_PNL_W')
-        const boneH = painel.getObjectByName('BN_PNL_H')
-        painel.position.set(panel_x, 0, 0.031)
-        if (boneCTRL && boneW && boneH) {
-          boneCTRL.position.x = panel_x
-          boneCTRL.position.y = height
-          boneW.position.x = panel_x
-          boneH.position.y = height
-        }
-      }
-    }
-  }, [modelsLoaded, doorsWidth, gapHeight, lockDiscounts])
-
   useEffect(() => {
     if (modelsLoaded >= 4 && sceneRef.current) {
       const porta1 = modelsRef.current['porta-vdpl-1']
@@ -483,7 +457,7 @@ const ThreeScene = () => {
         portaDir.position.set(
           gapWidth / 1000 - 0.0152,
           0,
-          (totalPanels - 1) * 0.031
+          (totalPanels - 1) * 0.031 * -1
         )
         if (boneCTRL && boneW && boneH) {
           boneCTRL.position.x = doorsWidth / 1000
@@ -494,6 +468,28 @@ const ThreeScene = () => {
       }
     }
   }, [modelsLoaded, doorsWidth, gapWidth, totalPanels, gapHeight])
+
+  // PAINEIS
+  useEffect(() => {
+    if (modelsLoaded >= 4 && sceneRef.current) {
+      const painel = modelsRef.current['painel-1']
+      const panel_x = (doorsWidth + 41) / 1000
+
+      if (painel) {
+        const height = (gapHeight - 85) / 1000
+        const boneCTRL = painel.getObjectByName('BN_PNL_CTRL')
+        const boneW = painel.getObjectByName('BN_PNL_W')
+        const boneH = painel.getObjectByName('BN_PNL_H')
+        painel.position.set(panel_x, 0, -0.031)
+        if (boneCTRL && boneW && boneH) {
+          boneCTRL.position.x = panel_x
+          boneCTRL.position.y = height
+          boneW.position.x = panel_x
+          boneH.position.y = height
+        }
+      }
+    }
+  }, [modelsLoaded, doorsWidth, gapHeight])
 
   // RECENTER SCENE
   //biome-ignore lint: need all the dependencies to run
