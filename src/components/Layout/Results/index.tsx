@@ -41,6 +41,7 @@ export const Results = ({ resultsLabels, productType }: ResultsProps) => {
     setFinalHeight,
     setDoorsWidth,
     setDoorsWidthB,
+    setPanelsWidth,
   } = useCalculator();
 
   const isVDPLVDC = productType === "vdpl-vdc";
@@ -90,7 +91,8 @@ export const Results = ({ resultsLabels, productType }: ResultsProps) => {
     useEffect(() => {
     setFinalHeight(finalResultsA.finalHeight)
     setDoorsWidth(finalResultsA.doorsWidth)
-  }, [finalResultsA, setFinalHeight, setDoorsWidth])
+    setPanelsWidth(finalResultsA.panelsWidth)
+  }, [finalResultsA, setFinalHeight, setDoorsWidth, setPanelsWidth])
 
   useEffect(() => {
     setDoorsWidthB(finalResultsB.doorsWidth)

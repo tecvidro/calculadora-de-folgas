@@ -19,9 +19,19 @@ import {
 import { useCalculator } from '@/context/calculator-context'
 
 const ThreeScene = () => {
-  const { gapWidth, gapHeight, panelCount, doorsCount, doorsWidth } =
-    useCalculator()
+  const {
+    gapWidth,
+    gapHeight,
+    panelCount,
+    doorsCount,
+    doorsWidth,
+    panelsWidth,
+    lockDiscounts,
+  } = useCalculator()
   const totalPanels = panelCount + doorsCount
+  const totalDoorWidth = (doorsWidth - lockDiscounts[0]) / 1000
+  const totalPanelsWidth = (panelsWidth + 42) / 1000
+
   const containerRef = useRef<HTMLDivElement>(null)
   const modelsRef = useRef<Record<string, Object3D>>({})
   const originalDimensionsRef = useRef<Record<string, Vector3>>({})
@@ -322,7 +332,6 @@ const ThreeScene = () => {
     },
     [totalPanels, gapWidth]
   )
-
   // TRILHOS SUPERIORES
   useEffect(() => {
     if (modelsLoaded >= 2 && sceneRef.current) {
@@ -415,34 +424,14 @@ const ThreeScene = () => {
         const boneH = porta1.getObjectByName('BN_H')
         porta1.position.set(0.0152, 0, 0)
         if (boneCTRL && boneW && boneH) {
-          boneCTRL.position.x = doorsWidth / 1000
+          boneCTRL.position.x = totalDoorWidth
           boneCTRL.position.y = height
-          boneW.position.x = doorsWidth / 1000
+          boneW.position.x = totalDoorWidth
           boneH.position.y = height
         }
       }
     }
-  }, [modelsLoaded, doorsWidth, gapHeight]) // PORTA
-
-  useEffect(() => {
-    if (modelsLoaded >= 4 && sceneRef.current) {
-      const porta1 = modelsRef.current['porta-vdpl-1']
-
-      if (porta1) {
-        const height = (gapHeight - 85) / 1000
-        const boneCTRL = porta1.getObjectByName('BN_CTRL')
-        const boneW = porta1.getObjectByName('BN_W')
-        const boneH = porta1.getObjectByName('BN_H')
-        porta1.position.set(0.0152, 0, 0)
-        if (boneCTRL && boneW && boneH) {
-          boneCTRL.position.x = doorsWidth / 1000
-          boneCTRL.position.y = height
-          boneW.position.x = doorsWidth / 1000
-          boneH.position.y = height
-        }
-      }
-    }
-  }, [modelsLoaded, doorsWidth, gapHeight])
+  }, [modelsLoaded, gapHeight, totalDoorWidth])
 
   // PORTA DIREITA
   useEffect(() => {
@@ -460,20 +449,20 @@ const ThreeScene = () => {
           (totalPanels - 1) * 0.031 * -1
         )
         if (boneCTRL && boneW && boneH) {
-          boneCTRL.position.x = doorsWidth / 1000
+          boneCTRL.position.x = totalDoorWidth
           boneCTRL.position.y = height
-          boneW.position.x = doorsWidth / 1000
+          boneW.position.x = totalDoorWidth
           boneH.position.y = height
         }
       }
     }
-  }, [modelsLoaded, doorsWidth, gapWidth, totalPanels, gapHeight])
+  }, [modelsLoaded, totalDoorWidth, gapWidth, totalPanels, gapHeight])
 
   // PAINEIS
   useEffect(() => {
     if (modelsLoaded >= 4 && sceneRef.current) {
       const painel = modelsRef.current['painel-1']
-      const panel_x = (doorsWidth + 41) / 1000
+      const panel_x = totalDoorWidth + 0.041
 
       if (painel) {
         const height = (gapHeight - 85) / 1000
@@ -482,14 +471,14 @@ const ThreeScene = () => {
         const boneH = painel.getObjectByName('BN_PNL_H')
         painel.position.set(panel_x, 0, -0.031)
         if (boneCTRL && boneW && boneH) {
-          boneCTRL.position.x = panel_x
+          boneCTRL.position.x = totalPanelsWidth
           boneCTRL.position.y = height
-          boneW.position.x = panel_x
+          boneW.position.x = totalPanelsWidth
           boneH.position.y = height
         }
       }
     }
-  }, [modelsLoaded, doorsWidth, gapHeight])
+  }, [modelsLoaded, totalDoorWidth, totalPanelsWidth, gapHeight])
 
   // RECENTER SCENE
   //biome-ignore lint: need all the dependencies to run
@@ -508,6 +497,7 @@ const ThreeScene = () => {
     panelCount,
     doorsCount,
     doorsWidth,
+    panelsWidth,
     modelsLoaded,
     fitCameraToScene,
   ])
