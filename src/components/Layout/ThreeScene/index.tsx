@@ -171,7 +171,12 @@ const ThreeScene = () => {
 
   // LOADER
   const loadModel = useCallback(
-    (threeScene: Scene, modelFilename: string, refName: string) => {
+    (
+      threeScene: Scene,
+      modelFilename: string,
+      refName: string,
+      initialPosition?: Vector3
+    ) => {
       const loader = new GLTFLoader()
       const dracoLoader = new DRACOLoader()
       dracoLoader.setDecoderPath('/draco/')
@@ -187,7 +192,9 @@ const ThreeScene = () => {
           gltf.scene.position.sub(boxCenter)
           threeScene.add(gltf.scene)
           modelsRef.current[refName] = gltf.scene
-          modelsRef.current[refName].position.set(1, 0, 0)
+          modelsRef.current[refName].position.copy(
+            initialPosition || new Vector3(0, 0, 0)
+          )
 
           setModelsLoaded((prev) => prev + 1)
         },
@@ -217,7 +224,7 @@ const ThreeScene = () => {
     loadModel(scene, 'trilho-inf', 'trilho-inf')
     loadModel(scene, 'perfil-u-laminado', 'perfil-u-laminado')
     loadModel(scene, 'porta-vdpl', 'porta-vdpl-1')
-    loadModel(scene, 'painel', 'painel-1')
+    loadModel(scene, 'painel', 'painel-1', new Vector3(1, 0, 0))
     if (doorsCount > 1) {
       loadModel(scene, 'porta-vdpl-dir', 'porta-vdpl-2')
     }
