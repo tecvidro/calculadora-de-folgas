@@ -19,8 +19,14 @@ import {
 import { useCalculator } from '@/context/calculator-context'
 
 const ThreeScene = () => {
-  const { gapWidth, gapHeight, panelCount, doorsCount, doorsWidth } =
-    useCalculator()
+  const {
+    gapWidth,
+    gapHeight,
+    panelCount,
+    doorsCount,
+    doorsWidth,
+    lockDiscounts,
+  } = useCalculator()
   const totalPanels = panelCount + doorsCount
   const containerRef = useRef<HTMLDivElement>(null)
   const modelsRef = useRef<Record<string, Object3D>>({})
@@ -161,13 +167,7 @@ const ThreeScene = () => {
 
   // LOADER
   const loadModel = useCallback(
-    (
-      threeScene: Scene,
-      perspectiveCamera: PerspectiveCamera,
-      orbitControls: OrbitControls,
-      modelFilename: string,
-      refName: string
-    ) => {
+    (threeScene: Scene, modelFilename: string, refName: string) => {
       const loader = new GLTFLoader()
       const dracoLoader = new DRACOLoader()
       dracoLoader.setDecoderPath('/draco/')
@@ -209,13 +209,16 @@ const ThreeScene = () => {
     const controls = setupControls(camera, renderer)
     controlsRef.current = controls
 
-    loadModel(scene, camera, controls, 'trilho-sup', 'trilho-sup')
-    loadModel(scene, camera, controls, 'trilho-inf', 'trilho-inf')
-    loadModel(scene, camera, controls, 'perfil-u-laminado', 'perfil-u-laminado')
-    loadModel(scene, camera, controls, 'porta-vdpl', 'porta-vdpl-1')
+    loadModel(scene, 'trilho-sup', 'trilho-sup')
+    loadModel(scene, 'trilho-inf', 'trilho-inf')
+    loadModel(scene, 'perfil-u-laminado', 'perfil-u-laminado')
+    loadModel(scene, 'porta-vdpl', 'porta-vdpl-1')
+    loadModel(scene, 'painel', 'painel-1')
     if (doorsCount > 1) {
-      loadModel(scene, camera, controls, 'porta-vdpl-dir', 'porta-vdpl-2')
+      loadModel(scene, 'porta-vdpl-dir', 'porta-vdpl-2')
     }
+
+    //TODO: Load panels GLB
 
     const frameId = createAnimationLoop(controls, renderer, scene, camera)
     const handleResize = createResizeHandler(currentContainer, camera, renderer)
@@ -405,6 +408,48 @@ const ThreeScene = () => {
   ])
 
   // PORTA
+  useEffect(() => {
+    if (modelsLoaded >= 4 && sceneRef.current) {
+      const porta1 = modelsRef.current['porta-vdpl-1']
+
+      if (porta1) {
+        const height = (gapHeight - 85) / 1000
+        const boneCTRL = porta1.getObjectByName('BN_CTRL')
+        const boneW = porta1.getObjectByName('BN_W')
+        const boneH = porta1.getObjectByName('BN_H')
+        porta1.position.set(0.0152, 0, 0)
+        if (boneCTRL && boneW && boneH) {
+          boneCTRL.position.x = doorsWidth / 1000
+          boneCTRL.position.y = height
+          boneW.position.x = doorsWidth / 1000
+          boneH.position.y = height
+        }
+      }
+    }
+  }, [modelsLoaded, doorsWidth, gapHeight]) // PORTA
+
+  // PAINEIS
+  useEffect(() => {
+    if (modelsLoaded >= 4 && sceneRef.current) {
+      const painel = modelsRef.current['painel-1']
+      const panel_x = (doorsWidth + lockDiscounts[0]) / 1000
+
+      if (painel) {
+        const height = (gapHeight - 85) / 1000
+        const boneCTRL = painel.getObjectByName('BN_PNL_CTRL')
+        const boneW = painel.getObjectByName('BN_PNL_W')
+        const boneH = painel.getObjectByName('BN_PNL_H')
+        painel.position.set(panel_x, 0, 0.031)
+        if (boneCTRL && boneW && boneH) {
+          boneCTRL.position.x = panel_x
+          boneCTRL.position.y = height
+          boneW.position.x = panel_x
+          boneH.position.y = height
+        }
+      }
+    }
+  }, [modelsLoaded, doorsWidth, gapHeight, lockDiscounts])
+
   useEffect(() => {
     if (modelsLoaded >= 4 && sceneRef.current) {
       const porta1 = modelsRef.current['porta-vdpl-1']
