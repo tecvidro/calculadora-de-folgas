@@ -294,7 +294,7 @@ const ThreeScene = () => {
 
       if (painel1) {
         const bonePanelCTRL = painel1.getObjectByName('BN_painel_ctrl')
-        const boneDoorBase = painel1.getObjectByName('BN_painel_base')
+        const bonePanelBase = painel1.getObjectByName('BN_painel_base')
         const bonePanelW = painel1.getObjectByName('BN_painel_w')
         const bonePanelH = painel1.getObjectByName('BN_painel_h')
         const boneProfilesCTRL = painel1.getObjectByName('BN_track_ctrl')
@@ -308,9 +308,9 @@ const ThreeScene = () => {
           bonePanelCTRL &&
           bonePanelW &&
           bonePanelH &&
-          boneDoorBase
+          bonePanelBase
         ) {
-          boneDoorBase.position.x = totalDoorWidth
+          bonePanelBase.position.x = totalDoorWidth
           boneProfilesCTRL.position.x = gapWidth / 1000
           boneProfilesW.position.x = gapWidth / 1000
           boneProfilesCTRL.position.y = gapHeight / 1000
