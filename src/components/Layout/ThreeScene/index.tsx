@@ -26,17 +26,14 @@ const ThreeScene = () => {
     doorsCount,
     doorsWidth,
     panelsWidth,
-    lockDiscounts,
   } = useCalculator()
   const totalPanels = panelCount + doorsCount
-  const totalDoorWidth = (doorsWidth - lockDiscounts[0]) / 1000
+  const totalDoorWidth = doorsWidth / 1000
   const totalPanelsWidth = panelsWidth / 1000
 
   const containerRef = useRef<HTMLDivElement>(null)
   const modelsRef = useRef<Record<string, Object3D>>({})
-  const originalDimensionsRef = useRef<Record<string, Vector3>>({})
   const sceneRef = useRef<Scene | null>(null)
-  const clonedModelsRef = useRef<Record<string, Object3D>>({})
 
   const [modelsLoaded, setModelsLoaded] = useState(0)
 
@@ -186,8 +183,6 @@ const ThreeScene = () => {
         `/models/parts/${modelFilename}.glb`,
         (gltf) => {
           const boundingBox = new Box3().setFromObject(gltf.scene)
-          const size = boundingBox.getSize(new Vector3())
-          originalDimensionsRef.current[refName] = size.clone() // Store original size
           const boxCenter = boundingBox.getCenter(new Vector3())
           gltf.scene.position.sub(boxCenter)
           threeScene.add(gltf.scene)
@@ -220,15 +215,17 @@ const ThreeScene = () => {
     const controls = setupControls(camera, renderer)
     controlsRef.current = controls
 
-    // loadModel(scene, 'trilho-sup', 'trilho-sup')
-    loadModel(scene, 'trilho-inf', 'trilho-inf')
-    loadModel(scene, 'perfil-u-laminado', 'perfil-u-laminado')
-    loadModel(scene, 'porta-vdpl', 'porta-vdpl-1')
+    loadModel(scene, 'VDPL_porta_esq', 'VDPL_porta-1')
+
     for (let i = 0; i < panelCount; i++) {
-      loadModel(scene, 'painel', `painel-${i + 1}`)
-    }
-    if (doorsCount > 1) {
-      loadModel(scene, 'porta-vdpl-dir', 'porta-vdpl-2')
+      const trackY = 0.031
+      const statingY = -(trackY * i + trackY)
+      loadModel(
+        scene,
+        'VDPL_painel',
+        `VDPL_painel-${i + 1}`,
+        new Vector3(0, 0, statingY)
+      )
     }
 
     const frameId = createAnimationLoop(controls, renderer, scene, camera)
@@ -252,257 +249,90 @@ const ThreeScene = () => {
     createAnimationLoop,
     createResizeHandler,
     createCleanup,
-    doorsCount,
-    panelCount,
-  ])
-
-  const scaleAndPosition = useCallback(
-    (
-      object: Object3D,
-      originalSize: Vector3,
-      desiredSize: { width?: number; height?: number },
-      position: { x: number; y: number; z: number }
-    ) => {
-      const originalWidth = originalSize.x
-      const originalHeight = originalSize.y
-      const desiredWidth = desiredSize.width
-        ? desiredSize.width
-        : originalSize.x
-      const desiredHeight = desiredSize.height
-        ? desiredSize.height
-        : originalSize.y
-
-      if (originalWidth > 0 && desiredSize.width) {
-        const scaleFactorWidth = desiredWidth / originalWidth
-        object.scale.x = scaleFactorWidth
-      }
-
-      if (originalHeight > 0 && desiredSize.height) {
-        const scaleFactorHeight = desiredHeight / originalHeight
-        object.scale.y = scaleFactorHeight
-      }
-
-      object.position.set(position.x, position.y, position.z)
-    },
-    []
-  )
-
-  const clearClones = useCallback((name: string) => {
-    if (!sceneRef.current) {
-      return
-    }
-    for (const key of Object.keys(clonedModelsRef.current).filter((k) =>
-      k.startsWith(`${name}-clone`)
-    )) {
-      sceneRef.current.remove(clonedModelsRef.current[key])
-      delete clonedModelsRef.current[key]
-    }
-  }, [])
-
-  // CREATE TRACKS CLONES
-  const createTracksClones = useCallback(
-    (object: Object3D, name: string) => {
-      if (!sceneRef.current) {
-        return
-      }
-      const numberOfClones =
-        panelCount + doorsCount > 1 ? panelCount + doorsCount - 1 : 0
-
-      for (let i = 0; i < numberOfClones; i++) {
-        const trilhoSupClone = object.clone()
-        const objectPosition = object.position
-        trilhoSupClone.position.set(
-          objectPosition.x,
-          objectPosition.y,
-          objectPosition.z - 0.031 * (i + 1)
-        )
-        sceneRef.current.add(trilhoSupClone)
-        clonedModelsRef.current[`${name}-clone-${i}`] = trilhoSupClone
-      }
-    },
-    [panelCount, doorsCount]
-  )
-
-  // CREATE U-PROFILE CLONE
-  const createUProfileClone = useCallback(
-    (object: Object3D, name: string) => {
-      if (!sceneRef.current) {
-        return
-      }
-      const pertfilUClone = object.clone()
-      pertfilUClone.position.set(
-        gapWidth / 1000,
-        0,
-        (totalPanels - 1) * 0.031 * -1
-      )
-
-      sceneRef.current.add(pertfilUClone)
-      pertfilUClone.rotateY(Math.PI)
-      clonedModelsRef.current[`${name}-clone`] = pertfilUClone
-    },
-    [totalPanels, gapWidth]
-  )
-  // TRILHOS SUPERIORES
-  useEffect(() => {
-    if (modelsLoaded >= 2 && sceneRef.current) {
-      const trilhoSup = modelsRef.current['trilho-sup']
-      const trilhoSupOriginalSize = originalDimensionsRef.current['trilho-sup']
-
-      if (trilhoSup && trilhoSupOriginalSize) {
-        scaleAndPosition(
-          trilhoSup,
-          trilhoSupOriginalSize,
-          { width: gapWidth / 1000 },
-          {
-            x: 0,
-            y: gapHeight / 1000,
-            z: 0,
-          }
-        )
-        clearClones('trilho-sup')
-        createTracksClones(trilhoSup, 'trilho-sup')
-      }
-    }
-  }, [
-    modelsLoaded,
-    gapHeight,
-    gapWidth,
-    scaleAndPosition,
-    clearClones,
-    createTracksClones,
-  ])
-
-  // TRILHOS INFERIORES
-  useEffect(() => {
-    if (modelsLoaded >= 4 && sceneRef.current) {
-      const trilhoInf = modelsRef.current['trilho-inf']
-      const trilhoInfOriginalSize = originalDimensionsRef.current['trilho-inf']
-
-      if (trilhoInf && trilhoInfOriginalSize) {
-        scaleAndPosition(
-          trilhoInf,
-          trilhoInfOriginalSize,
-          { width: gapWidth / 1000 },
-          { x: 0, y: 0, z: 0 }
-        )
-        clearClones('trilho-inf')
-        createTracksClones(trilhoInf, 'trilho-inf')
-      }
-    }
-  }, [
-    modelsLoaded,
-    gapWidth,
-    scaleAndPosition,
-    clearClones,
-    createTracksClones,
-  ])
-
-  // PERFIL U
-  useEffect(() => {
-    if (modelsLoaded >= 4 && sceneRef.current) {
-      const perfilU = modelsRef.current['perfil-u-laminado']
-      const perfilUOriginalSize =
-        originalDimensionsRef.current['perfil-u-laminado']
-      if (perfilU && perfilUOriginalSize) {
-        scaleAndPosition(
-          perfilU,
-          perfilUOriginalSize,
-          { height: gapHeight / 1000 - 0.04 },
-          { x: 0, y: 0, z: 0 }
-        )
-        clearClones('perfil-u')
-        createUProfileClone(perfilU, 'perfil-u')
-      }
-    }
-  }, [
-    modelsLoaded,
-    gapHeight,
-    clearClones,
-    createUProfileClone,
-    scaleAndPosition,
   ])
 
   // PORTA
   useEffect(() => {
-    if (modelsLoaded >= 4 && sceneRef.current) {
-      const porta1 = modelsRef.current['porta-vdpl-1']
+    if (modelsLoaded >= 1 && sceneRef.current) {
+      const porta1 = modelsRef.current['VDPL_porta-1']
 
       if (porta1) {
-        const height = (gapHeight - 85) / 1000
-        const boneCTRL = porta1.getObjectByName('BN_CTRL')
-        const boneW = porta1.getObjectByName('BN_W')
-        const boneH = porta1.getObjectByName('BN_H')
-        porta1.position.set(0.0152, 0, 0)
-        if (boneCTRL && boneW && boneH) {
-          boneCTRL.position.x = totalDoorWidth
-          boneCTRL.position.y = height
-          boneW.position.x = totalDoorWidth
-          boneH.position.y = height
+        const boneDoorCTRL = porta1.getObjectByName('BN_door_ctrl')
+        // const boneDoorBase = porta1.getObjectByName('BN_door_base')
+        const boneDoorW = porta1.getObjectByName('BN_door_w')
+        const boneDoorH = porta1.getObjectByName('BN_door_h')
+        const boneProfilesCTRL = porta1.getObjectByName('BN_track_ctrl')
+        // const boneProfilesBase = porta1.getObjectByName('BN_track_base')
+        const boneProfilesW = porta1.getObjectByName('BN_track_w')
+        const boneProfilesH = porta1.getObjectByName('BN_track_h')
+        porta1.position.set(0.0, 0, 0)
+        if (
+          boneProfilesCTRL &&
+          boneProfilesW &&
+          boneProfilesH &&
+          boneDoorCTRL &&
+          boneDoorW &&
+          boneDoorH
+        ) {
+          boneProfilesCTRL.position.x = gapWidth / 1000
+          boneProfilesW.position.x = gapWidth / 1000
+          boneProfilesCTRL.position.y = gapHeight / 1000
+          boneProfilesH.position.y = gapHeight / 1000
+          boneDoorCTRL.position.x = totalDoorWidth
+          boneDoorCTRL.position.y = gapHeight / 1000
+          boneDoorW.position.x = totalDoorWidth
+          boneDoorH.position.y = gapHeight / 1000
         }
       }
     }
-  }, [modelsLoaded, gapHeight, totalDoorWidth])
+  }, [modelsLoaded, gapHeight, gapWidth, totalDoorWidth])
 
-  // PORTA DIREITA
+  // PAINEL
   useEffect(() => {
-    if (modelsLoaded >= 4 && sceneRef.current) {
-      const portaDir = modelsRef.current['porta-vdpl-2']
+    if (modelsLoaded >= 2 && sceneRef.current) {
+      const painel1 = modelsRef.current['VDPL_painel-1']
 
-      if (portaDir) {
-        const height = (gapHeight - 85) / 1000
-        const boneCTRL = portaDir.getObjectByName('BN_CTRL')
-        const boneW = portaDir.getObjectByName('BN_W')
-        const boneH = portaDir.getObjectByName('BN_H')
-        portaDir.position.set(
-          gapWidth / 1000 - 0.0152,
-          0,
-          (totalPanels - 1) * 0.031 * -1
-        )
-        if (boneCTRL && boneW && boneH) {
-          boneCTRL.position.x = totalDoorWidth
-          boneCTRL.position.y = height
-          boneW.position.x = totalDoorWidth
-          boneH.position.y = height
+      if (painel1) {
+        const bonePanelCTRL = painel1.getObjectByName('BN_painel_ctrl')
+        const boneDoorBase = painel1.getObjectByName('BN_painel_base')
+        const bonePanelW = painel1.getObjectByName('BN_painel_w')
+        const bonePanelH = painel1.getObjectByName('BN_painel_h')
+        const boneProfilesCTRL = painel1.getObjectByName('BN_track_ctrl')
+        // const boneProfilesBase = porta1.getObjectByName('BN_track_base')
+        const boneProfilesW = painel1.getObjectByName('BN_track_w')
+        const boneProfilesH = painel1.getObjectByName('BN_track_h')
+        if (
+          boneProfilesCTRL &&
+          boneProfilesW &&
+          boneProfilesH &&
+          bonePanelCTRL &&
+          bonePanelW &&
+          bonePanelH &&
+          boneDoorBase
+        ) {
+          boneDoorBase.position.x = totalDoorWidth
+          boneProfilesCTRL.position.x = gapWidth / 1000
+          boneProfilesW.position.x = gapWidth / 1000
+          boneProfilesCTRL.position.y = gapHeight / 1000
+          boneProfilesH.position.y = gapHeight / 1000
+          bonePanelCTRL.position.x = panelsWidth / 1000
+          bonePanelCTRL.position.y = gapHeight / 1000
+          bonePanelW.position.x = panelsWidth / 1000
+          bonePanelH.position.y = gapHeight / 1000
         }
       }
     }
-  }, [modelsLoaded, totalDoorWidth, gapWidth, totalPanels, gapHeight])
+  }, [modelsLoaded, gapHeight, gapWidth, totalDoorWidth, panelsWidth])
 
-  const setupPanel = useCallback(
-    (panelIndex: number) => {
-      const painel = modelsRef.current[`painel-${panelIndex + 1}`]
-      if (!painel) {
-        return
-      }
-
-      const panel_x =
-        totalDoorWidth + 0.041 + (totalPanelsWidth + 0.0205) * panelIndex
-      const height = (gapHeight - 85) / 1000
-      const boneCTRL = painel.getObjectByName('BN_PNL_CTRL')
-      const boneW = painel.getObjectByName('BN_PNL_W')
-      const boneH = painel.getObjectByName('BN_PNL_H')
-
-      const panel_z = -0.031 * (panelIndex + 1)
-      painel.position.set(panel_x, 0, panel_z)
-
-      if (boneCTRL && boneW && boneH) {
-        boneCTRL.position.x = totalPanelsWidth
-        boneCTRL.position.y = height
-        boneW.position.x = totalPanelsWidth
-        boneH.position.y = height
-      }
-    },
-    [totalDoorWidth, gapHeight, totalPanelsWidth]
-  )
-
-  // PAINEIS
-  useEffect(() => {
-    if (modelsLoaded >= 4 && sceneRef.current) {
-      for (let i = 0; i < panelCount; i++) {
-        setupPanel(i)
-      }
-    }
-  }, [modelsLoaded, panelCount, setupPanel])
+  // // PAINEIS
+  // useEffect(() => {
+  //   if (modelsLoaded >= 4 && sceneRef.current) {
+  //     for (let i = 0; i < panelCount; i++) {
+  //       setupPanel(i)
+  //     }
+  //   }
+  // }, [modelsLoaded, panelCount, setupPanel])
+  //
 
   // RECENTER SCENE
   //biome-ignore lint: need all the dependencies to run
