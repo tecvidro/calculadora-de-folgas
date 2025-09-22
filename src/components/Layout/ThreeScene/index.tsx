@@ -89,8 +89,14 @@ const ThreeScene = () => {
 
   // FIt Camera
   const fitCameraToScene = useCallback(
-    (cam: PerspectiveCamera, ctrls: OrbitControls, obj: Object3D) => {
-      const boundingBox = new Box3().setFromObject(obj)
+    (
+      cam: PerspectiveCamera,
+      ctrls: OrbitControls,
+      obj: Object3D,
+      manualBox?: Box3
+    ) => {
+      const boundingBox = manualBox || new Box3().setFromObject(obj)
+
       const boxCenter = boundingBox.getCenter(new Vector3())
       const boxSize = boundingBox.getSize(new Vector3())
 
@@ -405,7 +411,17 @@ const ThreeScene = () => {
       controlsRef.current &&
       modelsLoaded >= 2
     ) {
-      fitCameraToScene(cameraRef.current, controlsRef.current, sceneRef.current)
+      const depth = (panelCount + doorsCount) * 0.031
+      const center = new Vector3(gapWidth / 2000, gapHeight / 2000, -depth / 2)
+      const size = new Vector3(gapWidth / 1000, gapHeight / 1000, depth)
+      const manualBox = new Box3().setFromCenterAndSize(center, size)
+
+      fitCameraToScene(
+        cameraRef.current,
+        controlsRef.current,
+        sceneRef.current,
+        manualBox
+      )
     }
   }, [
     gapWidth,
