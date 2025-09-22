@@ -30,7 +30,7 @@ const ThreeScene = () => {
   } = useCalculator()
   const totalPanels = panelCount + doorsCount
   const totalDoorWidth = (doorsWidth - lockDiscounts[0]) / 1000
-  const totalPanelsWidth = (panelsWidth + 42) / 1000
+  const totalPanelsWidth = panelsWidth / 1000
 
   const containerRef = useRef<HTMLDivElement>(null)
   const modelsRef = useRef<Record<string, Object3D>>({})
@@ -220,11 +220,13 @@ const ThreeScene = () => {
     const controls = setupControls(camera, renderer)
     controlsRef.current = controls
 
-    loadModel(scene, 'trilho-sup', 'trilho-sup')
+    // loadModel(scene, 'trilho-sup', 'trilho-sup')
     loadModel(scene, 'trilho-inf', 'trilho-inf')
     loadModel(scene, 'perfil-u-laminado', 'perfil-u-laminado')
     loadModel(scene, 'porta-vdpl', 'porta-vdpl-1')
-    loadModel(scene, 'painel', 'painel-1', new Vector3(1, 0, 0))
+    for (let i = 0; i < panelCount; i++) {
+      loadModel(scene, 'painel', `painel-${i + 1}`)
+    }
     if (doorsCount > 1) {
       loadModel(scene, 'porta-vdpl-dir', 'porta-vdpl-2')
     }
@@ -251,6 +253,7 @@ const ThreeScene = () => {
     createResizeHandler,
     createCleanup,
     doorsCount,
+    panelCount,
   ])
 
   const scaleAndPosition = useCallback(
@@ -465,27 +468,41 @@ const ThreeScene = () => {
     }
   }, [modelsLoaded, totalDoorWidth, gapWidth, totalPanels, gapHeight])
 
+  const setupPanel = useCallback(
+    (panelIndex: number) => {
+      const painel = modelsRef.current[`painel-${panelIndex + 1}`]
+      if (!painel) {
+        return
+      }
+
+      const panel_x =
+        totalDoorWidth + 0.041 + (totalPanelsWidth + 0.0205) * panelIndex
+      const height = (gapHeight - 85) / 1000
+      const boneCTRL = painel.getObjectByName('BN_PNL_CTRL')
+      const boneW = painel.getObjectByName('BN_PNL_W')
+      const boneH = painel.getObjectByName('BN_PNL_H')
+
+      const panel_z = -0.031 * (panelIndex + 1)
+      painel.position.set(panel_x, 0, panel_z)
+
+      if (boneCTRL && boneW && boneH) {
+        boneCTRL.position.x = totalPanelsWidth
+        boneCTRL.position.y = height
+        boneW.position.x = totalPanelsWidth
+        boneH.position.y = height
+      }
+    },
+    [totalDoorWidth, gapHeight, totalPanelsWidth]
+  )
+
   // PAINEIS
   useEffect(() => {
     if (modelsLoaded >= 4 && sceneRef.current) {
-      const painel = modelsRef.current['painel-1']
-      const panel_x = totalDoorWidth + 0.041
-
-      if (painel) {
-        const height = (gapHeight - 85) / 1000
-        const boneCTRL = painel.getObjectByName('BN_PNL_CTRL')
-        const boneW = painel.getObjectByName('BN_PNL_W')
-        const boneH = painel.getObjectByName('BN_PNL_H')
-        painel.position.set(panel_x, 0, -0.031)
-        if (boneCTRL && boneW && boneH) {
-          boneCTRL.position.x = totalPanelsWidth
-          boneCTRL.position.y = height
-          boneW.position.x = totalPanelsWidth
-          boneH.position.y = height
-        }
+      for (let i = 0; i < panelCount; i++) {
+        setupPanel(i)
       }
     }
-  }, [modelsLoaded, totalDoorWidth, totalPanelsWidth, gapHeight])
+  }, [modelsLoaded, panelCount, setupPanel])
 
   // RECENTER SCENE
   //biome-ignore lint: need all the dependencies to run
