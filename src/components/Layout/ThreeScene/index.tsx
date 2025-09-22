@@ -207,6 +207,8 @@ const ThreeScene = () => {
 
   // SETUP SCENE
   useEffect(() => {
+    setModelsLoaded(0)
+    modelsRef.current = {}
     const currentContainer = containerRef.current
     if (typeof window === 'undefined' || !currentContainer) {
       return
@@ -260,7 +262,7 @@ const ThreeScene = () => {
 
   // PORTA
   useEffect(() => {
-    if (modelsLoaded >= 2 && sceneRef.current) {
+    if (modelsLoaded >= panelCount && sceneRef.current) {
       const porta1 = modelsRef.current['VDPL_porta-1']
 
       if (porta1) {
@@ -292,11 +294,11 @@ const ThreeScene = () => {
         }
       }
     }
-  }, [modelsLoaded, gapHeight, gapWidth, totalDoorWidth])
+  }, [modelsLoaded, gapHeight, gapWidth, totalDoorWidth, panelCount])
 
   // PORTA 2
   useEffect(() => {
-    if (modelsLoaded >= 2 && sceneRef.current) {
+    if (modelsLoaded >= +panelCount && sceneRef.current) {
       const porta2 = modelsRef.current['VDPL_porta-2']
 
       if (porta2) {
@@ -395,7 +397,7 @@ const ThreeScene = () => {
   )
 
   useEffect(() => {
-    if (modelsLoaded >= 2 && sceneRef.current) {
+    if (modelsLoaded >= +panelCount && sceneRef.current) {
       for (let i = 0; i < panelCount; i++) {
         setupPanel(i)
       }
@@ -409,7 +411,7 @@ const ThreeScene = () => {
       sceneRef.current &&
       cameraRef.current &&
       controlsRef.current &&
-      modelsLoaded >= 2
+      modelsLoaded >= +panelCount
     ) {
       const depth = (panelCount + doorsCount) * 0.031
       const center = new Vector3(gapWidth / 2000, gapHeight / 2000, -depth / 2)
