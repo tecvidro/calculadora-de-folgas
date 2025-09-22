@@ -26,10 +26,10 @@ const ThreeScene = () => {
     doorsCount,
     doorsWidth,
     panelsWidth,
+    lockDiscounts,
   } = useCalculator()
-  const totalPanels = panelCount + doorsCount
-  const totalDoorWidth = doorsWidth / 1000
-  const totalPanelsWidth = panelsWidth / 1000
+
+  const totalDoorWidth = doorsWidth / 1000 + lockDiscounts[0] / 1000
 
   const containerRef = useRef<HTMLDivElement>(null)
   const modelsRef = useRef<Record<string, Object3D>>({})
@@ -205,7 +205,6 @@ const ThreeScene = () => {
     if (typeof window === 'undefined' || !currentContainer) {
       return
     }
-
     const { renderer } = setupRenderers(currentContainer)
     const scene = setupScene(renderer)
     sceneRef.current = scene // Armazenar referência da scene
@@ -216,6 +215,7 @@ const ThreeScene = () => {
     controlsRef.current = controls
 
     loadModel(scene, 'VDPL_porta_esq', 'VDPL_porta-1')
+    loadModel(scene, 'VDPL_porta_dir', 'VDPL_porta-2')
 
     for (let i = 0; i < panelCount; i++) {
       const trackY = 0.031
@@ -249,11 +249,12 @@ const ThreeScene = () => {
     createAnimationLoop,
     createResizeHandler,
     createCleanup,
+    panelCount,
   ])
 
   // PORTA
   useEffect(() => {
-    if (modelsLoaded >= 1 && sceneRef.current) {
+    if (modelsLoaded >= 2 && sceneRef.current) {
       const porta1 = modelsRef.current['VDPL_porta-1']
 
       if (porta1) {
@@ -287,20 +288,82 @@ const ThreeScene = () => {
     }
   }, [modelsLoaded, gapHeight, gapWidth, totalDoorWidth])
 
-  // PAINEL
+  // PORTA 2
   useEffect(() => {
     if (modelsLoaded >= 2 && sceneRef.current) {
-      const painel1 = modelsRef.current['VDPL_painel-1']
+      const porta2 = modelsRef.current['VDPL_porta-2']
 
-      if (painel1) {
-        const bonePanelCTRL = painel1.getObjectByName('BN_painel_ctrl')
-        const bonePanelBase = painel1.getObjectByName('BN_painel_base')
-        const bonePanelW = painel1.getObjectByName('BN_painel_w')
-        const bonePanelH = painel1.getObjectByName('BN_painel_h')
-        const boneProfilesCTRL = painel1.getObjectByName('BN_track_ctrl')
+      if (porta2) {
+        const boneDoorCTRL = porta2.getObjectByName('BN_door_ctrl')
+        const boneDoorBase = porta2.getObjectByName('BN_door_base')
+        const boneDoorW = porta2.getObjectByName('BN_door_w')
+        const boneDoorH = porta2.getObjectByName('BN_door_h')
+        const boneProfilesCTRL = porta2.getObjectByName('BN_track_ctrl')
         // const boneProfilesBase = porta1.getObjectByName('BN_track_base')
-        const boneProfilesW = painel1.getObjectByName('BN_track_w')
-        const boneProfilesH = painel1.getObjectByName('BN_track_h')
+        const boneProfilesW = porta2.getObjectByName('BN_track_w')
+        const boneProfilesH = porta2.getObjectByName('BN_track_h')
+        porta2.position.set(0.0, 0, -(panelCount + doorsCount - 1) * 0.031)
+        const firstPanelXLoc = totalDoorWidth
+        const panelXLoc =
+          firstPanelXLoc +
+          (panelsWidth / 1000) * panelCount -
+          0.015 * panelCount -
+          0.019
+        if (
+          boneProfilesCTRL &&
+          boneProfilesW &&
+          boneProfilesH &&
+          boneDoorCTRL &&
+          boneDoorW &&
+          boneDoorH &&
+          boneDoorBase
+        ) {
+          boneDoorBase.position.x = panelXLoc
+          boneProfilesCTRL.position.x = gapWidth / 1000
+          boneProfilesW.position.x = gapWidth / 1000
+          boneProfilesCTRL.position.y = gapHeight / 1000
+          boneProfilesH.position.y = gapHeight / 1000
+          boneDoorCTRL.position.x = totalDoorWidth
+          boneDoorCTRL.position.y = gapHeight / 1000
+          boneDoorW.position.x = totalDoorWidth
+          boneDoorH.position.y = gapHeight / 1000
+        }
+      }
+    }
+  }, [
+    modelsLoaded,
+    gapHeight,
+    gapWidth,
+    panelCount,
+    doorsCount,
+    totalDoorWidth,
+    panelsWidth,
+  ])
+
+  const setupPanel = useCallback(
+    (panelIndex: number) => {
+      const painel = modelsRef.current[`VDPL_painel-${panelIndex + 1}`]
+      const firstPanelXLoc = totalDoorWidth
+      const panelXLoc =
+        firstPanelXLoc +
+        (panelsWidth / 1000) * panelIndex -
+        0.015 * panelIndex -
+        0.019
+
+      if (!painel) {
+        return
+      }
+
+      if (painel) {
+        const bonePanelCTRL = painel.getObjectByName('BN_painel_ctrl')
+        const bonePanelBase = painel.getObjectByName('BN_painel_base')
+        const bonePanelW = painel.getObjectByName('BN_painel_w')
+        const bonePanelH = painel.getObjectByName('BN_painel_h')
+        const boneProfilesCTRL = painel.getObjectByName('BN_track_ctrl')
+        // const boneProfilesBase = porta1.getObjectByName('BN_track_base')
+        const boneProfilesW = painel.getObjectByName('BN_track_w')
+        const boneProfilesH = painel.getObjectByName('BN_track_h')
+
         if (
           boneProfilesCTRL &&
           boneProfilesW &&
@@ -310,7 +373,7 @@ const ThreeScene = () => {
           bonePanelH &&
           bonePanelBase
         ) {
-          bonePanelBase.position.x = totalDoorWidth
+          bonePanelBase.position.x = panelXLoc
           boneProfilesCTRL.position.x = gapWidth / 1000
           boneProfilesW.position.x = gapWidth / 1000
           boneProfilesCTRL.position.y = gapHeight / 1000
@@ -321,18 +384,17 @@ const ThreeScene = () => {
           bonePanelH.position.y = gapHeight / 1000
         }
       }
-    }
-  }, [modelsLoaded, gapHeight, gapWidth, totalDoorWidth, panelsWidth])
+    },
+    [gapHeight, gapWidth, totalDoorWidth, panelsWidth]
+  )
 
-  // // PAINEIS
-  // useEffect(() => {
-  //   if (modelsLoaded >= 4 && sceneRef.current) {
-  //     for (let i = 0; i < panelCount; i++) {
-  //       setupPanel(i)
-  //     }
-  //   }
-  // }, [modelsLoaded, panelCount, setupPanel])
-  //
+  useEffect(() => {
+    if (modelsLoaded >= 2 && sceneRef.current) {
+      for (let i = 0; i < panelCount; i++) {
+        setupPanel(i)
+      }
+    }
+  }, [modelsLoaded, panelCount, setupPanel])
 
   // RECENTER SCENE
   //biome-ignore lint: need all the dependencies to run
@@ -341,7 +403,7 @@ const ThreeScene = () => {
       sceneRef.current &&
       cameraRef.current &&
       controlsRef.current &&
-      modelsLoaded >= 4
+      modelsLoaded >= 2
     ) {
       fitCameraToScene(cameraRef.current, controlsRef.current, sceneRef.current)
     }
