@@ -1,30 +1,34 @@
-import { v4 as uuidv4 } from "uuid";
-import { Box } from "@/components/shared/Box";
-import { useCalculator } from "@/context/calculator-context";
-import type { ResultsLabels } from "@/Types/types";
-import { calculator } from "@/utils/calculator";
-import { useEffect } from "react";
+import {
+  Calculator as LucideCalculator,
+  RulerDimensionLine,
+} from 'lucide-react'
+import { useEffect } from 'react'
+import { v4 as uuidv4 } from 'uuid'
+import { Box } from '@/components/shared/Box'
+import { useCalculator } from '@/context/calculator-context'
+import type { ResultsLabels } from '@/Types/types'
+import { calculator } from '@/utils/calculator'
 
 type CalculatorResults = {
-  panelsWidth: number;
-  doorsWidths: { id: number; width: number }[];
-  finalHeight: number;
-  doorsWidth: number;
-};
+  panelsWidth: number
+  doorsWidths: { id: number; width: number }[]
+  finalHeight: number
+  doorsWidth: number
+}
 
 type SideData = {
-  panelCount: number;
-  doorsCount: number;
-  gapWidth: number;
-  gapHeight: number;
-  lockDiscounts: number[];
-  finalResults: CalculatorResults;
-};
+  panelCount: number
+  doorsCount: number
+  gapWidth: number
+  gapHeight: number
+  lockDiscounts: number[]
+  finalResults: CalculatorResults
+}
 
 type ResultsProps = {
-  resultsLabels: ResultsLabels;
-  productType: string;
-};
+  resultsLabels: ResultsLabels
+  productType: string
+}
 
 export const Results = ({ resultsLabels, productType }: ResultsProps) => {
   const {
@@ -42,9 +46,9 @@ export const Results = ({ resultsLabels, productType }: ResultsProps) => {
     setDoorsWidth,
     setDoorsWidthB,
     setPanelsWidth,
-  } = useCalculator();
+  } = useCalculator()
 
-  const isVDPLVDC = productType === "vdpl-vdc";
+  const isVDPLVDC = productType === 'vdpl-vdc'
 
   const paramsA = {
     params: {
@@ -64,8 +68,8 @@ export const Results = ({ resultsLabels, productType }: ResultsProps) => {
         heightDiscount: 85,
       },
     },
-  };
-  const finalResultsA = calculator(paramsA);
+  }
+  const finalResultsA = calculator(paramsA)
 
   const paramsB = {
     params: {
@@ -85,10 +89,10 @@ export const Results = ({ resultsLabels, productType }: ResultsProps) => {
         heightDiscount: 85,
       },
     },
-  };
-  const finalResultsB = calculator(paramsB);
+  }
+  const finalResultsB = calculator(paramsB)
 
-    useEffect(() => {
+  useEffect(() => {
     setFinalHeight(finalResultsA.finalHeight)
     setDoorsWidth(finalResultsA.doorsWidth)
     setPanelsWidth(finalResultsA.panelsWidth)
@@ -101,53 +105,65 @@ export const Results = ({ resultsLabels, productType }: ResultsProps) => {
   const renderResults = (data: SideData, sideLabel: string) => (
     <div className="flex w-full flex-col gap-4">
       {sideLabel && <h3 className="font-bold">{sideLabel}</h3>}
-      <div className="flex w-ful flex-col gap-4 md:grid md:grid-cols-2">
-        <Box className="w-full" variant="gray">
-          <div>
-            <h3>{resultsLabels.infoAndMeasures}</h3>
-            <p>{resultsLabels.numberOfGlasses}</p>
-            <p>
-              {resultsLabels.panels}: {data.panelCount}
-            </p>
-            <p>
-              {resultsLabels.doors}: {data.doorsCount}
-            </p>
-            <p>{resultsLabels.gapMeasures}</p>
-            <p>
-              {resultsLabels.width}: {data.gapWidth} mm
-            </p>
-            <p>
-              {resultsLabels.height}: {data.gapHeight} mm
-            </p>
-            <p>{resultsLabels.lockDiscounts}</p>
-            {data.lockDiscounts.map((discount, index) => (
-              <p key={uuidv4()}>
-                {resultsLabels.door} {index + 1}: {discount} mm
+      <div className="flex w-ful flex-col gap-4 ">
+        <Box className="flex w-full flex-col gap-4" variant="gray">
+          <h3 className="flex gap-2 font-bold">
+            <RulerDimensionLine />
+            {resultsLabels.infoAndMeasures}
+          </h3>
+          <div className="flex flex-col justify-between gap-4 md:flex-row">
+            <Box className="grow-1">
+              <h4 className="font-bold">{resultsLabels.numberOfGlasses}</h4>
+              <p>
+                {resultsLabels.panels}: {data.panelCount}
               </p>
-            ))}
+              <p>
+                {resultsLabels.doors}: {data.doorsCount}
+              </p>
+            </Box>
+            <Box className="grow-1">
+              <h4 className="font-bold">{resultsLabels.gapMeasures}</h4>
+              <p>
+                {resultsLabels.width}: {data.gapWidth} mm
+              </p>
+              <p>
+                {resultsLabels.height}: {data.gapHeight} mm
+              </p>
+            </Box>
+            <Box className="grow-1">
+              <h4 className="flex font-bold">{resultsLabels.lockDiscounts}</h4>
+              {data.lockDiscounts.map((discount, index) => (
+                <p key={uuidv4()}>
+                  {resultsLabels.door} {index + 1}: {discount} mm
+                </p>
+              ))}
+            </Box>
           </div>
         </Box>
-        <Box variant="blue">
-          <div>
-            <h3 className="font-bold">{resultsLabels.glassDimensions}</h3>
-            <div>
+        <Box className="flex w-full flex-col gap-4" variant="blue">
+          <h3 className="flex gap-2 font-bold">
+            <LucideCalculator />
+            {resultsLabels.glassDimensions}
+          </h3>
+          <div className="flex grid-cols-3 flex-col gap-4 sm:grid">
+            <Box variant="orange">
               <h4 className="font-bold">Painéis:</h4>
               <p>Largura: {data.finalResults.panelsWidth}mm</p>
               <p>Altura: {data.finalResults.finalHeight}mm</p>
-              {!!data.finalResults.doorsWidths &&
-                data.finalResults.doorsWidths.map((item) => (
-                  <div key={item.id}>
-                    <h4 className="font-bold">Porta {item.id}:</h4>
-                    <p>Largura: {item.width}mm</p>
-                    <p>Altura: {data.finalResults.finalHeight}mm</p>
-                  </div>
-                ))}
-            </div>
+            </Box>
+            {!!data.finalResults.doorsWidths &&
+              data.finalResults.doorsWidths.map((item) => (
+                <Box key={item.id} variant="orange">
+                  <h4 className="font-bold">Porta {item.id}:</h4>
+                  <p>Largura: {item.width}mm</p>
+                  <p>Altura: {data.finalResults.finalHeight}mm</p>
+                </Box>
+              ))}
           </div>
         </Box>
       </div>
     </div>
-  );
+  )
 
   return (
     <div className="flex w-full flex-col gap-4">
@@ -160,7 +176,7 @@ export const Results = ({ resultsLabels, productType }: ResultsProps) => {
           lockDiscounts,
           finalResults: finalResultsA,
         },
-        isVDPLVDC ? "Lado A" : "",
+        isVDPLVDC ? 'Lado A' : ''
       )}
       {isVDPLVDC && (
         <div className="mt-8">
@@ -173,10 +189,10 @@ export const Results = ({ resultsLabels, productType }: ResultsProps) => {
               lockDiscounts: lockDiscountsB,
               finalResults: finalResultsB,
             },
-            "Lado B",
+            'Lado B'
           )}
         </div>
       )}
     </div>
-  );
-};
+  )
+}

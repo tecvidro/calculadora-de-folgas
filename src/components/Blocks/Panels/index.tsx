@@ -1,8 +1,8 @@
-import { useState } from "react";
-import { Box } from "@/components/shared/Box";
-import { InputNumber } from "@/components/shared/InputNumber";
-import { useCalculator } from "@/context/calculator-context";
-import type { PanelsProps } from "@/Types/types";
+import { useState } from 'react'
+import { Box } from '@/components/shared/Box'
+import { InputNumber } from '@/components/shared/InputNumber'
+import { useCalculator } from '@/context/calculator-context'
+import type { PanelsProps } from '@/Types/types'
 
 export default function Panels({
   panelsCount: initialPanelsCount,
@@ -11,44 +11,44 @@ export default function Panels({
   doorsCount: initialDoorsCount,
   doorsDescription,
   doorsLabel,
-  side = "A",
+  side = 'A',
 }: PanelsProps) {
   const { setPanelCount, setDoorsCount, setPanelCountB, setDoorsCountB } =
-    useCalculator();
-  const [panelsCount, setLocalPanelsCount] = useState(initialPanelsCount);
-  const [doorsCount, setLocalDoorsCount] = useState(initialDoorsCount);
+    useCalculator()
+  const [panelsCount, setLocalPanelsCount] = useState(initialPanelsCount)
+  const [doorsCount, setLocalDoorsCount] = useState(initialDoorsCount)
 
   const handlePanelCountChange = (value: number) => {
-    setLocalPanelsCount(value);
+    setLocalPanelsCount(value)
     switch (side) {
-      case "A":
-        setPanelCount(value);
-        break;
-      case "B":
-        setPanelCountB(value);
-        break;
+      case 'A':
+        setPanelCount(value)
+        break
+      case 'B':
+        setPanelCountB(value)
+        break
       default:
-        return null;
+        return null
     }
-  };
+  }
 
   const handleDoorsCountChange = (value: number) => {
-    setLocalDoorsCount(value);
+    setLocalDoorsCount(value)
     switch (side) {
-      case "A":
-        setDoorsCount(value);
-        break;
-      case "B":
-        setDoorsCountB(value);
-        break;
+      case 'A':
+        setDoorsCount(value)
+        break
+      case 'B':
+        setDoorsCountB(value)
+        break
       default:
-        return null;
+        return null
     }
-  };
+  }
 
   return (
-    <Box className="flex flex-col gap-4">
-      <form>
+    <Box className="@container flex flex-col gap-4">
+      <form className="container flex @2xs:flex-row flex-col justify-between gap-4">
         <InputNumber
           description={panelsDescription}
           label={panelsLabel}
@@ -66,5 +66,5 @@ export default function Panels({
         />
       </form>
     </Box>
-  );
+  )
 }

@@ -49,11 +49,10 @@ export const InputNumber = ({
   }
 
   return (
-    <fieldset className="flex w-full flex-col gap-1 py-2">
+    <fieldset className="flex w-full flex-col gap-2 py-2">
       <label className="font-bold" htmlFor={name}>
         {label}
       </label>
-      {!!description && <div>{description}</div>}
       <div
         aria-disabled={disabled}
         className="flex h-12 items-center gap-1 rounded border p-1 aria-disabled:bg-gray-100 aria-disabled:[&_button]:opacity-0"
@@ -90,6 +89,7 @@ export const InputNumber = ({
           </button>
         )}
       </div>
+      {!!description && <div>{description}</div>}
     </fieldset>
   )
 }

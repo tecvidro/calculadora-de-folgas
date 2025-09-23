@@ -50,7 +50,7 @@ export default function Measures({
     <Box className="@container flex flex-col gap-4">
       <Title>{title}</Title>
       {!!description && <p>{description}</p>}
-      <div className="container flex @lg:flex-row flex-col justify-between gap-4">
+      <div className="container flex @2xs:flex-row flex-col justify-between gap-4">
         <InputNumber
           hasPlusMinusButton={false}
           label={widthLabel}

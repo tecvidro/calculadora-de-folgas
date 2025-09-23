@@ -1,5 +1,6 @@
 'use client'
 
+import { Calculator, RulerDimensionLine } from 'lucide-react'
 import { v4 as uuidv4 } from 'uuid'
 import { Box } from '@/components/shared/Box'
 import { useCalculator } from '@/context/calculator-context'
@@ -92,10 +93,14 @@ export const PrintResults = ({
       {sideLabel && <h3 className="font-bold">{sideLabel}</h3>}
       <div className="grid w-full max-w-7xl grid-cols-2 items-start gap-4">
         <Box className="h-full" variant="dashed">
-          <div className="w-full max-w-5xl">
-            <div className="border-b-1 border-dashed py-4">
-              <h3 className="font-bold">{resultsLabels.infoAndMeasures}</h3>
-              <p>{resultsLabels.numberOfGlasses}</p>
+          <div className="w-full max-w-5xl [&_div]:border-b-1 [&_div]:border-dashed [&_div]:py-4 [&_div]:last-of-type:border-0">
+            <h3 className="flex gap-2 border-b-1 border-dashed pb-4 font-bold">
+              <RulerDimensionLine />
+              {resultsLabels.infoAndMeasures}
+            </h3>
+
+            <div className="">
+              <h4 className="font-bold">{resultsLabels.numberOfGlasses}</h4>
               <p>
                 {resultsLabels.panels}: {data.panelCount}
               </p>
@@ -103,7 +108,7 @@ export const PrintResults = ({
                 {resultsLabels.doors}: {data.doorsCount}
               </p>
             </div>
-            <div className="border-b-1 border-dashed py-4">
+            <div className="">
               <h3 className=" font-bold">{resultsLabels.gapMeasures}</h3>
               <p>
                 {resultsLabels.width}: {data.gapWidth}mm
@@ -123,11 +128,16 @@ export const PrintResults = ({
           </div>
         </Box>
         <Box className="h-full" variant="dashed">
-          <h3 className="font-bold">{resultsLabels.glassDimensions}</h3>
-          <div>
-            <h4 className="font-bold">Painéis:</h4>
-            <p>Largura: {data.finalResults.panelsWidth}mm</p>
-            <p>Altura: {data.finalResults.finalHeight}mm</p>
+          <h3 className="flex gap-2 border-b-1 border-dashed pb-4 font-bold">
+            <Calculator />
+            {resultsLabels.glassDimensions}
+          </h3>
+          <div className="[&_div]:border-b-1 [&_div]:border-dashed [&_div]:py-4 [&_div]:last-of-type:border-0">
+            <div>
+              <h4 className="font-bold">Painéis:</h4>
+              <p>Largura: {data.finalResults.panelsWidth}mm</p>
+              <p>Altura: {data.finalResults.finalHeight}mm</p>
+            </div>
             {!!data.finalResults.doorsWidth &&
               data.finalResults.doorsWidth.map((item) => (
                 <div key={item.id}>

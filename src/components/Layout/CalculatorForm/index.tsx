@@ -5,7 +5,6 @@ import { Results } from '@/components/Layout/Results'
 import { Title } from '@/components/shared/BoxTitle'
 import Button from '@/components/shared/Button'
 import type { Dictionary, Product } from '@/Types/types'
-import ThreeScene from '../ThreeScene'
 
 type CalculatorFormProps = {
   product: Product
@@ -21,7 +20,7 @@ export const CalculatorForm = ({
 }: CalculatorFormProps) => {
   return (
     <div className=" flex w-full max-w-7xl flex-col items-center gap-4">
-      <section className="flex flex-col gap-4 md:grid md:grid-cols-[3fr_5fr]">
+      <section className="flex w-full flex-col gap-4 md:grid md:grid-cols-[1fr_2fr]">
         <div className="flex flex-col gap-4">
           <CalculatorBuilder
             content={product.content}
@@ -47,10 +46,6 @@ export const CalculatorForm = ({
           <Results
             productType={productType}
             resultsLabels={dictionary.globals.resultsLabels}
-          />
-          <ThreeScene
-            loadingText={dictionary.globals.loadinModel.loadingText}
-            loadingTitle={dictionary.globals.loadinModel.loadingTitle}
           />
         </div>
       </section>
