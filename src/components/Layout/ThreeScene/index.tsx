@@ -446,7 +446,7 @@ const ThreeScene = ({ loadingTitle, loadingText }: ThreeSceneProps) => {
 
   return (
     <div className="relative h-full max-h-[700px] min-h-[500px] w-full overflow-hidden rounded bg-gray-100">
-      {isLoading && (
+      {isLoading && !isNotVdpl && (
         <div className=" flex h-full w-full items-center justify-center">
           <div className="flex flex-col items-center gap-5">
             <div className="flex w-full justify-center text-orange">
@@ -476,7 +476,7 @@ const ThreeScene = ({ loadingTitle, loadingText }: ThreeSceneProps) => {
       {isNotVdpl && (
         <div className=" flex h-full w-full items-center justify-center">
           <div>
-            <p>Arquivo não encontrado</p>
+            <p>Arquivo não disponível</p>
           </div>
         </div>
       )}
