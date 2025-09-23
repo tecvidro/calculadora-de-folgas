@@ -17,6 +17,7 @@ import {
   RoomEnvironment,
 } from 'three/examples/jsm/Addons.js'
 import { useCalculator } from '@/context/calculator-context'
+import { useParams } from 'next/navigation'
 
 type ThreeSceneProps = {
   loadingTitle: string
@@ -24,6 +25,8 @@ type ThreeSceneProps = {
 }
 
 const ThreeScene = ({ loadingTitle, loadingText }: ThreeSceneProps) => {
+  const params = useParams()
+  const isNotVdpl = params.products !== 'vdpl-2-portas'
   const {
     gapWidth,
     gapHeight,
@@ -467,6 +470,13 @@ const ThreeScene = ({ loadingTitle, loadingText }: ThreeSceneProps) => {
             <p className="rounded bg-dark-blue px-2 py-1 text-sm text-white">
               {modelsLoaded} de {2 + panelCount} {loadingText}
             </p>
+          </div>
+        </div>
+      )}
+      {isNotVdpl && (
+        <div className=" flex h-full w-full items-center justify-center">
+          <div>
+            <p>Arquivo não encontrado</p>
           </div>
         </div>
       )}
