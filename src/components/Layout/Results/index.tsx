@@ -1,6 +1,11 @@
 import {
+  GalleryHorizontal,
+  GalleryHorizontalEnd,
+  KeyRound,
   Calculator as LucideCalculator,
+  Proportions,
   RulerDimensionLine,
+  SquareStack,
 } from 'lucide-react'
 import { useEffect } from 'react'
 import { v4 as uuidv4 } from 'uuid'
@@ -108,12 +113,15 @@ export const Results = ({ resultsLabels, productType }: ResultsProps) => {
       <div className="flex w-ful flex-col gap-4 ">
         <Box className="flex w-full flex-col gap-4" variant="gray">
           <h3 className="flex gap-2 font-bold">
-            <RulerDimensionLine />
+            <LucideCalculator />
             {resultsLabels.infoAndMeasures}
           </h3>
           <div className="flex flex-col justify-between gap-4 md:flex-row">
-            <Box className="grow-1">
-              <h4 className="font-bold">{resultsLabels.numberOfGlasses}</h4>
+            <Box className="flex grow-1 flex-col gap-2">
+              <h4 className="flex items-center gap-2 font-bold">
+                <SquareStack size={18} />
+                {resultsLabels.numberOfGlasses}
+              </h4>
               <p>
                 {resultsLabels.panels}: {data.panelCount}
               </p>
@@ -121,8 +129,11 @@ export const Results = ({ resultsLabels, productType }: ResultsProps) => {
                 {resultsLabels.doors}: {data.doorsCount}
               </p>
             </Box>
-            <Box className="grow-1">
-              <h4 className="font-bold">{resultsLabels.gapMeasures}</h4>
+            <Box className="flex grow-1 flex-col gap-2">
+              <h4 className="flex items-center gap-2 font-bold">
+                <RulerDimensionLine size={18} />
+                {resultsLabels.gapMeasures}
+              </h4>
               <p>
                 {resultsLabels.width}: {data.gapWidth} mm
               </p>
@@ -130,8 +141,11 @@ export const Results = ({ resultsLabels, productType }: ResultsProps) => {
                 {resultsLabels.height}: {data.gapHeight} mm
               </p>
             </Box>
-            <Box className="grow-1">
-              <h4 className="flex font-bold">{resultsLabels.lockDiscounts}</h4>
+            <Box className="flex grow-1 flex-col gap-2">
+              <h4 className="flex items-center gap-2 font-bold">
+                <KeyRound size={18} />
+                {resultsLabels.lockDiscounts}
+              </h4>
               {data.lockDiscounts.map((discount, index) => (
                 <p key={uuidv4()}>
                   {resultsLabels.door} {index + 1}: {discount} mm
@@ -142,21 +156,38 @@ export const Results = ({ resultsLabels, productType }: ResultsProps) => {
         </Box>
         <Box className="flex w-full flex-col gap-4" variant="blue">
           <h3 className="flex gap-2 font-bold">
-            <LucideCalculator />
+            <Proportions />
             {resultsLabels.glassDimensions}
           </h3>
           <div className="flex grid-cols-3 flex-col gap-4 sm:grid">
-            <Box variant="orange">
-              <h4 className="font-bold">Painéis:</h4>
-              <p>Largura: {data.finalResults.panelsWidth}mm</p>
-              <p>Altura: {data.finalResults.finalHeight}mm</p>
+            <Box className="flex flex-col gap-2" variant="orange">
+              <h4 className="flex items-center gap-2 font-bold">
+                <GalleryHorizontal size={18} /> {resultsLabels.panels}:
+              </h4>
+              <p>
+                {resultsLabels.width}: {data.finalResults.panelsWidth}mm
+              </p>
+              <p>
+                {resultsLabels.height}: {data.finalResults.finalHeight}mm
+              </p>
             </Box>
             {!!data.finalResults.doorsWidths &&
               data.finalResults.doorsWidths.map((item) => (
-                <Box key={item.id} variant="orange">
-                  <h4 className="font-bold">Porta {item.id}:</h4>
-                  <p>Largura: {item.width}mm</p>
-                  <p>Altura: {data.finalResults.finalHeight}mm</p>
+                <Box
+                  className="flex flex-col gap-2"
+                  key={item.id}
+                  variant="orange"
+                >
+                  <h4 className="flex items-center gap-2 font-bold">
+                    <GalleryHorizontalEnd size={18} />
+                    {resultsLabels.door}: {item.id}:
+                  </h4>
+                  <p>
+                    {resultsLabels.width}: {item.width}mm
+                  </p>
+                  <p>
+                    {resultsLabels.height}: {data.finalResults.finalHeight}mm
+                  </p>
                 </Box>
               ))}
           </div>
