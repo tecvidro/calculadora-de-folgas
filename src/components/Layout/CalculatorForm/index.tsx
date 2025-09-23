@@ -48,7 +48,10 @@ export const CalculatorForm = ({
             productType={productType}
             resultsLabels={dictionary.globals.resultsLabels}
           />
-          <ThreeScene />
+          <ThreeScene
+            loadingText={dictionary.globals.loadinModel.loadingText}
+            loadingTitle={dictionary.globals.loadinModel.loadingTitle}
+          />
         </div>
       </section>
     </div>

@@ -9,6 +9,11 @@
       "print": "Printable version",
       "manual": "Download manual"
     },
+    "loadinModel": {
+      "loadingTitle": "Loading...",
+      "loadingText": "models loaded."
+    },
+
     "resultsLabels": {
       "title": "Gap result for",
       "infoAndMeasures": "Information and measurements",

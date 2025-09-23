@@ -9,6 +9,11 @@
       "print": "Versión para imprimir",
       "manual": "Descargar manual"
     },
+    "loadinModel": {
+      "loadingTitle": "Cargando...",
+      "loadingText": "archivos cargados."
+    },
+
     "resultsLabels": {
       "title": "Resultado de holguras para",
       "infoAndMeasures": "Información y medidas",

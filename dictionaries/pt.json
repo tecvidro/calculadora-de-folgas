@@ -9,6 +9,10 @@
       "print": "Versão para impressão",
       "manual": "Baixar manual"
     },
+    "loadinModel": {
+      "loadingTitle": "Carregando...",
+      "loadingText": "modelos carregados."
+    },
     "resultsLabels": {
       "title": "Resultado de folgas para",
       "infoAndMeasures": "Informações e medidas",

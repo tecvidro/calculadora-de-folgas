@@ -18,7 +18,12 @@ import {
 } from 'three/examples/jsm/Addons.js'
 import { useCalculator } from '@/context/calculator-context'
 
-const ThreeScene = () => {
+type ThreeSceneProps = {
+  loadingTitle: string
+  loadingText: string
+}
+
+const ThreeScene = ({ loadingTitle, loadingText }: ThreeSceneProps) => {
   const {
     gapWidth,
     gapHeight,
@@ -123,10 +128,8 @@ const ThreeScene = () => {
       return () => {
         const width = containerElement.clientWidth
         const height = containerElement.clientHeight
-
         perspectiveCamera.aspect = width / height
         perspectiveCamera.updateProjectionMatrix()
-
         webGLRenderer.setSize(width, height)
       }
     },
@@ -411,7 +414,7 @@ const ThreeScene = () => {
       sceneRef.current &&
       cameraRef.current &&
       controlsRef.current &&
-      modelsLoaded >= +panelCount
+      modelsLoaded === 2 + panelCount
     ) {
       const depth = (panelCount + doorsCount) * 0.031
       const center = new Vector3(gapWidth / 2000, gapHeight / 2000, -depth / 2)
@@ -436,11 +439,43 @@ const ThreeScene = () => {
     fitCameraToScene,
   ])
 
+  const isLoading = modelsLoaded < 2 + panelCount
+
   return (
-    <div
-      className="relative h-full max-h-[700px] min-h-[500px] w-full overflow-hidden rounded"
-      ref={containerRef}
-    />
+    <div className="relative h-full max-h-[700px] min-h-[500px] w-full overflow-hidden rounded bg-gray-100">
+      {isLoading && (
+        <div className=" flex h-full w-full items-center justify-center">
+          <div className="flex flex-col items-center gap-5">
+            <div className="flex w-full justify-center text-orange">
+              <svg
+                className="animate-spin"
+                fill="none"
+                height="24"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <title>Loader</title>
+                <path d="M21 12a9 9 0 1 1-6.219-8.56" />
+              </svg>
+            </div>
+            <p className="font-semibold text-lg text-orange">{loadingTitle}</p>
+            <p className="rounded bg-dark-blue px-2 py-1 text-sm text-white">
+              {modelsLoaded} de {2 + panelCount} {loadingText}
+            </p>
+          </div>
+        </div>
+      )}
+      <div
+        className="h-full w-full"
+        ref={containerRef}
+        style={{ visibility: isLoading ? 'hidden' : 'visible' }}
+      />
+    </div>
   )
 }
 
