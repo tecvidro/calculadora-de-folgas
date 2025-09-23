@@ -7,19 +7,12 @@ import {
   RulerDimensionLine,
   SquareStack,
 } from 'lucide-react'
-import { useEffect } from 'react'
+import { useEffect, useMemo } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import { Box } from '@/components/shared/Box'
 import { useCalculator } from '@/context/calculator-context'
 import type { ResultsLabels } from '@/Types/types'
-import { calculator } from '@/utils/calculator'
-
-type CalculatorResults = {
-  panelsWidth: number
-  doorsWidths: { id: number; width: number }[]
-  finalHeight: number
-  doorsWidth: number
-}
+import { calculatorVdpl, calculatorVdpo } from '@/utils/calculator'
 
 type SideData = {
   panelCount: number
@@ -27,7 +20,11 @@ type SideData = {
   gapWidth: number
   gapHeight: number
   lockDiscounts: number[]
-  finalResults: CalculatorResults
+  finalResults: {
+    panelsWidth: number
+    doorsWidths: { id: number; width: number }[]
+    finalHeight: number
+  }
 }
 
 type ResultsProps = {
@@ -48,64 +45,59 @@ export const Results = ({ resultsLabels, productType }: ResultsProps) => {
     gapHeightB,
     lockDiscountsB,
     setFinalHeight,
-    setDoorsWidth,
-    setDoorsWidthB,
+    setDoorsWidths,
+    setDoorsWidthsB,
     setPanelsWidth,
   } = useCalculator()
 
   const isVDPLVDC = productType === 'vdpl-vdc'
 
-  const paramsA = {
-    params: {
-      gap: {
-        width: gapWidth,
-        height: gapHeight,
+  const paramsA = useMemo(
+    () => ({
+      params: {
+        gap: {
+          width: gapWidth,
+          height: gapHeight,
+        },
+        glasses: {
+          panels: panelCount,
+          doors: doorsCount,
+        },
+        lock: lockDiscounts,
       },
-      glasses: {
-        panels: panelCount,
-        doors: doorsCount,
-      },
-      lock: lockDiscounts,
-      adjustments: {
-        profile: 19,
-        transpass: 15,
-        doorAdjustment: 31,
-        heightDiscount: 85,
-      },
-    },
-  }
-  const finalResultsA = calculator(paramsA)
+    }),
+    [gapWidth, gapHeight, panelCount, doorsCount, lockDiscounts]
+  )
+  const finalResultsA = useMemo(() => calculatorVdpl(paramsA), [paramsA])
+  // TODO: Adicionar funcao para usar a calculadora do VDPO ou do VDPL
 
-  const paramsB = {
-    params: {
-      gap: {
-        width: gapWidthB,
-        height: gapHeightB,
+  const paramsB = useMemo(
+    () => ({
+      params: {
+        gap: {
+          width: gapWidthB,
+          height: gapHeightB,
+        },
+        glasses: {
+          panels: panelCountB,
+          doors: doorsCountB,
+        },
+        lock: lockDiscountsB,
       },
-      glasses: {
-        panels: panelCountB,
-        doors: doorsCountB,
-      },
-      lock: lockDiscountsB,
-      adjustments: {
-        profile: 19,
-        transpass: 15,
-        doorAdjustment: 31,
-        heightDiscount: 85,
-      },
-    },
-  }
-  const finalResultsB = calculator(paramsB)
+    }),
+    [gapWidthB, gapHeightB, panelCountB, doorsCountB, lockDiscountsB]
+  )
+  const finalResultsB = useMemo(() => calculatorVdpl(paramsB), [paramsB])
 
   useEffect(() => {
     setFinalHeight(finalResultsA.finalHeight)
-    setDoorsWidth(finalResultsA.doorsWidth)
+    setDoorsWidths(finalResultsA.doorsWidths)
     setPanelsWidth(finalResultsA.panelsWidth)
-  }, [finalResultsA, setFinalHeight, setDoorsWidth, setPanelsWidth])
+  }, [finalResultsA, setFinalHeight, setDoorsWidths, setPanelsWidth])
 
   useEffect(() => {
-    setDoorsWidthB(finalResultsB.doorsWidth)
-  }, [finalResultsB, setDoorsWidthB])
+    setDoorsWidthsB(finalResultsB.doorsWidths)
+  }, [finalResultsB, setDoorsWidthsB])
 
   const renderResults = (data: SideData, sideLabel: string) => (
     <div className="flex w-full flex-col gap-4">

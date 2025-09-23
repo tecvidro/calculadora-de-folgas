@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from 'uuid'
 import { Box } from '@/components/shared/Box'
 import { useCalculator } from '@/context/calculator-context'
 import type { ResultsLabels } from '@/Types/types'
-import { calculator } from '@/utils/calculator'
+import { calculatorVdpl } from '@/utils/calculator'
 
 type CalculatorResults = {
   panelsWidth: number
@@ -57,15 +57,9 @@ export const PrintResults = ({
         doors: doorsCount,
       },
       lock: lockDiscounts,
-      adjustments: {
-        profile: 19,
-        transpass: 15,
-        doorAdjustment: 31,
-        heightDiscount: 85,
-      },
     },
   }
-  const finalResultsA = calculator(paramsA)
+  const finalResultsA = calculatorVdpl(paramsA)
 
   const paramsB = {
     params: {
@@ -78,15 +72,9 @@ export const PrintResults = ({
         doors: doorsCountB,
       },
       lock: lockDiscountsB,
-      adjustments: {
-        profile: 19,
-        transpass: 15,
-        doorAdjustment: 31,
-        heightDiscount: 85,
-      },
     },
   }
-  const finalResultsB = calculator(paramsB)
+  const finalResultsB = calculatorVdpl(paramsB)
 
   const renderSideResults = (data: SideData, sideLabel: string) => (
     <div className="flex w-full flex-col items-center gap-4">
