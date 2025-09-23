@@ -1,6 +1,6 @@
 'use client'
 
-import { Calculator, RulerDimensionLine } from 'lucide-react'
+import { Calculator, Proportions } from 'lucide-react'
 import { v4 as uuidv4 } from 'uuid'
 import { Box } from '@/components/shared/Box'
 import { useCalculator } from '@/context/calculator-context'
@@ -95,7 +95,7 @@ export const PrintResults = ({
         <Box className="h-full" variant="dashed">
           <div className="w-full max-w-5xl [&_div]:border-b-1 [&_div]:border-dashed [&_div]:py-4 [&_div]:last-of-type:border-0">
             <h3 className="flex gap-2 border-b-1 border-dashed pb-4 font-bold">
-              <RulerDimensionLine />
+              <Calculator />
               {resultsLabels.infoAndMeasures}
             </h3>
 
@@ -129,7 +129,7 @@ export const PrintResults = ({
         </Box>
         <Box className="h-full" variant="dashed">
           <h3 className="flex gap-2 border-b-1 border-dashed pb-4 font-bold">
-            <Calculator />
+            <Proportions />
             {resultsLabels.glassDimensions}
           </h3>
           <div className="[&_div]:border-b-1 [&_div]:border-dashed [&_div]:py-4 [&_div]:last-of-type:border-0">
