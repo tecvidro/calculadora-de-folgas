@@ -1,4 +1,3 @@
-import { v4 as uuidv4 } from 'uuid'
 import { Box } from '@/components/shared/Box'
 import { Title } from '@/components/shared/BoxTitle'
 import { InputNumber } from '@/components/shared/InputNumber'
@@ -20,7 +19,6 @@ export default function Lock({
     useDefaultLockDiscounts,
     lockDiscountsB,
     setLockDiscountsB,
-    useDefaultLockDiscountsB,
   } = useCalculator()
 
   const handleLockChange = (index: number, value: number) => {
@@ -52,17 +50,20 @@ export default function Lock({
         {(useDefaultLockDiscounts || !defaultValues.option
           ? defaultValues.default
           : defaultValues.option
-        ).map((_, i) => (
-          <InputNumber
-            disabled={disabled}
-            hasPlusMinusButton={false}
-            key={uuidv4()}
-            label={`${label} ${i + 1}`}
-            name={`${label}_${i + 1}`}
-            onValueChange={(value) => handleLockChange(i, value)}
-            value={side === 'A' ? lockDiscounts[i] : lockDiscountsB[i]}
-          />
-        ))}
+        ).map((_, i) => {
+          const name = `lock-${i}`
+          return (
+            <InputNumber
+              disabled={disabled}
+              hasPlusMinusButton={false}
+              key={name}
+              label={`${label} ${i + 1}`}
+              name={`${label}_${i + 1}`}
+              onValueChange={(value) => handleLockChange(i, value)}
+              value={side === 'A' ? lockDiscounts[i] : lockDiscountsB[i]}
+            />
+          )
+        })}
       </div>
       {text?.map((item) => (
         <p key={item.index}>{item.text}</p>
