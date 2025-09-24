@@ -68,6 +68,7 @@
         {
           "id": "p1_2vdpo",
           "type": "panel",
+          "side": "A",
           "title": "Number of glasses",
           "panelsLabel": "Number of panels",
           "panelsDescription": "Enter here the number of panels that will be installed between the doors.",
@@ -79,6 +80,7 @@
         {
           "id": "m1_2vdpo",
           "type": "measure",
+          "side": "A",
           "title": "Gap measurements",
           "widthLabel": "Width (mm)",
           "heightLabel": "Height (mm)",
@@ -88,6 +90,7 @@
         {
           "id": "l1_2vdpo",
           "type": "lock",
+          "side": "A",
           "title": "Lock discount",
           "description": "Here you enter the additional measurement, per door, for lock adjustment.",
           "text": [
@@ -102,10 +105,7 @@
           ],
           "label": "Door",
           "defaultValues": {
-            "default": [
-              50,
-              50
-            ]
+            "default": [50, 50]
           },
           "disabled": false
         }
@@ -125,6 +125,7 @@
         {
           "id": "p2_4vdpo",
           "type": "panel",
+          "side": "A",
           "title": "Number of glasses",
           "panelsLabel": "Number of panels",
           "panelsDescription": "Enter here the number of panels that will be installed between the doors.",
@@ -136,6 +137,7 @@
         {
           "id": "m2_4vdpo",
           "type": "measure",
+          "side": "A",
           "title": "Gap measurements",
           "widthLabel": "Width (mm)",
           "heightLabel": "Height (mm)",
@@ -145,6 +147,7 @@
         {
           "id": "l2_4vdpo",
           "type": "lock",
+          "side": "A",
           "title": "Lock discount",
           "description": "Here you enter the additional measurement, per door, for lock adjustment.",
           "text": [
@@ -159,12 +162,7 @@
           ],
           "label": "Door",
           "defaultValues": {
-            "default": [
-              50,
-              50,
-              50,
-              50
-            ]
+            "default": [50, 50, 50, 50]
           },
           "disabled": false
         }
@@ -184,6 +182,7 @@
         {
           "id": "p3_2vdpl",
           "type": "panel",
+          "side": "A",
           "title": "Number of glasses",
           "panelsLabel": "Number of panels",
           "panelsDescription": "Enter here the number of panels that will be installed between the doors.",
@@ -195,6 +194,7 @@
         {
           "id": "m3_2vdpl",
           "type": "measure",
+          "side": "A",
           "title": "Gap measurements",
           "widthLabel": "Width (mm)",
           "heightLabel": "Height (mm)",
@@ -204,6 +204,7 @@
         {
           "id": "md1_2vpl",
           "type": "model",
+          "side": "A",
           "title": "Handle model for the doors",
           "label": "Select an option",
           "description": "",
@@ -221,6 +222,7 @@
         {
           "id": "l3_2vdpl",
           "type": "lock",
+          "side": "A",
           "title": "Lock discount",
           "description": "The measurements are automatically filled according to the handle option.",
           "text": [
@@ -231,14 +233,8 @@
           ],
           "label": "Door",
           "defaultValues": {
-            "default": [
-              50,
-              50
-            ],
-            "option": [
-              100,
-              100
-            ]
+            "default": [50, 50],
+            "option": [100, 100]
           },
           "disabled": true
         }
@@ -258,6 +254,7 @@
         {
           "id": "p4_vdsu",
           "type": "panel",
+          "side": "A",
           "title": "Number of glasses",
           "panelsLabel": "Number of panels",
           "panelsDescription": "Enter here the number of panels that will be installed between the doors.",
@@ -269,6 +266,7 @@
         {
           "id": "m4_vdsu",
           "type": "measure",
+          "side": "A",
           "title": "Gap measurements",
           "widthLabel": "Width (mm)",
           "heightLabel": "Height (mm)",
@@ -278,17 +276,13 @@
         {
           "id": "l4_vdsu",
           "type": "lock",
+          "side": "A",
           "title": "Lock discount",
           "description": "This is the additional measurement for doors with side profile with built-in lock. Non-editable.",
           "text": [],
           "label": "Door",
           "defaultValues": {
-            "default": [
-              50,
-              50,
-              50,
-              50
-            ]
+            "default": [50, 50, 50, 50]
           },
           "disabled": true
         }
@@ -308,6 +302,7 @@
         {
           "id": "md2_alv",
           "type": "model",
+          "side": "A",
           "title": "Door model",
           "label": "Select an option",
           "description": "",
@@ -325,6 +320,7 @@
         {
           "id": "p5_alv",
           "type": "panel",
+          "side": "A",
           "title": "Number of glasses",
           "panelsLabel": "Number of panels",
           "panelsDescription": "Enter here the number of panels that will be installed between the doors.",
@@ -336,6 +332,7 @@
         {
           "id": "m5_alv",
           "type": "measure",
+          "side": "A",
           "title": "Gap measurements",
           "description": "ATTENTION! Here you only enter the width of the gap opening. Do not consider the wall measurement.",
           "widthLabel": "Width (mm)",
@@ -346,6 +343,7 @@
         {
           "id": "l5_alv",
           "type": "lock",
+          "side": "A",
           "title": "Lock discount",
           "description": "This is the additional measurement for the door... Non-editable!",
           "text": [
@@ -356,12 +354,8 @@
           ],
           "label": "Door",
           "defaultValues": {
-            "default": [
-              50
-            ],
-            "option": [
-              100
-            ]
+            "default": [50],
+            "option": [100]
           },
           "disabled": true
         }
@@ -381,6 +375,7 @@
         {
           "id": "md3_vdc",
           "type": "model",
+          "side": "A",
           "title": "Door model",
           "label": "Here you choose the type of assembly for your project.",
           "description": "",
@@ -398,6 +393,7 @@
         {
           "id": "p6a_vdc",
           "type": "panel",
+          "side": "A",
           "title": "Number of glasses - Side A",
           "panelsLabel": "Number of panels",
           "panelsDescription": "Enter here the number of panels that will be installed between the doors.",
@@ -409,6 +405,7 @@
         {
           "id": "m6a_vdc",
           "type": "measure",
+          "side": "A",
           "title": "Gap measurements - Side A",
           "description": "",
           "widthLabel": "Width (mm)",
@@ -419,25 +416,21 @@
         {
           "id": "l6a_vdc",
           "type": "lock",
+          "side": "A",
           "title": "Lock discount - Side A",
           "description": "This is the additional measurement for doors with side profile with built-in lock. Non-editable.",
           "text": [],
           "label": "Door",
           "defaultValues": {
-            "default": [
-              50,
-              50
-            ],
-            "option": [
-              100,
-              100
-            ]
+            "default": [50, 50],
+            "option": [100, 100]
           },
           "disabled": true
         },
         {
           "id": "p6b_vdc",
           "type": "panel",
+          "side": "B",
           "title": "Number of glasses - Side B",
           "panelsLabel": "Number of panels",
           "panelsDescription": "Enter here the number of panels that will be installed between the doors.",
@@ -449,6 +442,7 @@
         {
           "id": "m6b_vdc",
           "type": "measure",
+          "side": "B",
           "title": "Gap measurements - Side B",
           "description": "",
           "widthLabel": "Width (mm)",
@@ -459,19 +453,14 @@
         {
           "id": "l6b_vdc",
           "type": "lock",
+          "side": "B",
           "title": "Lock discount - Side B",
           "description": "This is the additional measurement for doors with side profile with built-in lock. Non-editable.",
           "text": [],
           "label": "Door",
           "defaultValues": {
-            "default": [
-              50,
-              50
-            ],
-            "option": [
-              100,
-              100
-            ]
+            "default": [50, 50],
+            "option": [100, 100]
           },
           "disabled": true
         }
@@ -480,3 +469,4 @@
     }
   ]
 }
+

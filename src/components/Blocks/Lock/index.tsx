@@ -51,7 +51,7 @@ export default function Lock({
           ? defaultValues.default
           : defaultValues.option
         ).map((_, i) => {
-          const name = `lock-${i}`
+          const name = `lock-${i + 1}`
           return (
             <InputNumber
               disabled={disabled}

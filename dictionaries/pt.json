@@ -68,6 +68,7 @@
         {
           "id": "p1_2vdpo",
           "type": "panel",
+          "side": "A",
           "title": "Número de vidros",
           "panelsLabel": "Número de painéis",
           "panelsDescription": "Digite aqui o número de painéis que serão instalados entre as portas.",
@@ -79,6 +80,7 @@
         {
           "id": "m1_2vdpo",
           "type": "measure",
+          "side": "A",
           "title": "Medidas do vão",
           "widthLabel": "Largura (mm)",
           "heightLabel": "Altura (mm)",
@@ -88,6 +90,7 @@
         {
           "id": "l1_2vdpo",
           "type": "lock",
+          "side": "A",
           "title": "Desconto de fechadura",
           "description": "Aqui você coloca a medida a mais, por porta, para ajuste da fechadura.",
           "text": [
@@ -102,10 +105,7 @@
           ],
           "label": "Porta",
           "defaultValues": {
-            "default": [
-              50,
-              50
-            ]
+            "default": [50, 50]
           },
           "disabled": false
         }
@@ -125,6 +125,7 @@
         {
           "id": "p2_4vdpo",
           "type": "panel",
+          "side": "A",
           "title": "Número de vidros",
           "panelsLabel": "Número de painéis",
           "panelsDescription": "Digite aqui o número de painéis que serão instalados entre as portas.",
@@ -136,6 +137,7 @@
         {
           "id": "m2_4vdpo",
           "type": "measure",
+          "side": "A",
           "title": "Medidas do vão",
           "widthLabel": "Largura (mm)",
           "heightLabel": "Altura (mm)",
@@ -145,6 +147,7 @@
         {
           "id": "l2_4vdpo",
           "type": "lock",
+          "side": "A",
           "title": "Desconto de fechadura",
           "description": "Aqui você coloca a medida a mais, por porta, para ajuste da fechadura.",
           "text": [
@@ -159,12 +162,7 @@
           ],
           "label": "Porta",
           "defaultValues": {
-            "default": [
-              50,
-              50,
-              50,
-              50
-            ]
+            "default": [50, 50, 50, 50]
           },
           "disabled": false
         }
@@ -184,6 +182,7 @@
         {
           "id": "p3_2vdpl",
           "type": "panel",
+          "side": "A",
           "title": "Número de vidros",
           "panelsLabel": "Número de painéis",
           "panelsDescription": "Digite aqui o número de painéis que serão instalados entre as portas.",
@@ -195,6 +194,7 @@
         {
           "id": "m3_2vdpl",
           "type": "measure",
+          "side": "A",
           "title": "Medidas do vão",
           "widthLabel": "Largura (mm)",
           "heightLabel": "Altura (mm)",
@@ -204,6 +204,7 @@
         {
           "id": "md1_2vpl",
           "type": "model",
+          "side": "A",
           "title": "Modelo de puxador para as portas",
           "label": "Selecione uma opção",
           "description": "",
@@ -221,6 +222,7 @@
         {
           "id": "l3_2vdpl",
           "type": "lock",
+          "side": "A",
           "title": "Desconto de fechadura",
           "description": "As medidas são preenchidas automaticamente de acordo com a opção de puxador.",
           "text": [
@@ -231,14 +233,8 @@
           ],
           "label": "Porta",
           "defaultValues": {
-            "default": [
-              50,
-              50
-            ],
-            "option": [
-              100,
-              100
-            ]
+            "default": [50, 50],
+            "option": [100, 100]
           },
           "disabled": true
         }
@@ -258,6 +254,7 @@
         {
           "id": "p4_vdsu",
           "type": "panel",
+          "side": "A",
           "title": "Número de vidros",
           "panelsLabel": "Número de painéis",
           "panelsDescription": "Digite aqui o número de painéis que serão instalados entre as portas.",
@@ -269,6 +266,7 @@
         {
           "id": "m4_vdsu",
           "type": "measure",
+          "side": "A",
           "title": "Medidas do vão",
           "widthLabel": "Largura (mm)",
           "heightLabel": "Altura (mm)",
@@ -278,17 +276,13 @@
         {
           "id": "l4_vdsu",
           "type": "lock",
+          "side": "A",
           "title": "Desconto de fechadura",
           "description": "Esta é a medida a mais para as portas com perfil lateral de fechadura embutida. Não editável.",
           "text": [],
           "label": "Porta",
           "defaultValues": {
-            "default": [
-              50,
-              50,
-              50,
-              50
-            ]
+            "default": [50, 50, 50, 50]
           },
           "disabled": true
         }
@@ -308,6 +302,7 @@
         {
           "id": "md2_alv",
           "type": "model",
+          "side": "A",
           "title": "Modelo de porta",
           "label": "Selecione uma opção",
           "description": "",
@@ -325,6 +320,7 @@
         {
           "id": "p5_alv",
           "type": "panel",
+          "side": "A",
           "title": "Número de vidros",
           "panelsLabel": "Número de painéis",
           "panelsDescription": "Digite aqui o número de painéis que serão instalados entre as portas.",
@@ -336,6 +332,7 @@
         {
           "id": "m5_alv",
           "type": "measure",
+          "side": "A",
           "title": "Medidas do vão",
           "description": "ATENÇÃO! Aqui você digita apenas a largura de abertura do vão. Desconsiderar a medida da parede.",
           "widthLabel": "Largura (mm)",
@@ -346,6 +343,7 @@
         {
           "id": "l5_alv",
           "type": "lock",
+          "side": "A",
           "title": "Desconto de fechadura",
           "description": "Esta é a medida à mais para a porta... Não editável!",
           "text": [
@@ -356,12 +354,8 @@
           ],
           "label": "Porta",
           "defaultValues": {
-            "default": [
-              50
-            ],
-            "option": [
-              100
-            ]
+            "default": [50],
+            "option": [100]
           },
           "disabled": true
         }
@@ -381,6 +375,7 @@
         {
           "id": "md3_vdc",
           "type": "model",
+          "side": "A",
           "title": "Modelo de porta",
           "label": "Aqui você escolhe o tipo de montagem do seu projeto.",
           "description": "",
@@ -398,6 +393,7 @@
         {
           "id": "p6a_vdc",
           "type": "panel",
+          "side": "A",
           "title": "Número de vidros - Lado A",
           "panelsLabel": "Número de painéis",
           "panelsDescription": "Digite aqui o número de painéis que serão instalados entre as portas.",
@@ -409,6 +405,7 @@
         {
           "id": "m6a_vdc",
           "type": "measure",
+          "side": "A",
           "title": "Medidas do vão - Lado A",
           "description": "",
           "widthLabel": "Largura (mm)",
@@ -419,25 +416,21 @@
         {
           "id": "l6a_vdc",
           "type": "lock",
+          "side": "A",
           "title": "Desconto de fechadura - Lado A",
           "description": "Esta é a medida a mais para as portas com perfil lateral de fechadura embutida. Não editável.",
           "text": [],
           "label": "Porta",
           "defaultValues": {
-            "default": [
-              50,
-              50
-            ],
-            "option": [
-              100,
-              100
-            ]
+            "default": [50, 50],
+            "option": [100, 100]
           },
           "disabled": true
         },
         {
           "id": "p6b_vdc",
           "type": "panel",
+          "side": "B",
           "title": "Número de vidros - Lado B",
           "panelsLabel": "Número de painéis",
           "panelsDescription": "Digite aqui o número de painéis que serão instalados entre as portas.",
@@ -449,6 +442,7 @@
         {
           "id": "m6b_vdc",
           "type": "measure",
+          "side": "B",
           "title": "Medidas do vão - Lado B",
           "description": "",
           "widthLabel": "Largura (mm)",
@@ -459,19 +453,14 @@
         {
           "id": "l6b_vdc",
           "type": "lock",
+          "side": "B",
           "title": "Desconto de fechadura - Lado B",
           "description": "Esta é a medida a mais para as portas com perfil lateral de fechadura embutida. Não editável.",
           "text": [],
           "label": "Porta",
           "defaultValues": {
-            "default": [
-              50,
-              50
-            ],
-            "option": [
-              100,
-              100
-            ]
+            "default": [50, 50],
+            "option": [100, 100]
           },
           "disabled": true
         }
@@ -480,3 +469,4 @@
     }
   ]
 }
+
