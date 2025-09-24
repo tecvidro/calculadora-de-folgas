@@ -45,13 +45,17 @@ interface CalculatorContextType {
   setDoorsWidths: (
     width:
       | { id: number; width: number }[]
-      | ((prev: { id: number; width: number }[]) => { id: number; width: number }[])
+      | ((
+          prev: { id: number; width: number }[]
+        ) => { id: number; width: number }[])
   ) => void
   doorsWidthsB: { id: number; width: number }[]
   setDoorsWidthsB: (
     width:
       | { id: number; width: number }[]
-      | ((prev: { id: number; width: number }[]) => { id: number; width: number }[])
+      | ((
+          prev: { id: number; width: number }[]
+        ) => { id: number; width: number }[])
   ) => void
   panelsWidth: number
   setPanelsWidth: (width: number) => void
@@ -109,8 +113,12 @@ export const CalculatorProvider = ({
   )
 
   const [finalHeight, setFinalHeight] = useState<number>(0)
-  const [doorsWidths, setDoorsWidths] = useState<{ id: number; width: number }[]>([])
-  const [doorsWidthsB, setDoorsWidthsB] = useState<{ id: number; width: number }[]>([])
+  const [doorsWidths, setDoorsWidths] = useState<
+    { id: number; width: number }[]
+  >([])
+  const [doorsWidthsB, setDoorsWidthsB] = useState<
+    { id: number; width: number }[]
+  >([])
   const [panelsWidth, setPanelsWidth] = useState<number>(0)
 
   const isReady = gapWidth > 0 && gapHeight >= 0

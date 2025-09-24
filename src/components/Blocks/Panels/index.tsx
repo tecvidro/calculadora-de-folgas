@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import { Box } from '@/components/shared/Box'
+import { Title } from '@/components/shared/BoxTitle'
 import { InputNumber } from '@/components/shared/InputNumber'
 import { useCalculator } from '@/context/calculator-context'
 import type { PanelsProps } from '@/Types/types'
-import { Title } from '@/components/shared/BoxTitle'
 
 export default function Panels({
   title,

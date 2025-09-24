@@ -28,19 +28,19 @@ export const InputOptions = ({
       {!!description && <div>{description}</div>}
       <div className="flex items-center gap-4 rounded border p-2">
         {options.map((option) => (
-          <div key={String(option.value)} className="flex items-center gap-2">
+          <div className="flex items-center gap-2" key={String(option.value)}>
             <input
-              type="radio"
+              checked={value === option.value}
+              className="cursor-pointer"
               id={`${name}-${String(option.value)}`}
               name={name}
-              value={String(option.value)}
-              checked={value === option.value}
               onChange={handleChange}
-              className="cursor-pointer"
+              type="radio"
+              value={String(option.value)}
             />
             <label
-              htmlFor={`${name}-${String(option.value)}`}
               className="cursor-pointer"
+              htmlFor={`${name}-${String(option.value)}`}
             >
               {option.label}
             </label>
@@ -50,5 +50,3 @@ export const InputOptions = ({
     </fieldset>
   )
 }
-
-

@@ -1,3 +1,4 @@
+// biome-ignore-all lint: ignoring this config file
 import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {

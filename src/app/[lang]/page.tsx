@@ -1,14 +1,14 @@
-import { Title } from "@/components/shared/BoxTitle";
-import { Card } from "@/components/shared/Card";
-import type { Locale } from "@/i18n-config";
-import { getDictionary } from "@/utils/get-dictionary";
+import { Title } from '@/components/shared/BoxTitle'
+import { Card } from '@/components/shared/Card'
+import type { Locale } from '@/i18n-config'
+import { getDictionary } from '@/utils/get-dictionary'
 
 export default async function Home(props: {
-  params: Promise<{ lang: Locale }>;
+  params: Promise<{ lang: Locale }>
 }) {
-  const params = await props.params;
+  const params = await props.params
 
-  const dictionary = await getDictionary(params.lang);
+  const dictionary = await getDictionary(params.lang)
   return (
     <div className="flex flex-col items-center gap-4 pb-4">
       <Title align="center" variant="sectionTitle">
@@ -26,5 +26,5 @@ export default async function Home(props: {
           ))}
       </div>
     </div>
-  );
+  )
 }
