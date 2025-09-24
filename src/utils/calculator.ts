@@ -63,11 +63,11 @@ export const calculatorVdpo = ({ params }: Calculator) => {
     heightDiscount: 85,
   }
 
-  if (doorsCount !== 2 && doorsCount !== 4) {
+  if (doorsCount !== 1 && doorsCount !== 2 && doorsCount !== 4) {
     throw new Error('ERRD48O')
   }
 
-  const totalProfileDiscount = doorsCount === 2 ? 10 : 16 // desconto perfis
+  const totalProfileDiscount = doorsCount === 4 ? 16 : 10 // desconto perfis
 
   const totalTranpass = adjustments.transpass * (panelsCount + 2) // calcular total de transpasses (transpasse * total de painéis + 2)
 
