@@ -1,6 +1,6 @@
 'use client'
 import { Minus, Plus } from 'lucide-react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 type InputNumberProps = {
   name: string
@@ -22,6 +22,10 @@ export const InputNumber = ({
   onValueChange,
 }: InputNumberProps) => {
   const [inputValue, setInputValue] = useState(value)
+
+  useEffect(() => {
+    setInputValue(value)
+  }, [value])
 
   const handleIncrement = () => {
     const newValue = inputValue + 1

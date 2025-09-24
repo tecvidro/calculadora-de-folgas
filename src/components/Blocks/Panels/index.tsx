@@ -3,8 +3,10 @@ import { Box } from '@/components/shared/Box'
 import { InputNumber } from '@/components/shared/InputNumber'
 import { useCalculator } from '@/context/calculator-context'
 import type { PanelsProps } from '@/Types/types'
+import { Title } from '@/components/shared/BoxTitle'
 
 export default function Panels({
+  title,
   panelsCount: initialPanelsCount,
   panelsDescription,
   panelsLabel,
@@ -48,6 +50,7 @@ export default function Panels({
 
   return (
     <Box className="@container flex flex-col gap-4">
+      <Title>{title}</Title>
       <form className="container flex @2xs:flex-row flex-col justify-between gap-4">
         <InputNumber
           description={panelsDescription}
