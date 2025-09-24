@@ -26,6 +26,7 @@ export default async function PrintPage(props: {
 
       <div className="flex w-full flex-col gap-2">
         <PrintResults
+          calculatorType={product.calculatorType}
           productType={product.slug}
           resultsLabels={dictionary.globals.resultsLabels}
         />

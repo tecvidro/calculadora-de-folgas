@@ -1,11 +1,11 @@
 'use client'
 
 import { Calculator, Proportions } from 'lucide-react'
-import { v4 as uuidv4 } from 'uuid'
+import { useMemo } from 'react'
 import { Box } from '@/components/shared/Box'
 import { useCalculator } from '@/context/calculator-context'
-import type { ResultsLabels } from '@/Types/types'
-import { calculatorVdpl } from '@/utils/calculator'
+import type { CalculatorTypes, ResultsLabels } from '@/Types/types'
+import { calculatorVdpl, calculatorVdpo } from '@/utils/calculator'
 
 type CalculatorResults = {
   panelsWidth: number
@@ -25,11 +25,13 @@ type SideData = {
 type PrintResultsProps = {
   resultsLabels: ResultsLabels
   productType: string
+  calculatorType: CalculatorTypes
 }
 
 export const PrintResults = ({
   resultsLabels,
   productType,
+  calculatorType,
 }: PrintResultsProps) => {
   const {
     panelCount,
@@ -46,36 +48,53 @@ export const PrintResults = ({
 
   const isVDPLVDC = productType === 'vdpl-vdc'
 
-  const paramsA = {
-    params: {
-      gap: {
-        width: gapWidth,
-        height: gapHeight,
+  const paramsA = useMemo(
+    () => ({
+      params: {
+        gap: {
+          width: gapWidth,
+          height: gapHeight,
+        },
+        glasses: {
+          panels: panelCount,
+          doors: doorsCount,
+        },
+        lock: lockDiscounts,
       },
-      glasses: {
-        panels: panelCount,
-        doors: doorsCount,
-      },
-      lock: lockDiscounts,
-    },
-  }
-  const finalResultsA = calculatorVdpl(paramsA)
+    }),
+    [gapWidth, gapHeight, panelCount, doorsCount, lockDiscounts]
+  )
 
-  const paramsB = {
-    params: {
-      gap: {
-        width: gapWidthB,
-        height: gapHeightB,
+  const finalResultsA = useMemo(
+    () =>
+      calculatorType === 'vdpo'
+        ? calculatorVdpo(paramsA)
+        : calculatorVdpl(paramsA),
+    [paramsA, calculatorType]
+  )
+  const paramsB = useMemo(
+    () => ({
+      params: {
+        gap: {
+          width: gapWidthB,
+          height: gapHeightB,
+        },
+        glasses: {
+          panels: panelCountB,
+          doors: doorsCountB,
+        },
+        lock: lockDiscountsB,
       },
-      glasses: {
-        panels: panelCountB,
-        doors: doorsCountB,
-      },
-      lock: lockDiscountsB,
-    },
-  }
-  const finalResultsB = calculatorVdpl(paramsB)
-
+    }),
+    [gapWidthB, gapHeightB, panelCountB, doorsCountB, lockDiscountsB]
+  )
+  const finalResultsB = useMemo(
+    () =>
+      calculatorType === 'vdpo'
+        ? calculatorVdpo(paramsB)
+        : calculatorVdpl(paramsB),
+    [paramsB, calculatorType]
+  )
   const renderSideResults = (data: SideData, sideLabel: string) => (
     <div className="flex w-full flex-col items-center gap-4">
       {sideLabel && <h3 className="font-bold">{sideLabel}</h3>}
@@ -107,11 +126,14 @@ export const PrintResults = ({
             </div>
             <div className="py-4">
               <h3 className="font-bold">{resultsLabels.lockDiscounts}</h3>
-              {data.lockDiscounts.map((discount, index) => (
-                <p key={uuidv4()}>
-                  {resultsLabels.door} {index + 1}: {discount}mm
-                </p>
-              ))}
+              {data.lockDiscounts.map((discount, index) => {
+                const name = `porta-${index}`
+                return (
+                  <p key={name}>
+                    {resultsLabels.door} {index + 1}: {discount}mm
+                  </p>
+                )
+              })}
             </div>
           </div>
         </Box>
