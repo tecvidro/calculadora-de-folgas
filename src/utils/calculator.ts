@@ -34,14 +34,14 @@ export const calculatorVdpl = ({ params }: Calculator) => {
   const totalGap =
     gapWidth - totalProfileDiscount + (totalTranpass - lockDiscounts) // calcular o vão total com os descontos
 
-  const finalHeight = Math.floor(gapHeight - adjustments.heightDiscount) // calcular altura
+  const finalHeight = Math.ceil(gapHeight - adjustments.heightDiscount) // calcular altura
 
-  const panelsWidth = Math.floor(totalGap / totalGlassesCount) // calcular a largura dos painéis (vão / nº total de vidros)
+  const panelsWidth = Math.ceil(totalGap / totalGlassesCount) // calcular a largura dos painéis (vão / nº total de vidros)
 
   const doorsWidths = Array.from({ length: doorsCount }, (_, index) => {
     const doorWidth =
       panelsWidth + params.lock[index] - adjustments.doorAdjustment // calcular a largura das portas (lagura painel + desconto fechadura - ajustes fas portas)
-    return { id: index + 1, width: Math.floor(doorWidth) }
+    return { id: index + 1, width: Math.ceil(doorWidth) }
   })
 
   return {

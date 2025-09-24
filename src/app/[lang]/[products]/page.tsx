@@ -1,20 +1,20 @@
-import { CalculatorForm } from "@/components/Layout/CalculatorForm";
-import { Alert } from "@/components/shared/Alert";
-import { Title } from "@/components/shared/BoxTitle";
-import type { Locale } from "@/i18n-config";
-import { getDictionary } from "@/utils/get-dictionary";
+import { CalculatorForm } from '@/components/Layout/CalculatorForm'
+import { Alert } from '@/components/shared/Alert'
+import { Title } from '@/components/shared/BoxTitle'
+import type { Locale } from '@/i18n-config'
+import { getDictionary } from '@/utils/get-dictionary'
 
 export default async function ProductCalculator(props: {
-  params: Promise<{ lang: Locale; products: string }>;
+  params: Promise<{ lang: Locale; products: string }>
 }) {
-  const params = await props.params;
-  const dictionary = await getDictionary(params.lang);
+  const params = await props.params
+  const dictionary = await getDictionary(params.lang)
   const product = dictionary.products.find(
-    (item) => item.slug === params.products,
-  );
+    (item) => item.slug === params.products
+  )
 
   if (!product) {
-    return <div>Product not found</div>;
+    return <div>Product not found</div>
   }
 
   return (
@@ -26,10 +26,11 @@ export default async function ProductCalculator(props: {
       <Alert text={dictionary.globals.alert} />
       <CalculatorForm
         alertText={dictionary.globals.alert}
+        calculatorType={product.calculatorType}
         dictionary={dictionary}
         product={product}
         productType={product.slug}
       />
     </div>
-  );
+  )
 }

@@ -13,7 +13,6 @@
       "loadingTitle": "Cargando...",
       "loadingText": "archivos cargados."
     },
-
     "resultsLabels": {
       "title": "Resultado de holguras para",
       "infoAndMeasures": "Información y medidas",
@@ -103,11 +102,15 @@
           ],
           "label": "Puerta",
           "defaultValues": {
-            "default": [50, 50]
+            "default": [
+              50,
+              50
+            ]
           },
           "disabled": false
         }
-      ]
+      ],
+      "calculatorType": "vdpo"
     },
     {
       "name": "VDPO 4 PUERTAS",
@@ -156,11 +159,17 @@
           ],
           "label": "Puerta",
           "defaultValues": {
-            "default": [50, 50, 50, 50]
+            "default": [
+              50,
+              50,
+              50,
+              50
+            ]
           },
           "disabled": false
         }
-      ]
+      ],
+      "calculatorType": "vdpo"
     },
     {
       "name": "VDPL 2 PUERTAS",
@@ -199,8 +208,14 @@
           "label": "Seleccione una opción",
           "description": "",
           "options": [
-            { "label": "Tirador", "value": "default" },
-            { "label": "De embutir en el perfil", "value": "option" }
+            {
+              "label": "Tirador",
+              "value": "default"
+            },
+            {
+              "label": "De embutir en el perfil",
+              "value": "option"
+            }
           ]
         },
         {
@@ -216,12 +231,19 @@
           ],
           "label": "Puerta",
           "defaultValues": {
-            "default": [50, 50],
-            "option": [100, 100]
+            "default": [
+              50,
+              50
+            ],
+            "option": [
+              100,
+              100
+            ]
           },
           "disabled": true
         }
-      ]
+      ],
+      "calculatorType": "vdpl"
     },
     {
       "name": "VDPL + VDSU",
@@ -261,11 +283,17 @@
           "text": [],
           "label": "Puerta",
           "defaultValues": {
-            "default": [50, 50, 50, 50]
+            "default": [
+              50,
+              50,
+              50,
+              50
+            ]
           },
           "disabled": true
         }
-      ]
+      ],
+      "calculatorType": "vdpl"
     },
     {
       "name": "Albañilería",
@@ -284,8 +312,14 @@
           "label": "Seleccione una opción",
           "description": "",
           "options": [
-            { "label": "VDPO", "value": "default" },
-            { "label": "VDPL", "value": "option" }
+            {
+              "label": "VDPO",
+              "value": "default"
+            },
+            {
+              "label": "VDPL",
+              "value": "option"
+            }
           ]
         },
         {
@@ -322,12 +356,17 @@
           ],
           "label": "Puerta",
           "defaultValues": {
-            "default": [50],
-            "option": [100]
+            "default": [
+              50
+            ],
+            "option": [
+              100
+            ]
           },
           "disabled": true
         }
-      ]
+      ],
+      "calculatorType": "vdpo"
     },
     {
       "name": "VDPL + VDC",
@@ -346,8 +385,14 @@
           "label": "Aquí usted escoge el tipo de montaje de su proyecto.",
           "description": "",
           "options": [
-            { "label": "VDPL y VDC", "value": "default" },
-            { "label": "VDPL y VDPL", "value": "option" }
+            {
+              "label": "VDPL y VDC",
+              "value": "default"
+            },
+            {
+              "label": "VDPL y VDPL",
+              "value": "option"
+            }
           ]
         },
         {
@@ -379,8 +424,14 @@
           "text": [],
           "label": "Puerta",
           "defaultValues": {
-            "default": [50, 50],
-            "option": [100, 100]
+            "default": [
+              50,
+              50
+            ],
+            "option": [
+              100,
+              100
+            ]
           },
           "disabled": true
         },
@@ -413,12 +464,19 @@
           "text": [],
           "label": "Puerta",
           "defaultValues": {
-            "default": [50, 50],
-            "option": [100, 100]
+            "default": [
+              50,
+              50
+            ],
+            "option": [
+              100,
+              100
+            ]
           },
           "disabled": true
         }
-      ]
+      ],
+      "calculatorType": "vdpl"
     }
   ]
 }

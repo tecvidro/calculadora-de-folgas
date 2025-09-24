@@ -4,19 +4,21 @@ import { CalculatorBuilder } from '@/components/Blocks/CalculatorBuilder'
 import { Results } from '@/components/Layout/Results'
 import { Title } from '@/components/shared/BoxTitle'
 import Button from '@/components/shared/Button'
-import type { Dictionary, Product } from '@/Types/types'
+import type { CalculatorTypes, Dictionary, Product } from '@/Types/types'
 
 type CalculatorFormProps = {
   product: Product
   alertText: string
   dictionary: Dictionary
   productType: string
+  calculatorType: CalculatorTypes
 }
 
 export const CalculatorForm = ({
   product,
   dictionary,
   productType,
+  calculatorType,
 }: CalculatorFormProps) => {
   return (
     <div className=" flex w-full max-w-7xl flex-col items-center gap-4">
@@ -44,6 +46,7 @@ export const CalculatorForm = ({
             {dictionary.globals.resultsLabels.title} {product.name}
           </Title>
           <Results
+            calculatorType={calculatorType}
             productType={productType}
             resultsLabels={dictionary.globals.resultsLabels}
           />

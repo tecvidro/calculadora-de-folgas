@@ -11,7 +11,7 @@ import { useEffect, useMemo } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import { Box } from '@/components/shared/Box'
 import { useCalculator } from '@/context/calculator-context'
-import type { ResultsLabels } from '@/Types/types'
+import type { CalculatorTypes, ResultsLabels } from '@/Types/types'
 import { calculatorVdpl, calculatorVdpo } from '@/utils/calculator'
 
 type SideData = {
@@ -30,9 +30,14 @@ type SideData = {
 type ResultsProps = {
   resultsLabels: ResultsLabels
   productType: string
+  calculatorType: CalculatorTypes
 }
 
-export const Results = ({ resultsLabels, productType }: ResultsProps) => {
+export const Results = ({
+  resultsLabels,
+  productType,
+  calculatorType,
+}: ResultsProps) => {
   const {
     panelCount,
     doorsCount,
@@ -68,8 +73,13 @@ export const Results = ({ resultsLabels, productType }: ResultsProps) => {
     }),
     [gapWidth, gapHeight, panelCount, doorsCount, lockDiscounts]
   )
-  const finalResultsA = useMemo(() => calculatorVdpl(paramsA), [paramsA])
-  // TODO: Adicionar funcao para usar a calculadora do VDPO ou do VDPL
+  const finalResultsA = useMemo(
+    () =>
+      calculatorType === 'vdpo'
+        ? calculatorVdpo(paramsA)
+        : calculatorVdpl(paramsA),
+    [paramsA, calculatorType]
+  )
 
   const paramsB = useMemo(
     () => ({
@@ -87,7 +97,13 @@ export const Results = ({ resultsLabels, productType }: ResultsProps) => {
     }),
     [gapWidthB, gapHeightB, panelCountB, doorsCountB, lockDiscountsB]
   )
-  const finalResultsB = useMemo(() => calculatorVdpl(paramsB), [paramsB])
+  const finalResultsB = useMemo(
+    () =>
+      calculatorType === 'vdpo'
+        ? calculatorVdpo(paramsB)
+        : calculatorVdpl(paramsB),
+    [paramsB, calculatorType]
+  )
 
   useEffect(() => {
     setFinalHeight(finalResultsA.finalHeight)

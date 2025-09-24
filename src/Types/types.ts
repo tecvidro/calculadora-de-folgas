@@ -55,6 +55,8 @@ export type BlockContentType =
   | ModelProps
   | LockProps
 
+export type CalculatorTypes = 'vdpo' | 'vdpl'
+
 export type CalculatorBuilderProps = {
   content: BlockContentType[]
   productType: string
@@ -64,6 +66,7 @@ export type Product = {
   name: string
   slug: string
   model: string
+  calculatorType: CalculatorTypes
   title: string
   subtitle: string
   description: string
