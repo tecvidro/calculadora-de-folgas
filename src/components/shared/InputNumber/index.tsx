@@ -55,7 +55,7 @@ export const InputNumber = ({
       </label>
       <div
         aria-disabled={disabled}
-        className="flex h-12 items-center gap-1 rounded border p-1 aria-disabled:bg-gray-100 aria-disabled:[&_button]:opacity-0"
+        className="flex h-12 items-center gap-1 rounded border p-1 has-focus:border-2 has-focus:border-orange aria-disabled:bg-gray-100 aria-disabled:[&_button]:opacity-0"
       >
         {!!hasPlusMinusButton && (
           <button
@@ -68,7 +68,7 @@ export const InputNumber = ({
           </button>
         )}
         <input
-          className="w-full text-center [appearance:textfield] disabled:bg-gray-100 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+          className="w-full text-center [appearance:textfield] focus:outline-0 disabled:bg-gray-100 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
           disabled={disabled}
           id={name}
           min="1"
